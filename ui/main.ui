@@ -60,7 +60,7 @@ background-color: qlineargradient(spread:pad, x1:0.619, y1:0.875, x2:0.023, y2:0
 background-color :qlineargradient(spread:pad, x1:0.71, y1:0.982955, x2:0, y2:0.051, stop:0 rgba(25, 118, 221, 255), stop:0.6875 rgba(3, 169, 244, 255));</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="welcome">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -102,7 +102,7 @@ background-color :qlineargradient(spread:pad, x1:0.71, y1:0.982955, x2:0, y2:0.0
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>399</width>
+               <width>527</width>
                <height>20</height>
               </size>
              </property>
@@ -132,7 +132,7 @@ color: rgb(183, 183, 183);</string>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>398</width>
+               <width>527</width>
                <height>20</height>
               </size>
              </property>
@@ -206,7 +206,7 @@ text-align: center;
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>162</width>
+                  <width>291</width>
                   <height>20</height>
                  </size>
                 </property>
@@ -252,7 +252,7 @@ color: rgb(255, 255, 255);</string>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>162</width>
+                  <width>290</width>
                   <height>20</height>
                  </size>
                 </property>
@@ -289,7 +289,7 @@ color: rgb(255, 255, 255);</string>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>375</width>
+               <width>503</width>
                <height>20</height>
               </size>
              </property>
@@ -326,7 +326,7 @@ border-radius:4px;</string>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>374</width>
+               <width>503</width>
                <height>20</height>
               </size>
              </property>
@@ -1990,6 +1990,20 @@ color: rgba(255, 255, 255,.55);
             </widget>
            </item>
           </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="video_player">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
          </widget>
         </item>
        </layout>
