@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>assets/icons/credit-card-02.png</file>
+    <file>assets/icons/google.png</file>
+    <file>assets/icons/lock-01.png</file>
+    <file>assets/icons/upload-cloud-02.png</file>
+    <file>assets/icons/youtube.png</file>
+  </qresource>
+</RCC>

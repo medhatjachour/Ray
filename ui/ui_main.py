@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainrYvwjW.ui'
+## Form generated from reading UI file 'mainqPnRSU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -20,13 +20,12 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QRadioButton, QSizePolicy, QSpacerItem, QStackedWidget,
     QVBoxLayout, QWidget)
 import resources_rc
-import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1239, 721)
+        MainWindow.resize(1420, 721)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -52,6 +51,7 @@ class Ui_MainWindow(object):
 "background-color :qlineargradient(spread:pad, x1:0.71, y1:0.982955, x2:0, y2:0.051, stop:0 rgba(25, 118, 221, 255), stop:0.6875 rgba(3, 169, 244, 255));")
         self.welcome = QWidget()
         self.welcome.setObjectName(u"welcome")
+        self.welcome.setStyleSheet(u"border:none;")
         self.verticalLayout_2 = QVBoxLayout(self.welcome)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalSpacer = QSpacerItem(20, 145, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.frame_2)
         self.label.setObjectName(u"label")
         self.label.setMinimumSize(QSize(129, 0))
-        self.label.setStyleSheet(u"background-color: rgb(217, 217, 217);\n"
+        self.label.setStyleSheet(u"background-color: rgba(217, 217, 217,.5);\n"
 "color: rgb(183, 183, 183);")
 
         self.horizontalLayout.addWidget(self.label)
@@ -155,10 +155,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_5)
 
-        self.pushButton = QPushButton(self.frame_4)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMinimumSize(QSize(177, 64))
-        self.pushButton.setStyleSheet(u"font-family: Proxima Nova;\n"
+        self.get_started = QPushButton(self.frame_4)
+        self.get_started.setObjectName(u"get_started")
+        self.get_started.setMinimumSize(QSize(177, 64))
+        self.get_started.setCursor(QCursor(Qt.PointingHandCursor))
+        self.get_started.setStyleSheet(u"font-family: Proxima Nova;\n"
 "font-size: 16px;\n"
 "font-weight: 700;\n"
 "line-height: 16px;\n"
@@ -168,7 +169,7 @@ class Ui_MainWindow(object):
 "border :none;\n"
 "border-radius:4px;")
 
-        self.horizontalLayout_3.addWidget(self.pushButton)
+        self.horizontalLayout_3.addWidget(self.get_started)
 
         self.horizontalSpacer_6 = QSpacerItem(503, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -231,6 +232,7 @@ class Ui_MainWindow(object):
 "font-weight: 400;\n"
 "line-height: 22px;\n"
 "text-align: left;\n"
+"color: rgb(0, 0, 0);\n"
 "")
         self.label_4.setAlignment(Qt.AlignCenter)
 
@@ -249,18 +251,60 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setSpacing(0)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.button_patiensts_16 = QRadioButton(self.frame_8)
-        self.button_patiensts_16.setObjectName(u"button_patiensts_16")
-        self.button_patiensts_16.setMinimumSize(QSize(100, 38))
-        self.button_patiensts_16.setMaximumSize(QSize(14566, 50))
+        self.logIn_tab = QRadioButton(self.frame_8)
+        self.logIn_tab.setObjectName(u"logIn_tab")
+        self.logIn_tab.setMinimumSize(QSize(100, 38))
+        self.logIn_tab.setMaximumSize(QSize(14566, 50))
         font = QFont()
         font.setFamilies([u"Poppins"])
         font.setBold(False)
         font.setItalic(False)
-        self.button_patiensts_16.setFont(font)
-        self.button_patiensts_16.setCursor(QCursor(Qt.PointingHandCursor))
-        self.button_patiensts_16.setLayoutDirection(Qt.LeftToRight)
-        self.button_patiensts_16.setStyleSheet(u"\n"
+        self.logIn_tab.setFont(font)
+        self.logIn_tab.setCursor(QCursor(Qt.PointingHandCursor))
+        self.logIn_tab.setLayoutDirection(Qt.LeftToRight)
+        self.logIn_tab.setStyleSheet(u"\n"
+"QRadioButton{ \n"
+"/*background-color :  transparent;*/\n"
+"border : none ;\n"
+"padding-left : 0px;\n"
+"color : #242B2E;\n"
+"font-family: 'Poppins';\n"
+"font-style: normal;\n"
+"font-weight: 400;\n"
+"font-size: 18px;\n"
+"text-align:center;\n"
+"border-radius:0ox;\n"
+"border-bottom:2px solid #eeeeee;\n"
+" }\n"
+"\n"
+"QRadioButton:hover{\n"
+"background: #eeeeee;\n"
+"\n"
+"}\n"
+"QRadioButton:checked{\n"
+"background-color : rgb(255, 255, 255) ;\n"
+"color: rgb(0, 0, 0);\n"
+"border-bottom:2px solid black;\n"
+"}\n"
+"QRadioButton::indicator {\n"
+"width: 0px;\n"
+"height: 0px;\n"
+"border-radius: 0px;\n"
+" }")
+        self.logIn_tab.setIconSize(QSize(30, 30))
+        self.logIn_tab.setChecked(True)
+        self.logIn_tab.setAutoRepeat(False)
+
+        self.horizontalLayout_8.addWidget(self.logIn_tab)
+
+        self.signUp_tab = QRadioButton(self.frame_8)
+        self.signUp_tab.setObjectName(u"signUp_tab")
+        self.signUp_tab.setMinimumSize(QSize(100, 38))
+        self.signUp_tab.setMaximumSize(QSize(14566, 50))
+        self.signUp_tab.setFont(font)
+        self.signUp_tab.setCursor(QCursor(Qt.PointingHandCursor))
+        self.signUp_tab.setLayoutDirection(Qt.LeftToRight)
+        self.signUp_tab.setStyleSheet(u"\n"
 "QRadioButton{ \n"
 "background-color :  transparent;\n"
 "border : none ;\n"
@@ -288,52 +332,12 @@ class Ui_MainWindow(object):
 "QRadioButton::indicator {\n"
 "width: 0px;\n"
 "height: 0px;\n"
+"border-radius: 0px;\n"
 " }")
-        self.button_patiensts_16.setIconSize(QSize(30, 30))
-        self.button_patiensts_16.setChecked(False)
+        self.signUp_tab.setIconSize(QSize(0, 0))
+        self.signUp_tab.setChecked(False)
 
-        self.horizontalLayout_8.addWidget(self.button_patiensts_16)
-
-        self.button_patiensts_17 = QRadioButton(self.frame_8)
-        self.button_patiensts_17.setObjectName(u"button_patiensts_17")
-        self.button_patiensts_17.setMinimumSize(QSize(100, 38))
-        self.button_patiensts_17.setMaximumSize(QSize(14566, 50))
-        self.button_patiensts_17.setFont(font)
-        self.button_patiensts_17.setCursor(QCursor(Qt.PointingHandCursor))
-        self.button_patiensts_17.setLayoutDirection(Qt.LeftToRight)
-        self.button_patiensts_17.setStyleSheet(u"\n"
-"QRadioButton{ \n"
-"background-color :  transparent;\n"
-"border : none ;\n"
-"padding-left : 0px;\n"
-"color : #242B2E;\n"
-"font-family: 'Poppins';\n"
-"font-style: normal;\n"
-"font-weight: 400;\n"
-"font-size: 18px;\n"
-"text-align:center;\n"
-"border-radius:0ox;\n"
-"border-bottom:2px solid #eeeeee;\n"
-" }\n"
-"\n"
-"QRadioButton:hover{\n"
-"background: #eeeeee;\n"
-"\n"
-"}\n"
-"QRadioButton:checked{\n"
-"background-color : rgb(255, 255, 255) ;\n"
-"color: rgb(0, 0, 0);\n"
-"border-bottom:2px solid black;\n"
-"}\n"
-"\n"
-"QRadioButton::indicator {\n"
-"width: 0px;\n"
-"height: 0px;\n"
-" }")
-        self.button_patiensts_17.setIconSize(QSize(0, 0))
-        self.button_patiensts_17.setChecked(True)
-
-        self.horizontalLayout_8.addWidget(self.button_patiensts_17)
+        self.horizontalLayout_8.addWidget(self.signUp_tab)
 
 
         self.verticalLayout_4.addWidget(self.frame_8)
@@ -363,10 +367,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.pushButton_3 = QPushButton(self.frame_12)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setMinimumSize(QSize(55, 53))
-        self.pushButton_3.setStyleSheet(u"font-family: Proxima Nova;\n"
+        self.log_google = QPushButton(self.frame_12)
+        self.log_google.setObjectName(u"log_google")
+        self.log_google.setMinimumSize(QSize(55, 53))
+        self.log_google.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(0, 0, 0);\n"
 "font-size: 15px;\n"
 "font-weight: 400;\n"
 "line-height: 15px;\n"
@@ -375,11 +380,11 @@ class Ui_MainWindow(object):
 "padding-left :15px\n"
 "")
         icon = QIcon()
-        icon.addFile(u"../../assets/icons/google.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_3.setIcon(icon)
-        self.pushButton_3.setIconSize(QSize(26, 26))
+        icon.addFile(u":/icons/assets/icons/google.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.log_google.setIcon(icon)
+        self.log_google.setIconSize(QSize(26, 26))
 
-        self.horizontalLayout_9.addWidget(self.pushButton_3)
+        self.horizontalLayout_9.addWidget(self.log_google)
 
 
         self.verticalLayout_6.addWidget(self.frame_12)
@@ -388,6 +393,7 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMaximumSize(QSize(16777215, 20))
         self.label_5.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(0, 0, 0);\n"
 "font-size: 15px;\n"
 "font-weight: 400;\n"
 "line-height: 15px;\n"
@@ -428,30 +434,31 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.label_6 = QLabel(self.frame_15)
         self.label_6.setObjectName(u"label_6")
-        self.label_6.setPixmap(QPixmap(u"../../assets/icons/credit-card-02.png"))
+        self.label_6.setPixmap(QPixmap(u":/icons/assets/icons/credit-card-02.png"))
 
         self.gridLayout_3.addWidget(self.label_6, 0, 0, 1, 1)
 
 
         self.horizontalLayout_33.addWidget(self.frame_15)
 
-        self.username_3 = QLineEdit(self.frame_42)
-        self.username_3.setObjectName(u"username_3")
-        self.username_3.setMinimumSize(QSize(0, 50))
+        self.email_log = QLineEdit(self.frame_42)
+        self.email_log.setObjectName(u"email_log")
+        self.email_log.setMinimumSize(QSize(0, 50))
         font1 = QFont()
         font1.setFamilies([u"Proxima Nova"])
         font1.setBold(False)
-        self.username_3.setFont(font1)
-        self.username_3.setLayoutDirection(Qt.RightToLeft)
-        self.username_3.setStyleSheet(u"font-family: Proxima Nova;\n"
+        self.email_log.setFont(font1)
+        self.email_log.setLayoutDirection(Qt.RightToLeft)
+        self.email_log.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(71, 71, 71);\n"
 "font-size: 15px;\n"
 "font-weight: 400;\n"
 "line-height: 15px;\n"
 "text-align: left;\n"
 "border:none")
-        self.username_3.setMaxLength(32757)
+        self.email_log.setMaxLength(32757)
 
-        self.horizontalLayout_33.addWidget(self.username_3)
+        self.horizontalLayout_33.addWidget(self.email_log)
 
         self.frame_18 = QFrame(self.frame_42)
         self.frame_18.setObjectName(u"frame_18")
@@ -500,25 +507,26 @@ class Ui_MainWindow(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.label_7 = QLabel(self.frame_17)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setPixmap(QPixmap(u"../../assets/icons/lock-01.png"))
+        self.label_7.setPixmap(QPixmap(u":/icons/assets/icons/lock-01.png"))
 
         self.gridLayout_4.addWidget(self.label_7, 0, 0, 1, 1)
 
 
         self.horizontalLayout_34.addWidget(self.frame_17)
 
-        self.username_4 = QLineEdit(self.frame_43)
-        self.username_4.setObjectName(u"username_4")
-        self.username_4.setMinimumSize(QSize(0, 50))
-        self.username_4.setLayoutDirection(Qt.RightToLeft)
-        self.username_4.setStyleSheet(u"font-family: Proxima Nova;\n"
+        self.pass_log = QLineEdit(self.frame_43)
+        self.pass_log.setObjectName(u"pass_log")
+        self.pass_log.setMinimumSize(QSize(0, 50))
+        self.pass_log.setLayoutDirection(Qt.RightToLeft)
+        self.pass_log.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(102, 102, 102);\n"
 "font-size: 15px;\n"
 "font-weight: 400;\n"
 "line-height: 15px;\n"
 "text-align: left;\n"
 "border:none")
 
-        self.horizontalLayout_34.addWidget(self.username_4)
+        self.horizontalLayout_34.addWidget(self.pass_log)
 
 
         self.horizontalLayout_11.addWidget(self.frame_43)
@@ -536,6 +544,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName(u"pushButton_4")
         self.pushButton_4.setCursor(QCursor(Qt.PointingHandCursor))
         self.pushButton_4.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(0, 0, 0);\n"
 "font-size: 15px;\n"
 "font-weight: 400;\n"
 "line-height: 15px;\n"
@@ -565,11 +574,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.pushButton_2 = QPushButton(self.frame_10)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setMinimumSize(QSize(147, 72))
-        self.pushButton_2.setCursor(QCursor(Qt.PointingHandCursor))
-        self.pushButton_2.setStyleSheet(u"font-family: Proxima Nova;\n"
+        self.logIn_btn = QPushButton(self.frame_10)
+        self.logIn_btn.setObjectName(u"logIn_btn")
+        self.logIn_btn.setMinimumSize(QSize(147, 72))
+        self.logIn_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.logIn_btn.setStyleSheet(u"font-family: Proxima Nova;\n"
 "font-size: 18px;\n"
 "font-weight: 400;\n"
 "line-height: 18px;\n"
@@ -577,7 +586,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);\n"
 "text-align:center;")
 
-        self.horizontalLayout_4.addWidget(self.pushButton_2)
+        self.horizontalLayout_4.addWidget(self.logIn_btn)
 
 
         self.gridLayout_2.addWidget(self.frame_10, 1, 0, 1, 1)
@@ -627,7 +636,7 @@ class Ui_MainWindow(object):
         self.label_8 = QLabel(self.frame_19)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setMinimumSize(QSize(67, 67))
-        self.label_8.setStyleSheet(u"background: #D9D9D9;\n"
+        self.label_8.setStyleSheet(u"background: rgba(217, 217, 217,.5);\n"
 "border-radius: 6px 0px 0px 0px;\n"
 "\n"
 "")
@@ -637,6 +646,7 @@ class Ui_MainWindow(object):
         self.label_9 = QLabel(self.frame_19)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(0, 0, 0);\n"
 "font-size: 20px;\n"
 "font-weight: 400;\n"
 "line-height: 20px;\n"
@@ -677,21 +687,21 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13.addItem(self.horizontalSpacer_10)
 
-        self.frame_23 = QFrame(self.frame_22)
-        self.frame_23.setObjectName(u"frame_23")
-        self.frame_23.setMinimumSize(QSize(572, 178))
-        self.frame_23.setMaximumSize(QSize(16777215, 180))
-        self.frame_23.setStyleSheet(u"background: rgba(3, 169, 244, 0.05);\n"
+        self.drag_frame = QFrame(self.frame_22)
+        self.drag_frame.setObjectName(u"drag_frame")
+        self.drag_frame.setMinimumSize(QSize(572, 178))
+        self.drag_frame.setMaximumSize(QSize(16777215, 180))
+        self.drag_frame.setStyleSheet(u"background: rgba(3, 169, 244, 0.05);\n"
 "\n"
 "\n"
 "border: 2px dashed #03A9F4;")
-        self.frame_23.setFrameShape(QFrame.StyledPanel)
-        self.frame_23.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_9 = QVBoxLayout(self.frame_23)
+        self.drag_frame.setFrameShape(QFrame.StyledPanel)
+        self.drag_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_9 = QVBoxLayout(self.drag_frame)
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.frame_25 = QFrame(self.frame_23)
+        self.frame_25 = QFrame(self.drag_frame)
         self.frame_25.setObjectName(u"frame_25")
         self.frame_25.setStyleSheet(u"border:none;\n"
 "background-color:transparent;")
@@ -706,7 +716,7 @@ class Ui_MainWindow(object):
 
         self.label_11 = QLabel(self.frame_25)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setPixmap(QPixmap(u"../../assets/icons/upload-cloud-02.png"))
+        self.label_11.setPixmap(QPixmap(u":/icons/assets/icons/upload-cloud-02.png"))
 
         self.horizontalLayout_14.addWidget(self.label_11)
 
@@ -717,7 +727,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.frame_25)
 
-        self.label_12 = QLabel(self.frame_23)
+        self.label_12 = QLabel(self.drag_frame)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setMaximumSize(QSize(16777215, 20))
         self.label_12.setStyleSheet(u"font-family: Proxima Nova;\n"
@@ -732,7 +742,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.label_12)
 
-        self.label_13 = QLabel(self.frame_23)
+        self.label_13 = QLabel(self.drag_frame)
         self.label_13.setObjectName(u"label_13")
         self.label_13.setMaximumSize(QSize(16777215, 30))
         self.label_13.setStyleSheet(u"border:none;\n"
@@ -741,13 +751,13 @@ class Ui_MainWindow(object):
 "font-weight: 400;\n"
 "line-height: 16px;\n"
 "text-align: center;\n"
-"\n"
+"color: rgb(0, 0, 0);\n"
 "background-color:transparent;")
         self.label_13.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_9.addWidget(self.label_13)
 
-        self.frame_24 = QFrame(self.frame_23)
+        self.frame_24 = QFrame(self.drag_frame)
         self.frame_24.setObjectName(u"frame_24")
         self.frame_24.setStyleSheet(u"border:none;\n"
 "background-color:transparent;")
@@ -761,10 +771,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_15.addItem(self.horizontalSpacer_14)
 
-        self.pushButton_5 = QPushButton(self.frame_24)
-        self.pushButton_5.setObjectName(u"pushButton_5")
-        self.pushButton_5.setMinimumSize(QSize(136, 40))
-        self.pushButton_5.setStyleSheet(u"\n"
+        self.browse_file = QPushButton(self.frame_24)
+        self.browse_file.setObjectName(u"browse_file")
+        self.browse_file.setMinimumSize(QSize(136, 40))
+        self.browse_file.setCursor(QCursor(Qt.PointingHandCursor))
+        self.browse_file.setStyleSheet(u"\n"
 "font-family: Proxima Nova;\n"
 "font-size: 16px;\n"
 "font-weight: 700;\n"
@@ -776,7 +787,7 @@ class Ui_MainWindow(object):
 "\n"
 "")
 
-        self.horizontalLayout_15.addWidget(self.pushButton_5)
+        self.horizontalLayout_15.addWidget(self.browse_file)
 
         self.horizontalSpacer_15 = QSpacerItem(255, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -786,7 +797,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.addWidget(self.frame_24)
 
 
-        self.horizontalLayout_13.addWidget(self.frame_23)
+        self.horizontalLayout_13.addWidget(self.drag_frame)
 
         self.horizontalSpacer_11 = QSpacerItem(262, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -901,29 +912,30 @@ class Ui_MainWindow(object):
         self.label_16.setObjectName(u"label_16")
         self.label_16.setStyleSheet(u"border:none\n"
 "")
-        self.label_16.setPixmap(QPixmap(u"../../assets/icons/youtube.png"))
+        self.label_16.setPixmap(QPixmap(u":/icons/assets/icons/youtube.png"))
 
         self.horizontalLayout_18.addWidget(self.label_16)
 
-        self.username_5 = QLineEdit(self.frame_31)
-        self.username_5.setObjectName(u"username_5")
-        self.username_5.setMinimumSize(QSize(0, 0))
-        self.username_5.setFont(font1)
-        self.username_5.setLayoutDirection(Qt.RightToLeft)
-        self.username_5.setStyleSheet(u"font-family: Proxima Nova;\n"
+        self.youtube_url = QLineEdit(self.frame_31)
+        self.youtube_url.setObjectName(u"youtube_url")
+        self.youtube_url.setMinimumSize(QSize(0, 34))
+        self.youtube_url.setFont(font1)
+        self.youtube_url.setLayoutDirection(Qt.RightToLeft)
+        self.youtube_url.setStyleSheet(u"font-family: Proxima Nova;\n"
 "font-size: 15px;\n"
 "font-weight: 400;\n"
 "line-height: 15px;\n"
 "text-align: left;\n"
 "border:none")
-        self.username_5.setMaxLength(32757)
+        self.youtube_url.setMaxLength(32757)
 
-        self.horizontalLayout_18.addWidget(self.username_5)
+        self.horizontalLayout_18.addWidget(self.youtube_url)
 
-        self.pushButton_6 = QPushButton(self.frame_31)
-        self.pushButton_6.setObjectName(u"pushButton_6")
-        self.pushButton_6.setMinimumSize(QSize(136, 40))
-        self.pushButton_6.setStyleSheet(u"background: rgba(3, 169, 244, 0.51);\n"
+        self.play_youtube = QPushButton(self.frame_31)
+        self.play_youtube.setObjectName(u"play_youtube")
+        self.play_youtube.setMinimumSize(QSize(136, 40))
+        self.play_youtube.setCursor(QCursor(Qt.PointingHandCursor))
+        self.play_youtube.setStyleSheet(u"background: rgba(3, 169, 244, 0.51);\n"
 "font-family: Proxima Nova;\n"
 "font-size: 16px;\n"
 "font-weight: 700;\n"
@@ -932,7 +944,7 @@ class Ui_MainWindow(object):
 "color: rgba(255, 255, 255,.55);\n"
 "")
 
-        self.horizontalLayout_18.addWidget(self.pushButton_6)
+        self.horizontalLayout_18.addWidget(self.play_youtube)
 
 
         self.horizontalLayout_17.addWidget(self.frame_31)
@@ -955,6 +967,7 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.label_17 = QLabel(self.video_player)
         self.label_17.setObjectName(u"label_17")
+        self.label_17.setPixmap(QPixmap(u":/icons/assets/icons/youtube.png"))
 
         self.gridLayout_6.addWidget(self.label_17, 0, 0, 1, 1)
 
@@ -966,7 +979,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -974,36 +987,36 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"     LOGO    ", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"               LOGO    ", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Welcome to TechSpecs Ray", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"em ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim v", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Let\u2019s get started", None))
+        self.get_started.setText(QCoreApplication.translate("MainWindow", u"Let\u2019s get started", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Techspecs Ray", None))
-        self.button_patiensts_16.setText(QCoreApplication.translate("MainWindow", u"           Log In", None))
-        self.button_patiensts_17.setText(QCoreApplication.translate("MainWindow", u"        Sign Up", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"       Sign in with Google", None))
+        self.logIn_tab.setText(QCoreApplication.translate("MainWindow", u"           Log In", None))
+        self.signUp_tab.setText(QCoreApplication.translate("MainWindow", u"        Sign Up", None))
+        self.log_google.setText(QCoreApplication.translate("MainWindow", u"       Sign in with Google", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"OR", None))
         self.label_6.setText("")
-        self.username_3.setText("")
-        self.username_3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"yours@example.com", None))
+        self.email_log.setText("")
+        self.email_log.setPlaceholderText(QCoreApplication.translate("MainWindow", u"yours@example.com", None))
         self.label_7.setText("")
-        self.username_4.setText("")
-        self.username_4.setPlaceholderText(QCoreApplication.translate("MainWindow", u"your password", None))
+        self.pass_log.setText("")
+        self.pass_log.setPlaceholderText(QCoreApplication.translate("MainWindow", u"your password", None))
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Don\u2019t remember your password?", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"LOG IN", None))
+        self.logIn_btn.setText(QCoreApplication.translate("MainWindow", u"LOG IN", None))
         self.label_8.setText("")
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"TechSpecs Ray", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Play video from file", None))
         self.label_11.setText("")
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Drag & drop video and audio files here", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"OR", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"Browse Files", None))
+        self.browse_file.setText(QCoreApplication.translate("MainWindow", u"Browse Files", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Play direct from Youtube", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Insert your Youtube video link below to play directly from youtube", None))
         self.label_16.setText("")
-        self.username_5.setText("")
-        self.username_5.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Insert your Youtube video link here", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"Play Video", None))
-        self.label_17.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.youtube_url.setText("")
+        self.youtube_url.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Insert your Youtube video link here", None))
+        self.play_youtube.setText(QCoreApplication.translate("MainWindow", u"Play Video", None))
+        self.label_17.setText("")
     # retranslateUi
 
