@@ -1,5 +1,17 @@
 <RCC>
   <qresource prefix="icons">
+    <file>assets/icons/volume-x.png</file>
+    <file>assets/icons/equal-CC-off.png</file>
+    <file>assets/icons/play-circle.png</file>
+    <file>assets/icons/volume-max.png</file>
+    <file>assets/icons/play_.png</file>
+    <file>assets/icons/skip-back.png</file>
+    <file>assets/icons/refresh-ccw-01.png</file>
+    <file>assets/icons/equal-pause.png</file>
+    <file>assets/icons/refresh-ccw-02.png</file>
+    <file>assets/icons/skip-forward.png</file>
+    <file>assets/icons/message-text-square-02.png</file>
+    <file>assets/icons/equal-CC.png</file>
     <file>assets/icons/credit-card-02.png</file>
     <file>assets/icons/google.png</file>
     <file>assets/icons/lock-01.png</file>
