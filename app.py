@@ -35,17 +35,20 @@ class MainWindow(QMainWindow):
 
 
 
-        self.view =   QGraphicsView(self)
-        self._scene =  QGraphicsScene(self)
+        self.view =   QGraphicsView(self.ui.frame_41)
+        self._scene =  QGraphicsScene(self.view )
         self.view.setScene(self._scene) 
         self._videoitem = QGraphicsVideoItem()
-        self.ui.gridLayout_7.addWidget(self.view)
+        self.ui.verticalLayout_13.addWidget(self.view)
         self._scene.addItem(self._videoitem)
-        self.view.fitInView(self._videoitem)
-        # self._videoitem.setSize(self.ui.frame_41.size())
-        print(f'video_player{self.ui.frame_41.size()}')
-        print(f'{self._videoitem.size()}')
-        print(self.view.size())
+        self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
+        # self.view.fitInView(self._videoitem)
+        self._videoitem.setSize(self.ui.frame_23.size())
+        # print(f'_scene  {self._scene.size()}')
+        print(f'view  == {self.view.size()}')
+        print(f'video_player == {self._videoitem.size()}')
+        print(f'frame_41 == {self.ui.frame_41.size()}')
+  
 
 
 
@@ -65,22 +68,22 @@ class MainWindow(QMainWindow):
         self.ui.drag_frame.setAcceptDrops(True)
         self.ui.browse_file.clicked.connect(self.showDialog)
         # ,media player 
-        self.ui.stop_play.clicked.connect(self.play_pause)
-        # position
-        self.ui.position_control.sliderMoved.connect(self.set_position)
-        self.ui.sound_control.setToolTip("Position")
-        self.player.positionChanged.connect(self.change_position)
-        self.player.durationChanged.connect(self.duration_position)
-        # sound
-        self.ui.sound_control.setValue(self.audio_output.volume()*100)
-        self.ui.sound_control.setTickInterval(10)
-        self.ui.sound_control.setTickPosition(QSlider.TicksBelow)
-        self.ui.sound_control.setToolTip("Volume")
-        self.ui.sound_control.valueChanged.connect(self.adjust_audio_volume)
-        # choose subtitle 
-        self.ui.gridLayout_13.removeWidget(self.ui.sub_floating)
-        self.ui.sub_floating.hide()
-        self.ui.choseSub.clicked.connect(self.choose_subtitle)    
+        # self.ui.stop_play.clicked.connect(self.play_pause)
+        # # position
+        # self.ui.position_control.sliderMoved.connect(self.set_position)
+        # self.ui.sound_control.setToolTip("Position")
+        # self.player.positionChanged.connect(self.change_position)
+        # self.player.durationChanged.connect(self.duration_position)
+        # # sound
+        # self.ui.sound_control.setValue(self.audio_output.volume()*100)
+        # self.ui.sound_control.setTickInterval(10)
+        # self.ui.sound_control.setTickPosition(QSlider.TicksBelow)
+        # self.ui.sound_control.setToolTip("Volume")
+        # self.ui.sound_control.valueChanged.connect(self.adjust_audio_volume)
+        # # choose subtitle 
+        # self.ui.gridLayout_13.removeWidget(self.ui.sub_floating)
+        # self.ui.sub_floating.hide()
+        # self.ui.choseSub.clicked.connect(self.choose_subtitle)    
     def get_started_Fun(self):
         self.ui.stackedWidget.setCurrentIndex(1)
     def open_singUp(self):
@@ -117,7 +120,7 @@ class MainWindow(QMainWindow):
         # self.player.setVideoOutput(self.videoWidget)
         # self.videoWidget.show()
         self.player.play()
-        self.floating_video_control()
+        # self.floating_video_control()
     @Slot()
     def floating_video_control(self):
         # self.ui.frame_23.hide()
