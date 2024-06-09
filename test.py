@@ -1,210 +1,289 @@
+# Copyright (C) 2022 The Qt Company Ltd.
+# SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
 
-import platform
-import os
+"""PySide6 Multimedia player example"""
+
 import sys
+from PySide6.QtCore import QStandardPaths, Qt, Slot
+from PySide6.QtGui import QAction, QIcon, QKeySequence
+from PySide6.QtWidgets import (QApplication, QDialog, QFileDialog,
+                               QMainWindow, QSlider, QStyle, QToolBar)
+from PySide6.QtMultimedia import (QAudioOutput, QMediaFormat,
+                                  QMediaPlayer)
+from PySide6.QtMultimediaWidgets import QVideoWidget
 
-from datetime import datetime, timedelta
-from functools import partial
 
-from PySide6.QtWidgets import QApplication, QMainWindow,QFileDialog , QGraphicsScene, QGraphicsView, QSpacerItem, QSlider, QCompleter, QPushButton
-from PySide6.QtCore import Qt, QThreadPool, QSize, Slot,QUrl,QPoint,QSizeF
-from PySide6.QtGui import QRegularExpressionValidator, QCursor,QIcon
-from PySide6.QtMultimedia import (QAudioOutput,
-                            QMediaPlayer)
-from PySide6.QtMultimediaWidgets import QVideoWidget,QGraphicsVideoItem
+AVI = "video/x-msvideo"  # AVI
 
-import vlc
 
-from ui.ui_main import Ui_MainWindow
+MP4 = 'video/mp4'
+
+
+def get_supported_mime_types():
+    result = []
+    for f in QMediaFormat().supportedFileFormats(QMediaFormat.Decode):
+        mime_type = QMediaFormat(f).mimeType()
+        result.append(mime_type.name())
+    return result
+
+
 class MainWindow(QMainWindow):
+
     def __init__(self):
-        QMainWindow.__init__(self)
+        super().__init__()
 
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        #/////////// media player 
+        self._playlist = []  # FIXME 6.3: Replace by QMediaPlaylist?
+        self._playlist_index = -1
+        self._audio_output = QAudioOutput()
+        self._player = QMediaPlayer()
+        self._player.setAudioOutput(self._audio_output)
 
-        self.player = QMediaPlayer()
-        
+        self._player.errorOccurred.connect(self._player_error)
 
-        self.audio_output = QAudioOutput()
-        self.player.setAudioOutput(self.audio_output)
-        # test graphics
+        tool_bar = QToolBar()
+        self.addToolBar(tool_bar)
 
-        # self._scene =  QGraphicsScene(self)
-        # self._gv =   QGraphicsView(self._scene)
-        # self._videoitem = QGraphicsVideoItem()
-        # self.ui.gridLayout_7.addWidget(self._gv)
-        # self._scene.addItem(self._videoitem)
-        # self._gv.fitInView(self._videoitem)
+        file_menu = self.menuBar().addMenu("&File")
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.DocumentOpen)
+        open_action = QAction(icon, "&Open...", self,
+                              shortcut=QKeySequence.Open, triggered=self.open)
+        file_menu.addAction(open_action)
+        tool_bar.addAction(open_action)
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.ApplicationExit)
+        exit_action = QAction(icon, "E&xit", self,
+                              shortcut="Ctrl+Q", triggered=self.close)
+        file_menu.addAction(exit_action)
 
+        play_menu = self.menuBar().addMenu("&Play")
+        style = self.style()
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackStart,
+                               style.standardIcon(QStyle.SP_MediaPlay))
+        self._play_action = tool_bar.addAction(icon, "Play")
+        self._play_action.triggered.connect(self._player.play)
+        play_menu.addAction(self._play_action)
 
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.MediaSkipBackward,
+                               style.standardIcon(QStyle.SP_MediaSkipBackward))
+        self._previous_action = tool_bar.addAction(icon, "Previous")
+        self._previous_action.triggered.connect(self.previous_clicked)
+        play_menu.addAction(self._previous_action)
 
-        # self.view =   QGraphicsView(self)
-        # self._scene =  QGraphicsScene(self)
-        # self.view.setScene(self._scene) 
-        # self._videoitem = QGraphicsVideoItem()
-        # self.ui.gridLayout_7.addWidget(self.view)
-        # self._scene.addItem(self._videoitem)
-        # self.view.fitInView(self._videoitem)
-        # # self._videoitem.setSize(self.ui.frame_41.size())
-        # print(f'video_player{self.ui.frame_41.size()}')
-        # print(f'{self._videoitem.size()}')
-        # print(self.view.size())
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackPause,
+                               style.standardIcon(QStyle.SP_MediaPause))
+        self._pause_action = tool_bar.addAction(icon, "Pause")
+        self._pause_action.triggered.connect(self._player.pause)
+        play_menu.addAction(self._pause_action)
 
-        # self.player.setVideoOutput(self._videoitem)
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.MediaSkipForward,
+                               style.standardIcon(QStyle.SP_MediaSkipForward))
+        self._next_action = tool_bar.addAction(icon, "Next")
+        self._next_action.triggered.connect(self.next_clicked)
+        play_menu.addAction(self._next_action)
 
-        #vlc 
-        self.media = None
-        # Create a basic vlc instance
-        self.instance = vlc.Instance()
-        # self.volumeslider.setValue(self.mediaplayer.audio_get_volume())
-        # Create an empty vlc media player
-        self.mediaplayer = self.instance.media_player_new()
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackStop,
+                               style.standardIcon(QStyle.SP_MediaStop))
+        self._stop_action = tool_bar.addAction(icon, "Stop")
+        self._stop_action.triggered.connect(self._ensure_stopped)
+        play_menu.addAction(self._stop_action)
 
-        
-        # init always the main window to the welcome page
-        self.ui.stackedWidget.setCurrentIndex(0)
-        # get started function 
-        self.ui.get_started.clicked.connect(self.get_started_Fun)
-        # sign up and login function
-        self.ui.signUp_tab.clicked.connect(self.open_singUp)
-        self.ui.logIn_tab.clicked.connect(self.open_logIn)
-        self.ui.logIn_btn.clicked.connect(self.log_in_fun)
-        # drag and drop files 
-        # get the drag and drop frame to accept drag and drop behavior
-        self.fileName = None #it holds the video path 
-        self.ui.drag_frame.setAcceptDrops(True)
-        self.ui.browse_file.clicked.connect(self.showDialog)
-        # ,media player 
-        self.ui.stop_play.clicked.connect(self.play_pause)
-        # position
-        self.ui.position_control.sliderMoved.connect(self.set_position)
-        self.ui.sound_control.setToolTip("Position")
-        self.player.positionChanged.connect(self.change_position)
-        self.player.durationChanged.connect(self.duration_position)
-        # sound
-        self.ui.sound_control.setValue(self.mediaplayer.audio_get_volume())
-        # self.ui.sound_control.setValue(self.audio_output.volume()*100)
-        self.ui.sound_control.setTickInterval(10)
-        self.ui.sound_control.setTickPosition(QSlider.TicksBelow)
-        self.ui.sound_control.setToolTip("Volume")
-        self.ui.sound_control.valueChanged.connect(self.adjust_audio_volume)
-        # choose subtitle 
-        self.ui.gridLayout_13.removeWidget(self.ui.sub_floating)
-        self.ui.sub_floating.hide()
-        self.ui.choseSub.clicked.connect(self.choose_subtitle)    
-    def get_started_Fun(self):
-        self.ui.stackedWidget.setCurrentIndex(1)
-    def open_singUp(self):
-        self.ui.stackedWidget_2.setCurrentIndex(1)
-    def open_logIn(self):
-        self.ui.stackedWidget_2.setCurrentIndex(0)
-    def log_in_fun(self):
-        self.ui.stackedWidget.setCurrentIndex(2)
-    # drag and drop events
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasImage:
-            event.accept()
-        else:
-            event.ignore()
-    def dragMoveEvent(self, event):
-        if event.mimeData().hasImage:
-            event.accept()
-        else:
-            event.ignore()
-    def dropEvent(self, event):
-        if event.mimeData().hasImage:
-            event.setDropAction(Qt.CopyAction)
-            file_path = event.mimeData().urls()[0].toLocalFile()
-            print(file_path)
+        self._volume_slider = QSlider()
+        self._volume_slider.setOrientation(Qt.Horizontal)
+        self._volume_slider.setMinimum(0)
+        self._volume_slider.setMaximum(100)
+        available_width = self.screen().availableGeometry().width()
+        self._volume_slider.setFixedWidth(available_width / 10)
+        self._volume_slider.setValue(self._audio_output.volume())
+        self._volume_slider.setTickInterval(10)
+        self._volume_slider.setTickPosition(QSlider.TicksBelow)
+        self._volume_slider.setToolTip("Volume")
+        self._volume_slider.valueChanged.connect(self._audio_output.setVolume)
+        tool_bar.addWidget(self._volume_slider)
 
-            event.accept()
-        else:
-            event.ignore()
-    def showDialog(self):
-        self.fileName = QFileDialog.getOpenFileName(self, "Chose the movie", "/","Image Files (*.mp4 *.avi *.mov *.mkv)")
-        self.ui.stackedWidget.setCurrentIndex(3)
-        print(self.fileName[0])
-        # self.player.setSource(QUrl(self.fileName[0]))
-        # # self.player.setVideoOutput(self.videoWidget)
-        # # self.videoWidget.show()
-        # self.player.play()
-        
-        # getOpenFileName returns a tuple, so use only the actual file name
-        self.media = self.instance.media_new(self.fileName[0])
+        icon = QIcon.fromTheme(QIcon.ThemeIcon.HelpAbout)
+        about_menu = self.menuBar().addMenu("&About")
+        about_qt_act = QAction(icon, "About &Qt", self, triggered=qApp.aboutQt)  # noqa: F821
+        about_menu.addAction(about_qt_act)
 
-        # Put the media in the media player
-        self.mediaplayer.set_media(self.media)
-        
-        # Parse the metadata of the file
-        self.media.parse()
-        
-        if platform.system() == "Linux": # for Linux using the X Server
-            self.mediaplayer.set_xwindow(int(self.ui.frame_23.winId()))
-        elif platform.system() == "Windows": # for Windows
-            self.mediaplayer.set_hwnd(int(self.ui.frame_23.winId()))
-        elif platform.system() == "Darwin": # for MacOS
-            self.mediaplayer.set_nsobject(int(self.ui.frame_23.winId()))
+        self._video_widget = QVideoWidget()
+        self.setCentralWidget(self._video_widget)
+        self._player.playbackStateChanged.connect(self.update_buttons)
+        self._player.setVideoOutput(self._video_widget)
 
-        self.mediaplayer.play()
-        # self.floating_video_control()
+        self.update_buttons(self._player.playbackState())
+        self._mime_types = []
+
+    def closeEvent(self, event):
+        self._ensure_stopped()
+        event.accept()
+
     @Slot()
-    def floating_video_control(self):
-        # self.ui.frame_23.hide()
-        self.ui.frame_32.raise_()
-        self.ui.gridLayout_8.removeWidget(self.ui.frame_32)
-        self.ui.frame_32.setMinimumWidth(self.width())
-        self.ui.frame_32.setMinimumHeight(100)
-        self.ui.frame_32.raise_()
-        R = QPoint(0, self.height())- QPoint(0, self.ui.frame_32.height() + 85)
-        self.ui.frame_32.move(R)
+    def open(self):
+        self._ensure_stopped()
+        file_dialog = QFileDialog(self)
+
+        is_windows = sys.platform == 'win32'
+        if not self._mime_types:
+            self._mime_types = get_supported_mime_types()
+            if (is_windows and AVI not in self._mime_types):
+                self._mime_types.append(AVI)
+            elif MP4 not in self._mime_types:
+                self._mime_types.append(MP4)
+
+        file_dialog.setMimeTypeFilters(self._mime_types)
+
+        default_mimetype = AVI if is_windows else MP4
+        if default_mimetype in self._mime_types:
+            file_dialog.selectMimeTypeFilter(default_mimetype)
+
+        movies_location = QStandardPaths.writableLocation(QStandardPaths.MoviesLocation)
+        file_dialog.setDirectory(movies_location)
+        if file_dialog.exec() == QDialog.Accepted:
+            url = file_dialog.selectedUrls()[0]
+            self._playlist.append(url)
+            self._playlist_index = len(self._playlist) - 1
+            self._player.setSource(url)
+            self._player.play()
+
     @Slot()
     def _ensure_stopped(self):
-        if self.player.playbackState() != QMediaPlayer.StoppedState:
-            self.player.stop()
+        if self._player.playbackState() != QMediaPlayer.StoppedState:
+            self._player.stop()
+
     @Slot()
-    def play_pause(self):
-        if self.player.playbackState() == QMediaPlayer.PlayingState:
-            self.player.pause()
-            icon = QIcon()
-            icon.addFile(u"../assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.stop_play.setIcon(icon)
-            self.ui.stop_play.setIconSize(QSize(21, 21))
+    def previous_clicked(self):
+        # Go to previous track if we are within the first 5 seconds of playback
+        # Otherwise, seek to the beginning.
+        if self._player.position() <= 5000 and self._playlist_index > 0:
+            self._playlist_index -= 1
+            self._playlist.previous()
+            self._player.setSource(self._playlist[self._playlist_index])
         else:
-            self.player.play()
-            icon4 = QIcon()
-            icon4.addFile(u":/icons/assets/icons/play.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.stop_play.setIcon(icon4)
-            self.ui.stop_play.setIconSize(QSize(21, 21))
-    @Slot()
-    def set_position(self,position):
-        self.player.setPosition(position)
-    @Slot()
-    def change_position(self,position):
-        self.ui.position_control.setValue(position)
-    @Slot()
-    def duration_position(self,d):
-        self.ui.position_control.setRange(0,d)
-    @Slot()
-    def adjust_audio_volume(self,volume):
-        self.audio_output.setVolume(volume/100)
-    @Slot()
-    def choose_subtitle(self):
-        width = self.ui.frame_32.width()
-        # height = self.ui.frame_32.height()
+            self._player.setPosition(0)
 
-        R = QPoint(width, 0) - QPoint(600, 350)
-        # print(f"{R} is r")
-        self.ui.sub_floating.setMinimumWidth(300)
-        self.ui.sub_floating.setMinimumHeight(300)
-        self.ui.sub_floating.move(R)
-        self.ui.sub_floating.show()
+    @Slot()
+    def next_clicked(self):
+        if self._playlist_index < len(self._playlist) - 1:
+            self._playlist_index += 1
+            self._player.setSource(self._playlist[self._playlist_index])
+
+    @Slot("QMediaPlayer::PlaybackState")
+    def update_buttons(self, state):
+        media_count = len(self._playlist)
+        self._play_action.setEnabled(media_count > 0 and state != QMediaPlayer.PlayingState)
+        self._pause_action.setEnabled(state == QMediaPlayer.PlayingState)
+        self._stop_action.setEnabled(state != QMediaPlayer.StoppedState)
+        self._previous_action.setEnabled(self._player.position() > 0)
+        self._next_action.setEnabled(media_count > 1)
+
+    def show_status_message(self, message):
+        self.statusBar().showMessage(message, 5000)
+
+    @Slot("QMediaPlayer::Error", str)
+    def _player_error(self, error, error_string):
+        print(error_string, file=sys.stderr)
+        self.show_status_message(error_string)
 
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
+    main_win = MainWindow()
+    available_geometry = main_win.screen().availableGeometry()
+    main_win.resize(available_geometry.width() / 3,
+                    available_geometry.height() / 2)
+    main_win.show()
     sys.exit(app.exec())
+
+
+
+
+# from PySide6.QtWidgets import (QMainWindow, QTextEdit,
+#         QFileDialog, QApplication)
+# from PySide6.QtGui import QIcon, QAction
+# from pathlib import Path
+# import sys
+
+
+# class Example(QMainWindow):
+
+#     def __init__(self):
+#         super().__init__()
+
+#         self.initUI()
+
+
+#     def initUI(self):
+
+#         self.textEdit = QTextEdit()
+#         self.setCentralWidget(self.textEdit)
+#         self.statusBar()
+
+#         openFile = QAction(QIcon('open.png'), 'Open', self)
+#         openFile.setShortcut('Ctrl+O')
+#         openFile.setStatusTip('Open new File')
+#         openFile.triggered.connect(self.showDialog)
+
+#         menubar = self.menuBar()
+#         fileMenu = menubar.addMenu('&File')
+#         fileMenu.addAction(openFile)
+
+#         self.setGeometry(300, 300, 550, 450)
+#         self.setWindowTitle('File dialog')
+#         self.show()
+
+
+#     def showDialog(self):
+
+#         home_dir = str(Path.home())
+#         fname = QFileDialog.getOpenFileName(self, 'Open file', home_dir)
+
+#         if fname[0]:
+
+#             f = open(fname[0], 'r')
+
+#             with f:
+
+#                 data = f.read()
+#                 self.textEdit.setText(data)
+
+
+# def main():
+
+#     app = QApplication(sys.argv)
+#     ex = Example()
+#     sys.exit(app.exec())
+
+
+# if __name__ == '__main__':
+#     main()
+# import sys
+# from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QVBoxLayout
+
+# from PySide6.QtMultimediaWidgets import QVideoWidget
+# class MyWindow(QMainWindow):
+#     def __init__(self):
+#         super().__init__()
+#         self.setWindowTitle("Widget Stacking Example")
+        
+#         # Create a container widget (e.g., a QWidget)
+#         container = QWidget(self)
+#         self.setCentralWidget(container)
+        
+#         # Create a layout for the container
+#         layout = QVBoxLayout(container)
+        
+#         # Add your QVideoWidget (replace with your actual video widget)
+#         videoWidget = QVideoWidget()
+#         layout.addWidget(videoWidget)
+        
+#         # Add a button (or any other widget) on top of the video widget
+#         button = QPushButton("Click Me")
+#         layout.addWidget(button)
+        
+#         # Raise the button to appear above the video widget
+#         button.raise_()
+        
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     window = MyWindow()
+#     window.show()
+#     sys.exit(app.exec_())
