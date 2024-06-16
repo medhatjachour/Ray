@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainHpGsNM.ui'
+## Form generated from reading UI file 'mainEJQOos.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -17,41 +17,115 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLineEdit, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QStackedWidget,
-    QVBoxLayout, QWidget)
+    QRadioButton, QSizePolicy, QSlider, QSpacerItem,
+    QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1420, 822)
+        MainWindow.resize(1420, 828)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(self.centralwidget)
-        self.frame.setObjectName(u"frame")
-        self.frame.setMinimumSize(QSize(0, 50))
-        self.frame.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.top_bar = QFrame(self.centralwidget)
+        self.top_bar.setObjectName(u"top_bar")
+        self.top_bar.setMinimumSize(QSize(0, 50))
+        self.top_bar.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.top_bar.setFrameShape(QFrame.StyledPanel)
+        self.top_bar.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.top_bar)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.frame_35 = QFrame(self.top_bar)
+        self.frame_35.setObjectName(u"frame_35")
+        self.frame_35.setFrameShape(QFrame.StyledPanel)
+        self.frame_35.setFrameShadow(QFrame.Raised)
 
-        self.verticalLayout.addWidget(self.frame)
+        self.horizontalLayout_6.addWidget(self.frame_35)
+
+        self.horizontalSpacer_18 = QSpacerItem(621, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_18)
+
+        self.pushButton = QPushButton(self.top_bar)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.horizontalLayout_6.addWidget(self.pushButton)
+
+        self.frame_41 = QFrame(self.top_bar)
+        self.frame_41.setObjectName(u"frame_41")
+        self.frame_41.setFrameShape(QFrame.StyledPanel)
+        self.frame_41.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_6.addWidget(self.frame_41)
+
+        self.horizontalSpacer_19 = QSpacerItem(621, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_19)
+
+        self.frame_34 = QFrame(self.top_bar)
+        self.frame_34.setObjectName(u"frame_34")
+        self.frame_34.setMinimumSize(QSize(150, 0))
+        self.frame_34.setFrameShape(QFrame.StyledPanel)
+        self.frame_34.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.frame_34)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.min_btn = QPushButton(self.frame_34)
+        self.min_btn.setObjectName(u"min_btn")
+        self.min_btn.setMinimumSize(QSize(25, 40))
+        font = QFont()
+        font.setPointSize(29)
+        self.min_btn.setFont(font)
+        self.min_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.min_btn.setStyleSheet(u"color: rgb(0, 132, 198);\n"
+"border:none;")
+
+        self.horizontalLayout_7.addWidget(self.min_btn)
+
+        self.max_btn = QPushButton(self.frame_34)
+        self.max_btn.setObjectName(u"max_btn")
+        self.max_btn.setMinimumSize(QSize(25, 40))
+        font1 = QFont()
+        font1.setPointSize(14)
+        self.max_btn.setFont(font1)
+        self.max_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.max_btn.setStyleSheet(u"border:none;color: rgb(0, 193, 0);")
+
+        self.horizontalLayout_7.addWidget(self.max_btn)
+
+        self.close_btn = QPushButton(self.frame_34)
+        self.close_btn.setObjectName(u"close_btn")
+        self.close_btn.setMinimumSize(QSize(25, 40))
+        self.close_btn.setFont(font1)
+        self.close_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.close_btn.setStyleSheet(u"border:none;color: rgb(255, 25, 17);")
+
+        self.horizontalLayout_7.addWidget(self.close_btn)
+
+
+        self.horizontalLayout_6.addWidget(self.frame_34)
+
+
+        self.verticalLayout.addWidget(self.top_bar)
 
         self.stackedWidget = QStackedWidget(self.centralwidget)
         self.stackedWidget.setObjectName(u"stackedWidget")
-        self.stackedWidget.setStyleSheet(u"\n"
+        self.stackedWidget.setStyleSheet(u"")
+        self.welcome = QWidget()
+        self.welcome.setObjectName(u"welcome")
+        self.welcome.setStyleSheet(u"\n"
 "background-color: qlineargradient(spread:pad, x1:0.670455, y1:0.812, x2:0, y2:0.471, stop:0 rgba(35, 134, 244, 244), stop:1 rgba(55, 193, 255, 255));\n"
 "\n"
 "background-color: qlineargradient(spread:pad, x1:0.619, y1:0.875, x2:0.023, y2:0.0339545, stop:0 rgba(25, 118, 221, 255), stop:0.556818 rgba(3, 169, 244, 255));\n"
 "\n"
-"background-color :qlineargradient(spread:pad, x1:0.71, y1:0.982955, x2:0, y2:0.051, stop:0 rgba(25, 118, 221, 255), stop:0.6875 rgba(3, 169, 244, 255));")
-        self.welcome = QWidget()
-        self.welcome.setObjectName(u"welcome")
-        self.welcome.setStyleSheet(u"border:none;")
+"background-color :qlineargradient(spread:pad, x1:0.71, y1:0.982955, x2:0, y2:0.051, stop:0 rgba(25, 118, 221, 255), stop:0.6875 rgba(3, 169, 244, 255));border:none;")
         self.verticalLayout_2 = QVBoxLayout(self.welcome)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -187,6 +261,12 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.welcome)
         self.log = QWidget()
         self.log.setObjectName(u"log")
+        self.log.setStyleSheet(u"\n"
+"background-color: qlineargradient(spread:pad, x1:0.670455, y1:0.812, x2:0, y2:0.471, stop:0 rgba(35, 134, 244, 244), stop:1 rgba(55, 193, 255, 255));\n"
+"\n"
+"background-color: qlineargradient(spread:pad, x1:0.619, y1:0.875, x2:0.023, y2:0.0339545, stop:0 rgba(25, 118, 221, 255), stop:0.556818 rgba(3, 169, 244, 255));\n"
+"\n"
+"background-color :qlineargradient(spread:pad, x1:0.71, y1:0.982955, x2:0, y2:0.051, stop:0 rgba(25, 118, 221, 255), stop:0.6875 rgba(3, 169, 244, 255));")
         self.gridLayout = QGridLayout(self.log)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -258,11 +338,11 @@ class Ui_MainWindow(object):
         self.logIn_tab.setObjectName(u"logIn_tab")
         self.logIn_tab.setMinimumSize(QSize(100, 38))
         self.logIn_tab.setMaximumSize(QSize(14566, 50))
-        font = QFont()
-        font.setFamilies([u"Poppins"])
-        font.setBold(False)
-        font.setItalic(False)
-        self.logIn_tab.setFont(font)
+        font2 = QFont()
+        font2.setFamilies([u"Poppins"])
+        font2.setBold(False)
+        font2.setItalic(False)
+        self.logIn_tab.setFont(font2)
         self.logIn_tab.setCursor(QCursor(Qt.PointingHandCursor))
         self.logIn_tab.setLayoutDirection(Qt.LeftToRight)
         self.logIn_tab.setStyleSheet(u"\n"
@@ -304,7 +384,7 @@ class Ui_MainWindow(object):
         self.signUp_tab.setObjectName(u"signUp_tab")
         self.signUp_tab.setMinimumSize(QSize(100, 38))
         self.signUp_tab.setMaximumSize(QSize(14566, 50))
-        self.signUp_tab.setFont(font)
+        self.signUp_tab.setFont(font2)
         self.signUp_tab.setCursor(QCursor(Qt.PointingHandCursor))
         self.signUp_tab.setLayoutDirection(Qt.LeftToRight)
         self.signUp_tab.setStyleSheet(u"\n"
@@ -479,10 +559,10 @@ class Ui_MainWindow(object):
         self.email_log = QLineEdit(self.frame_42)
         self.email_log.setObjectName(u"email_log")
         self.email_log.setMinimumSize(QSize(0, 50))
-        font1 = QFont()
-        font1.setFamilies([u"Proxima Nova"])
-        font1.setBold(False)
-        self.email_log.setFont(font1)
+        font3 = QFont()
+        font3.setFamilies([u"Proxima Nova"])
+        font3.setBold(False)
+        self.email_log.setFont(font3)
         self.email_log.setLayoutDirection(Qt.RightToLeft)
         self.email_log.setStyleSheet(u"font-family: Proxima Nova;\n"
 "color: rgb(71, 71, 71);\n"
@@ -641,7 +721,7 @@ class Ui_MainWindow(object):
         self.email_sign = QLineEdit(self.frame_45)
         self.email_sign.setObjectName(u"email_sign")
         self.email_sign.setMinimumSize(QSize(0, 50))
-        self.email_sign.setFont(font1)
+        self.email_sign.setFont(font3)
         self.email_sign.setLayoutDirection(Qt.RightToLeft)
         self.email_sign.setStyleSheet(u"font-family: Proxima Nova;\n"
 "color: rgb(71, 71, 71);\n"
@@ -1126,7 +1206,7 @@ class Ui_MainWindow(object):
         self.youtube_url = QLineEdit(self.frame_31)
         self.youtube_url.setObjectName(u"youtube_url")
         self.youtube_url.setMinimumSize(QSize(0, 34))
-        self.youtube_url.setFont(font1)
+        self.youtube_url.setFont(font3)
         self.youtube_url.setLayoutDirection(Qt.RightToLeft)
         self.youtube_url.setStyleSheet(u"font-family: Proxima Nova;\n"
 "font-size: 15px;\n"
@@ -1169,8 +1249,10 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.home)
         self.video_player = QWidget()
         self.video_player.setObjectName(u"video_player")
-        self.video_player.setStyleSheet(u"background-color: rgb(255, 170, 0);")
+        self.video_player.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
+"background-color: transparent;")
         self.gridLayout_6 = QGridLayout(self.video_player)
+        self.gridLayout_6.setSpacing(0)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.gridLayout_6.setContentsMargins(0, 0, 0, 0)
         self.frame_23 = QFrame(self.video_player)
@@ -1181,35 +1263,294 @@ class Ui_MainWindow(object):
         self.gridLayout_8.setSpacing(0)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.frame_41 = QFrame(self.frame_23)
-        self.frame_41.setObjectName(u"frame_41")
-        self.frame_41.setMinimumSize(QSize(1415, 555))
-        self.frame_41.setMaximumSize(QSize(1677215, 16777215))
-        self.frame_41.setToolTipDuration(5)
-        self.frame_41.setFrameShape(QFrame.StyledPanel)
-        self.frame_41.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_13 = QVBoxLayout(self.frame_41)
-        self.verticalLayout_13.setSpacing(0)
-        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
-
-        self.gridLayout_8.addWidget(self.frame_41, 0, 0, 1, 1)
-
-        self.sub_floating = QFrame(self.frame_23)
-        self.sub_floating.setObjectName(u"sub_floating")
-        self.sub_floating.setMinimumSize(QSize(0, 45))
-        self.sub_floating.setMaximumSize(QSize(0, 0))
-        self.sub_floating.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 4px ;\n"
-"padding:10px;\n"
-"")
-        self.sub_floating.setFrameShape(QFrame.StyledPanel)
-        self.sub_floating.setFrameShadow(QFrame.Raised)
-
-        self.gridLayout_8.addWidget(self.sub_floating, 1, 0, 1, 1)
-
 
         self.gridLayout_6.addWidget(self.frame_23, 0, 1, 1, 1)
+
+        self.frame_32 = QFrame(self.video_player)
+        self.frame_32.setObjectName(u"frame_32")
+        self.frame_32.setMinimumSize(QSize(0, 0))
+        self.frame_32.setMaximumSize(QSize(16777215, 160))
+        self.frame_32.setStyleSheet(u"border:none;\n"
+"background-color: transparent;\n"
+"")
+        self.frame_32.setFrameShape(QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QFrame.Raised)
+        self.gridLayout_13 = QGridLayout(self.frame_32)
+        self.gridLayout_13.setSpacing(0)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.gridLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.frame_60 = QFrame(self.frame_32)
+        self.frame_60.setObjectName(u"frame_60")
+        self.frame_60.setMinimumSize(QSize(777, 92))
+        self.frame_60.setMaximumSize(QSize(770, 92))
+        self.frame_60.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);\n"
+"border-radius:4px;")
+        self.frame_60.setFrameShape(QFrame.StyledPanel)
+        self.frame_60.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_21 = QVBoxLayout(self.frame_60)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+        self.frame_61 = QFrame(self.frame_60)
+        self.frame_61.setObjectName(u"frame_61")
+        self.frame_61.setMinimumSize(QSize(770, 85))
+        self.frame_61.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);")
+        self.frame_61.setFrameShape(QFrame.StyledPanel)
+        self.frame_61.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_22 = QVBoxLayout(self.frame_61)
+        self.verticalLayout_22.setSpacing(0)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.verticalLayout_22.setContentsMargins(1, 0, 1, 6)
+        self.frame_65 = QFrame(self.frame_61)
+        self.frame_65.setObjectName(u"frame_65")
+        self.frame_65.setMinimumSize(QSize(0, 0))
+        self.frame_65.setFrameShape(QFrame.StyledPanel)
+        self.frame_65.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_23 = QVBoxLayout(self.frame_65)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, -1)
+        self.position_control = QSlider(self.frame_65)
+        self.position_control.setObjectName(u"position_control")
+        self.position_control.setMaximumSize(QSize(16777215, 8))
+        self.position_control.setStyleSheet(u"QSlider{\n"
+"	background-color:transparent;\n"
+"	margin: 0px;\n"
+"\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QSlider::groove:horizontal {\n"
+"    border-radius: 10px;\n"
+"    height: 7px;\n"
+"	background-color:  rgba(149, 168, 189, 1);\n"
+"}/*\n"
+"QSlider::groove:horizontal:hover { background-color: #1e2229; }\n"
+"*/QSlider::handle:horizontal {\n"
+"    border: none;\n"
+"    height: 18;\n"
+"    width: 18;\n"
+"    margin: 1px;\n"
+"	border-radius: 9px;\n"
+"    background-color: white;\n"
+"}/*\n"
+"QSlider::handle:horizontal:hover { background-color: #1e2229; }*/\n"
+"QSlider::handle:horizontal:pressed { \n"
+"	background-color: rgba(3, 169, 244, 1); }\n"
+"\n"
+"")
+        self.position_control.setOrientation(Qt.Horizontal)
+
+        self.verticalLayout_23.addWidget(self.position_control)
+
+
+        self.verticalLayout_22.addWidget(self.frame_65)
+
+        self.time = QLabel(self.frame_61)
+        self.time.setObjectName(u"time")
+        self.time.setMaximumSize(QSize(16777215, 19))
+        self.time.setStyleSheet(u"color: rgb(0, 0, 0);")
+
+        self.verticalLayout_22.addWidget(self.time)
+
+        self.frame_62 = QFrame(self.frame_61)
+        self.frame_62.setObjectName(u"frame_62")
+        self.frame_62.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);")
+        self.frame_62.setFrameShape(QFrame.StyledPanel)
+        self.frame_62.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_31 = QHBoxLayout(self.frame_62)
+        self.horizontalLayout_31.setSpacing(10)
+        self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
+        self.horizontalLayout_31.setContentsMargins(50, 0, 29, 0)
+        self.frame_63 = QFrame(self.frame_62)
+        self.frame_63.setObjectName(u"frame_63")
+        self.frame_63.setMinimumSize(QSize(200, 0))
+        self.frame_63.setFrameShape(QFrame.StyledPanel)
+        self.frame_63.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_32 = QHBoxLayout(self.frame_63)
+        self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
+        self.mute = QPushButton(self.frame_63)
+        self.mute.setObjectName(u"mute")
+        self.mute.setMinimumSize(QSize(30, 30))
+        self.mute.setMaximumSize(QSize(30, 30))
+        self.mute.setCursor(QCursor(Qt.PointingHandCursor))
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.mute.setIcon(icon1)
+
+        self.horizontalLayout_32.addWidget(self.mute)
+
+        self.sound_control = QSlider(self.frame_63)
+        self.sound_control.setObjectName(u"sound_control")
+        self.sound_control.setMaximumSize(QSize(150, 16777215))
+        self.sound_control.setStyleSheet(u"QSlider{\n"
+"	background-color:transparent;\n"
+"	margin: 0px;\n"
+"\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QSlider::groove:horizontal {\n"
+"    border-radius: 10px;\n"
+"    height: 7px;\n"
+"	background-color:  rgba(149, 168, 189, 1);\n"
+"}/*\n"
+"QSlider::groove:horizontal:hover { background-color: #1e2229; }*/\n"
+"QSlider::handle:horizontal {\n"
+"    border: none;\n"
+"    height: 18;\n"
+"    width: 18;\n"
+"    margin: 1px;\n"
+"	border-radius: 9px;\n"
+"    background-color: white;\n"
+"}/*\n"
+"QSlider::handle:horizontal:hover { background-color: #1e2229; }*/\n"
+"QSlider::handle:horizontal:pressed { \n"
+"	background-color: rgba(3, 169, 244, 1); }\n"
+"")
+        self.sound_control.setOrientation(Qt.Horizontal)
+
+        self.horizontalLayout_32.addWidget(self.sound_control)
+
+
+        self.horizontalLayout_31.addWidget(self.frame_63)
+
+        self.frame_64 = QFrame(self.frame_62)
+        self.frame_64.setObjectName(u"frame_64")
+        self.frame_64.setMinimumSize(QSize(224, 0))
+        self.frame_64.setMaximumSize(QSize(224, 16777215))
+        self.frame_64.setFrameShape(QFrame.StyledPanel)
+        self.frame_64.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_35 = QHBoxLayout(self.frame_64)
+        self.horizontalLayout_35.setSpacing(8)
+        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
+        self.previus = QPushButton(self.frame_64)
+        self.previus.setObjectName(u"previus")
+        self.previus.setMinimumSize(QSize(0, 30))
+        self.previus.setMaximumSize(QSize(50, 16777215))
+        self.previus.setCursor(QCursor(Qt.PointingHandCursor))
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.previus.setIcon(icon2)
+        self.previus.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_35.addWidget(self.previus)
+
+        self.backward = QPushButton(self.frame_64)
+        self.backward.setObjectName(u"backward")
+        self.backward.setMinimumSize(QSize(0, 30))
+        self.backward.setMaximumSize(QSize(50, 16777215))
+        self.backward.setCursor(QCursor(Qt.PointingHandCursor))
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/assets/icons/refresh-ccw-01.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.backward.setIcon(icon3)
+        self.backward.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_35.addWidget(self.backward)
+
+        self.horizontalSpacer_33 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_35.addItem(self.horizontalSpacer_33)
+
+        self.stop_play = QPushButton(self.frame_64)
+        self.stop_play.setObjectName(u"stop_play")
+        self.stop_play.setMinimumSize(QSize(38, 38))
+        self.stop_play.setMaximumSize(QSize(38, 38))
+        self.stop_play.setCursor(QCursor(Qt.PointingHandCursor))
+        self.stop_play.setStyleSheet(u"background: rgba(255, 255, 255, 1);\n"
+"border-radius:19px;\n"
+"text-align:center;")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.stop_play.setIcon(icon4)
+        self.stop_play.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_35.addWidget(self.stop_play)
+
+        self.horizontalSpacer_34 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_35.addItem(self.horizontalSpacer_34)
+
+        self.forward = QPushButton(self.frame_64)
+        self.forward.setObjectName(u"forward")
+        self.forward.setMinimumSize(QSize(0, 30))
+        self.forward.setMaximumSize(QSize(50, 16777215))
+        self.forward.setCursor(QCursor(Qt.PointingHandCursor))
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/assets/icons/refresh-ccw-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.forward.setIcon(icon5)
+        self.forward.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_35.addWidget(self.forward)
+
+        self.next = QPushButton(self.frame_64)
+        self.next.setObjectName(u"next")
+        self.next.setMinimumSize(QSize(0, 30))
+        self.next.setMaximumSize(QSize(50, 16777215))
+        self.next.setCursor(QCursor(Qt.PointingHandCursor))
+        icon6 = QIcon()
+        icon6.addFile(u":/icons/assets/icons/skip-forward.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.next.setIcon(icon6)
+        self.next.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_35.addWidget(self.next)
+
+
+        self.horizontalLayout_31.addWidget(self.frame_64)
+
+        self.horizontalSpacer_35 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_31.addItem(self.horizontalSpacer_35)
+
+        self.choseSub = QPushButton(self.frame_62)
+        self.choseSub.setObjectName(u"choseSub")
+        self.choseSub.setMinimumSize(QSize(133, 33))
+        self.choseSub.setMaximumSize(QSize(133, 33))
+        self.choseSub.setCursor(QCursor(Qt.PointingHandCursor))
+        self.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n"
+"color: rgb(0, 0, 0);\n"
+"font-size: 12px;\n"
+"font-weight: 400;\n"
+"line-height: 12px;\n"
+"\n"
+"\n"
+"border-radius: 4px;\n"
+"background-color: rgb(255, 255, 255);")
+        icon7 = QIcon()
+        icon7.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.choseSub.setIcon(icon7)
+        self.choseSub.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_31.addWidget(self.choseSub)
+
+        self.playSub = QPushButton(self.frame_62)
+        self.playSub.setObjectName(u"playSub")
+        self.playSub.setMinimumSize(QSize(77, 33))
+        self.playSub.setMaximumSize(QSize(77, 33))
+        self.playSub.setCursor(QCursor(Qt.PointingHandCursor))
+        self.playSub.setStyleSheet(u"font-family: Proxima Nova;\n"
+"font-size: 12px;\n"
+"font-weight: 400;\n"
+"line-height: 12px;\n"
+"\n"
+"color: rgb(0, 0, 0);\n"
+"border-radius: 4px;\n"
+"background-color: rgb(255, 255, 255);")
+        icon8 = QIcon()
+        icon8.addFile(u":/icons/assets/icons/equal-CC.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.playSub.setIcon(icon8)
+        self.playSub.setIconSize(QSize(21, 21))
+
+        self.horizontalLayout_31.addWidget(self.playSub)
+
+
+        self.verticalLayout_22.addWidget(self.frame_62)
+
+
+        self.verticalLayout_21.addWidget(self.frame_61)
+
+
+        self.gridLayout_13.addWidget(self.frame_60, 0, 0, 1, 1)
+
+
+        self.gridLayout_6.addWidget(self.frame_32, 1, 1, 1, 1)
 
         self.stackedWidget.addWidget(self.video_player)
 
@@ -1228,6 +1569,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"sub", None))
+        self.min_btn.setText(QCoreApplication.translate("MainWindow", u"-", None))
+        self.max_btn.setText(QCoreApplication.translate("MainWindow", u"O", None))
+        self.close_btn.setText(QCoreApplication.translate("MainWindow", u"X", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"               LOGO    ", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Welcome to TechSpecs Ray", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"em ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim v", None))
@@ -1268,5 +1613,14 @@ class Ui_MainWindow(object):
         self.youtube_url.setText("")
         self.youtube_url.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Insert your Youtube video link here", None))
         self.play_youtube.setText(QCoreApplication.translate("MainWindow", u"Play Video", None))
+        self.time.setText(QCoreApplication.translate("MainWindow", u"1:29 / 10:45", None))
+        self.mute.setText("")
+        self.previus.setText("")
+        self.backward.setText("")
+        self.stop_play.setText("")
+        self.forward.setText("")
+        self.next.setText("")
+        self.choseSub.setText(QCoreApplication.translate("MainWindow", u"  English (US)", None))
+        self.playSub.setText(QCoreApplication.translate("MainWindow", u"  ON", None))
     # retranslateUi
 

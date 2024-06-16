@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="icons">
-    <file>assets/icons/volume-x.png</file>
+    <file>assets/icons/Mute.png</file>
     <file>assets/icons/equal-CC-off.png</file>
     <file>assets/icons/play-circle.png</file>
     <file>assets/icons/volume-max.png</file>

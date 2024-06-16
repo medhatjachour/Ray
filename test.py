@@ -287,3 +287,44 @@ if __name__ == '__main__':
 #     window = MyWindow()
 #     window.show()
 #     sys.exit(app.exec_())
+    def get_local_subtitle(self):
+        # Create a QTimer to track video playback time
+        self.subName = QFileDialog.getOpenFileName(self, "Chose the subtitle", f"{self.fileName[0]}","Subtitle Files (*.srt *.sbv *.vtt )")
+        print(self.subName[0])
+        # self.player.setActiveSubtitleTrack(0)
+        with open(self.subName[0],encoding="utf-8") as subtitle_file:
+            self.subtitle_content = subtitle_file.read()
+        print(f'self.subtitle_content == {self.subtitle_content}' )
+
+        # subtitle_text_item = QGraphicsTextItem(self.subName)
+        # subtitle_text_item.setPos(50,100)  # Set position on the video
+          # Load subtitles
+        for subtitle in self.subtitle_content:
+            print(f'subtitle ==  {subtitle}')
+            subtitle_text = subtitle["text"]
+            start_time_ms = subtitle["start_time_ms"]
+
+            # Create a QGraphicsTextItem for each subtitle
+            subtitle_text_item = QGraphicsTextItem(subtitle_text)
+            subtitle_text_item.setPos(20, 20)  # Adjust position as needed
+            self._scene.addItem(subtitle_text_item)
+
+            # Use a QTimer to update subtitles based on video timestamp
+            timer = QTimer()
+            timer.timeout.connect(self.update_subtitles(subtitle_text_item, self.player))
+            timer.start(100)  # Adjust interval as needed
+
+    def update_subtitles(self,subtitle_text_item, player):
+        # Get the current video timestamp in milliseconds
+        current_time_ms = player.position()
+
+        # Update subtitle visibility based on timing (you can add more logic here)
+        subtitle_start_time_ms = ...  # Get the start time of the subtitle
+        subtitle_end_time_ms = ...    # Get the end time of the subtitle
+        if subtitle_start_time_ms <= current_time_ms <= subtitle_end_time_ms:
+            subtitle_text_item.setVisible(True)
+        else:
+            subtitle_text_item.setVisible(False)
+# /////////////////////////////////////
+# /////////////////////////////////////
+# /////////////////////////////////////
