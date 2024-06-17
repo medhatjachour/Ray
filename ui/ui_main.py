@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainEJQOos.ui'
+## Form generated from reading UI file 'mainbpordQ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -17,8 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLineEdit, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QSlider, QSpacerItem,
-    QStackedWidget, QVBoxLayout, QWidget)
+    QRadioButton, QScrollArea, QSizePolicy, QSlider,
+    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -41,11 +41,44 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QHBoxLayout(self.top_bar)
         self.horizontalLayout_6.setSpacing(0)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_6.setContentsMargins(20, 0, 10, 0)
         self.frame_35 = QFrame(self.top_bar)
         self.frame_35.setObjectName(u"frame_35")
+        self.frame_35.setMinimumSize(QSize(150, 0))
+        self.frame_35.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.frame_35.setFrameShape(QFrame.StyledPanel)
         self.frame_35.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_19 = QHBoxLayout(self.frame_35)
+        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.horizontalLayout_19.setContentsMargins(0, 4, 0, 4)
+        self.label_19 = QLabel(self.frame_35)
+        self.label_19.setObjectName(u"label_19")
+
+        self.horizontalLayout_19.addWidget(self.label_19)
+
+        self.preferences = QPushButton(self.frame_35)
+        self.preferences.setObjectName(u"preferences")
+        self.preferences.setMinimumSize(QSize(0, 35))
+        self.preferences.setCursor(QCursor(Qt.PointingHandCursor))
+        self.preferences.setStyleSheet(u"QPushButton{\n"
+"width: 125px;\n"
+"height: 29px;\n"
+"top: 11px;\n"
+"left: 74px;\n"
+"\n"
+"border-radius: 4px;\n"
+"border: 1px 0px 0px 0px;\n"
+"\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgb(223, 223, 223);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/icons/assets/icons/settings-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.preferences.setIcon(icon)
+
+        self.horizontalLayout_19.addWidget(self.preferences)
+
 
         self.horizontalLayout_6.addWidget(self.frame_35)
 
@@ -53,13 +86,20 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6.addItem(self.horizontalSpacer_18)
 
-        self.pushButton = QPushButton(self.top_bar)
-        self.pushButton.setObjectName(u"pushButton")
+        self.movie_name = QLabel(self.top_bar)
+        self.movie_name.setObjectName(u"movie_name")
+        self.movie_name.setStyleSheet(u"color: rgb(0, 0, 0);")
 
-        self.horizontalLayout_6.addWidget(self.pushButton)
+        self.horizontalLayout_6.addWidget(self.movie_name)
 
         self.frame_41 = QFrame(self.top_bar)
         self.frame_41.setObjectName(u"frame_41")
+        self.frame_41.setStyleSheet(u"font-family: Proxima Nova;\n"
+"font-size: 14px;\n"
+"font-weight: 400;\n"
+"line-height: 14px;\n"
+"text-align: left;\n"
+"")
         self.frame_41.setFrameShape(QFrame.StyledPanel)
         self.frame_41.setFrameShadow(QFrame.Raised)
 
@@ -114,6 +154,190 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout.addWidget(self.top_bar)
+
+        self.preferences_frame = QFrame(self.centralwidget)
+        self.preferences_frame.setObjectName(u"preferences_frame")
+        self.preferences_frame.setMinimumSize(QSize(0, 0))
+        self.preferences_frame.setMaximumSize(QSize(0, 0))
+        self.preferences_frame.setStyleSheet(u"width: 262px;\n"
+"height: 258px;\n"
+"border-radius:5px;\n"
+"\n"
+"background: rgba(255, 255, 255, 1);\n"
+"color: rgb(0, 0, 0);\n"
+"")
+        self.preferences_frame.setFrameShape(QFrame.StyledPanel)
+        self.preferences_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.preferences_frame)
+        self.verticalLayout_15.setSpacing(8)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(15, -1, 15, -1)
+        self.frame_47 = QFrame(self.preferences_frame)
+        self.frame_47.setObjectName(u"frame_47")
+        self.frame_47.setStyleSheet(u"font-family: Proxima Nova;\n"
+"font-size: 14px;\n"
+"font-weight: 400;\n"
+"line-height: 14px;\n"
+"text-align: left;\n"
+"")
+        self.frame_47.setFrameShape(QFrame.StyledPanel)
+        self.frame_47.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_17 = QVBoxLayout(self.frame_47)
+        self.verticalLayout_17.setSpacing(10)
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.p_user = QPushButton(self.frame_47)
+        self.p_user.setObjectName(u"p_user")
+        self.p_user.setMaximumSize(QSize(16777215, 32))
+        self.p_user.setCursor(QCursor(Qt.PointingHandCursor))
+        self.p_user.setStyleSheet(u"border:none;")
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/assets/icons/user-03.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_user.setIcon(icon1)
+
+        self.verticalLayout_17.addWidget(self.p_user)
+
+        self.frame_51 = QFrame(self.frame_47)
+        self.frame_51.setObjectName(u"frame_51")
+        self.frame_51.setFrameShape(QFrame.StyledPanel)
+        self.frame_51.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_21 = QHBoxLayout(self.frame_51)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.horizontalLayout_21.setContentsMargins(0, 0, 15, 0)
+        self.p_subscription = QPushButton(self.frame_51)
+        self.p_subscription.setObjectName(u"p_subscription")
+        self.p_subscription.setMaximumSize(QSize(16777215, 31))
+        self.p_subscription.setCursor(QCursor(Qt.PointingHandCursor))
+        self.p_subscription.setStyleSheet(u"border:none;")
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/assets/icons/diamond-01.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_subscription.setIcon(icon2)
+
+        self.horizontalLayout_21.addWidget(self.p_subscription)
+
+        self.label_22 = QLabel(self.frame_51)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setMinimumSize(QSize(50, 0))
+        font2 = QFont()
+        font2.setFamilies([u"Proxima Nova"])
+        font2.setBold(False)
+        self.label_22.setFont(font2)
+        self.label_22.setStyleSheet(u"\n"
+"\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 15px;\n"
+"\n"
+"background: rgba(145, 168, 191, 1);\n"
+"")
+        self.label_22.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_21.addWidget(self.label_22)
+
+
+        self.verticalLayout_17.addWidget(self.frame_51)
+
+        self.p_settings = QPushButton(self.frame_47)
+        self.p_settings.setObjectName(u"p_settings")
+        self.p_settings.setMaximumSize(QSize(16777215, 32))
+        self.p_settings.setCursor(QCursor(Qt.PointingHandCursor))
+        self.p_settings.setStyleSheet(u"border:none;")
+        self.p_settings.setIcon(icon)
+
+        self.verticalLayout_17.addWidget(self.p_settings)
+
+        self.frame_50 = QFrame(self.frame_47)
+        self.frame_50.setObjectName(u"frame_50")
+        self.frame_50.setFrameShape(QFrame.StyledPanel)
+        self.frame_50.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_22 = QHBoxLayout(self.frame_50)
+        self.horizontalLayout_22.setSpacing(0)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.horizontalLayout_22.setContentsMargins(0, 0, 15, 0)
+        self.p_mode = QPushButton(self.frame_50)
+        self.p_mode.setObjectName(u"p_mode")
+        self.p_mode.setCursor(QCursor(Qt.PointingHandCursor))
+        self.p_mode.setStyleSheet(u"border:none;\n"
+"border-bottom: 1px solid  rgba(165, 165, 165 ,.4);")
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/assets/icons/moon-01.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_mode.setIcon(icon3)
+
+        self.horizontalLayout_22.addWidget(self.p_mode)
+
+
+        self.verticalLayout_17.addWidget(self.frame_50)
+
+
+        self.verticalLayout_15.addWidget(self.frame_47)
+
+        self.frame_48 = QFrame(self.preferences_frame)
+        self.frame_48.setObjectName(u"frame_48")
+        self.frame_48.setMaximumSize(QSize(16777215, 83))
+        self.frame_48.setFrameShape(QFrame.StyledPanel)
+        self.frame_48.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_16 = QVBoxLayout(self.frame_48)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.label_18 = QLabel(self.frame_48)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setMinimumSize(QSize(0, 25))
+        self.label_18.setMaximumSize(QSize(16777215, 39))
+        self.label_18.setStyleSheet(u"font-family: Proxima Nova;\n"
+"font-size: 14px;\n"
+"font-weight: 400;\n"
+"line-height: 14px;\n"
+"text-align: left;\n"
+"")
+
+        self.verticalLayout_16.addWidget(self.label_18)
+
+        self.frame_49 = QFrame(self.frame_48)
+        self.frame_49.setObjectName(u"frame_49")
+        self.frame_49.setStyleSheet(u"border :1px solid rgba(165, 165, 165 ,.4);")
+        self.frame_49.setFrameShape(QFrame.StyledPanel)
+        self.frame_49.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_20 = QHBoxLayout(self.frame_49)
+        self.horizontalLayout_20.setSpacing(0)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.horizontalLayout_20.setContentsMargins(15, 0, 0, 0)
+        self.p_lang = QPushButton(self.frame_49)
+        self.p_lang.setObjectName(u"p_lang")
+        self.p_lang.setCursor(QCursor(Qt.PointingHandCursor))
+        self.p_lang.setStyleSheet(u"border:none;\n"
+"font-family: Proxima Nova;\n"
+"font-size: 15px;\n"
+"font-weight: 400;\n"
+"line-height: 15px;\n"
+"text-align: left;\n"
+"")
+
+        self.horizontalLayout_20.addWidget(self.p_lang)
+
+        self.p_lang_2 = QPushButton(self.frame_49)
+        self.p_lang_2.setObjectName(u"p_lang_2")
+        self.p_lang_2.setMaximumSize(QSize(50, 16777215))
+        self.p_lang_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.p_lang_2.setStyleSheet(u"border:none;\n"
+"font-family: Proxima Nova;\n"
+"font-size: 15px;\n"
+"font-weight: 400;\n"
+"line-height: 15px;\n"
+"")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/assets/icons/pencil-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_lang_2.setIcon(icon4)
+        self.p_lang_2.setIconSize(QSize(28, 29))
+
+        self.horizontalLayout_20.addWidget(self.p_lang_2)
+
+
+        self.verticalLayout_16.addWidget(self.frame_49)
+
+
+        self.verticalLayout_15.addWidget(self.frame_48)
+
+
+        self.verticalLayout.addWidget(self.preferences_frame)
 
         self.stackedWidget = QStackedWidget(self.centralwidget)
         self.stackedWidget.setObjectName(u"stackedWidget")
@@ -270,10 +494,6 @@ class Ui_MainWindow(object):
         self.gridLayout = QGridLayout(self.log)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalSpacer_3 = QSpacerItem(20, 17, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_3, 0, 1, 1, 1)
-
         self.horizontalSpacer_7 = QSpacerItem(422, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer_7, 1, 0, 1, 1)
@@ -338,11 +558,11 @@ class Ui_MainWindow(object):
         self.logIn_tab.setObjectName(u"logIn_tab")
         self.logIn_tab.setMinimumSize(QSize(100, 38))
         self.logIn_tab.setMaximumSize(QSize(14566, 50))
-        font2 = QFont()
-        font2.setFamilies([u"Poppins"])
-        font2.setBold(False)
-        font2.setItalic(False)
-        self.logIn_tab.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"Poppins"])
+        font3.setBold(False)
+        font3.setItalic(False)
+        self.logIn_tab.setFont(font3)
         self.logIn_tab.setCursor(QCursor(Qt.PointingHandCursor))
         self.logIn_tab.setLayoutDirection(Qt.LeftToRight)
         self.logIn_tab.setStyleSheet(u"\n"
@@ -384,7 +604,7 @@ class Ui_MainWindow(object):
         self.signUp_tab.setObjectName(u"signUp_tab")
         self.signUp_tab.setMinimumSize(QSize(100, 38))
         self.signUp_tab.setMaximumSize(QSize(14566, 50))
-        self.signUp_tab.setFont(font2)
+        self.signUp_tab.setFont(font3)
         self.signUp_tab.setCursor(QCursor(Qt.PointingHandCursor))
         self.signUp_tab.setLayoutDirection(Qt.LeftToRight)
         self.signUp_tab.setStyleSheet(u"\n"
@@ -494,9 +714,9 @@ class Ui_MainWindow(object):
 "border:1px solid #F1F1F1;\n"
 "padding-left :15px\n"
 "")
-        icon = QIcon()
-        icon.addFile(u":/icons/assets/icons/google.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.log_google.setIcon(icon)
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/assets/icons/google.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.log_google.setIcon(icon5)
         self.log_google.setIconSize(QSize(26, 26))
 
         self.horizontalLayout_9.addWidget(self.log_google)
@@ -559,10 +779,7 @@ class Ui_MainWindow(object):
         self.email_log = QLineEdit(self.frame_42)
         self.email_log.setObjectName(u"email_log")
         self.email_log.setMinimumSize(QSize(0, 50))
-        font3 = QFont()
-        font3.setFamilies([u"Proxima Nova"])
-        font3.setBold(False)
-        self.email_log.setFont(font3)
+        self.email_log.setFont(font2)
         self.email_log.setLayoutDirection(Qt.RightToLeft)
         self.email_log.setStyleSheet(u"font-family: Proxima Nova;\n"
 "color: rgb(71, 71, 71);\n"
@@ -721,7 +938,7 @@ class Ui_MainWindow(object):
         self.email_sign = QLineEdit(self.frame_45)
         self.email_sign.setObjectName(u"email_sign")
         self.email_sign.setMinimumSize(QSize(0, 50))
-        self.email_sign.setFont(font3)
+        self.email_sign.setFont(font2)
         self.email_sign.setLayoutDirection(Qt.RightToLeft)
         self.email_sign.setStyleSheet(u"font-family: Proxima Nova;\n"
 "color: rgb(71, 71, 71);\n"
@@ -887,6 +1104,10 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout.addWidget(self.frame_6, 1, 1, 1, 1)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 17, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_3, 0, 1, 1, 1)
 
         self.horizontalSpacer_8 = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -1206,7 +1427,7 @@ class Ui_MainWindow(object):
         self.youtube_url = QLineEdit(self.frame_31)
         self.youtube_url.setObjectName(u"youtube_url")
         self.youtube_url.setMinimumSize(QSize(0, 34))
-        self.youtube_url.setFont(font3)
+        self.youtube_url.setFont(font2)
         self.youtube_url.setLayoutDirection(Qt.RightToLeft)
         self.youtube_url.setStyleSheet(u"font-family: Proxima Nova;\n"
 "font-size: 15px;\n"
@@ -1255,6 +1476,118 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setSpacing(0)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.gridLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.sub_floating = QFrame(self.video_player)
+        self.sub_floating.setObjectName(u"sub_floating")
+        self.sub_floating.setMaximumSize(QSize(0, 0))
+        self.sub_floating.setStyleSheet(u"background: rgba(255, 255, 255, 1);\n"
+"\n"
+"")
+        self.sub_floating.setFrameShape(QFrame.StyledPanel)
+        self.sub_floating.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_14 = QVBoxLayout(self.sub_floating)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.search_sub = QLineEdit(self.sub_floating)
+        self.search_sub.setObjectName(u"search_sub")
+        self.search_sub.setMinimumSize(QSize(100, 40))
+        self.search_sub.setMaximumSize(QSize(511, 16777215))
+        font4 = QFont()
+        font4.setPointSize(11)
+        self.search_sub.setFont(font4)
+        self.search_sub.setCursor(QCursor(Qt.IBeamCursor))
+        self.search_sub.setStyleSheet(u"QLineEdit{\n"
+"border:2px solid transparent;\n"
+"border-radius: 4px;\n"
+"padding: 0px 8px;\n"
+"	color: rgb(0, 0, 0);\n"
+"background-color: rgb(242, 248, 255);\n"
+"}\n"
+"QLineEdit::hover{\n"
+"\n"
+"	border: 2px solid rgb(149, 168, 189);\n"
+"}\n"
+"QLineEdit::focus{\n"
+"	\n"
+"	border: 2px solid rgb(149, 168, 189);\n"
+"}")
+        self.search_sub.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.verticalLayout_14.addWidget(self.search_sub)
+
+        self.scrollArea_2 = QScrollArea(self.sub_floating)
+        self.scrollArea_2.setObjectName(u"scrollArea_2")
+        self.scrollArea_2.setStyleSheet(u"QScrollBar:vertical{\n"
+"	border: none;\n"
+"	background-color: rgb(181, 196, 232);\n"
+"	width: 7px;	\n"
+"	margin: 8px 0px 15px 0px;\n"
+"	border-radius:0px;\n"
+"}\n"
+"QScrollBar::handle:vertical{\n"
+"	background-color: rgb(145, 145, 145);\n"
+"	min-height:30px;\n"
+"	border-radius:3px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover{\n"
+"	background-color: rgb(99, 99, 99);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed{\n"
+"	background-color: rgb(0, 0, 0);\n"
+"}\n"
+"QScrollBar::sub-line:vertical{\n"
+"	border:none;\n"
+"	background-color: rgb(194, 194, 194);\n"
+"	height:7px;\n"
+"	border-top-left-radius:3px;\n"
+"	border-top-right-radius: 3px;\n"
+"	subcontrol-position:top;\n"
+"	subcontrol-origin:margin;\n"
+"}\n"
+"QScrollBar::sub-line:vertical:hover{\n"
+"background-color: rgb(134, 134, 134);\n"
+"}\n"
+"QScrollBar::sub-line:vertical:pressed{\n"
+"	background-color: rgb(1, 13, 89);\n"
+"}\n"
+"QScrollBar::add-line:vertical{\n"
+"\n"
+"	border:none;\n"
+"	background-color: rgb(194, 194, 194);\n"
+"	height:7px;\n"
+"	border-bottom-left"
+                        "-radius:3px;\n"
+"	border-bottom-right-radius: 3px;\n"
+"	subcontrol-position:bottom;\n"
+"	subcontrol-origin:margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical:hover{\n"
+"background-color: rgb(134, 134, 134);\n"
+"}\n"
+"QScrollBar::add-line:vertical:pressed{\n"
+"	background-color: rgb(1, 13, 89);\n"
+"}\n"
+"QScrollBar::up-arrow::vertical, QScrollBar::down-arrow:vertical{\n"
+"	border:none\n"
+"}\n"
+"QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{\n"
+"	border:none\n"
+"}\n"
+"")
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_2 = QWidget()
+        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 16, 16))
+        self.verticalLayout_13 = QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_13.setSpacing(0)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.verticalLayout_14.addWidget(self.scrollArea_2)
+
+
+        self.gridLayout_6.addWidget(self.sub_floating, 1, 1, 1, 1)
+
         self.frame_23 = QFrame(self.video_player)
         self.frame_23.setObjectName(u"frame_23")
         self.frame_23.setFrameShape(QFrame.StyledPanel)
@@ -1372,9 +1705,9 @@ class Ui_MainWindow(object):
         self.mute.setMinimumSize(QSize(30, 30))
         self.mute.setMaximumSize(QSize(30, 30))
         self.mute.setCursor(QCursor(Qt.PointingHandCursor))
-        icon1 = QIcon()
-        icon1.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.mute.setIcon(icon1)
+        icon6 = QIcon()
+        icon6.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.mute.setIcon(icon6)
 
         self.horizontalLayout_32.addWidget(self.mute)
 
@@ -1426,9 +1759,9 @@ class Ui_MainWindow(object):
         self.previus.setMinimumSize(QSize(0, 30))
         self.previus.setMaximumSize(QSize(50, 16777215))
         self.previus.setCursor(QCursor(Qt.PointingHandCursor))
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.previus.setIcon(icon2)
+        icon7 = QIcon()
+        icon7.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.previus.setIcon(icon7)
         self.previus.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.previus)
@@ -1438,9 +1771,9 @@ class Ui_MainWindow(object):
         self.backward.setMinimumSize(QSize(0, 30))
         self.backward.setMaximumSize(QSize(50, 16777215))
         self.backward.setCursor(QCursor(Qt.PointingHandCursor))
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/assets/icons/refresh-ccw-01.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.backward.setIcon(icon3)
+        icon8 = QIcon()
+        icon8.addFile(u":/icons/assets/icons/refresh-ccw-01.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.backward.setIcon(icon8)
         self.backward.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.backward)
@@ -1457,9 +1790,9 @@ class Ui_MainWindow(object):
         self.stop_play.setStyleSheet(u"background: rgba(255, 255, 255, 1);\n"
 "border-radius:19px;\n"
 "text-align:center;")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.stop_play.setIcon(icon4)
+        icon9 = QIcon()
+        icon9.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.stop_play.setIcon(icon9)
         self.stop_play.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.stop_play)
@@ -1473,9 +1806,9 @@ class Ui_MainWindow(object):
         self.forward.setMinimumSize(QSize(0, 30))
         self.forward.setMaximumSize(QSize(50, 16777215))
         self.forward.setCursor(QCursor(Qt.PointingHandCursor))
-        icon5 = QIcon()
-        icon5.addFile(u":/icons/assets/icons/refresh-ccw-02.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.forward.setIcon(icon5)
+        icon10 = QIcon()
+        icon10.addFile(u":/icons/assets/icons/refresh-ccw-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.forward.setIcon(icon10)
         self.forward.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.forward)
@@ -1485,9 +1818,9 @@ class Ui_MainWindow(object):
         self.next.setMinimumSize(QSize(0, 30))
         self.next.setMaximumSize(QSize(50, 16777215))
         self.next.setCursor(QCursor(Qt.PointingHandCursor))
-        icon6 = QIcon()
-        icon6.addFile(u":/icons/assets/icons/skip-forward.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.next.setIcon(icon6)
+        icon11 = QIcon()
+        icon11.addFile(u":/icons/assets/icons/skip-forward.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.next.setIcon(icon11)
         self.next.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.next)
@@ -1513,9 +1846,9 @@ class Ui_MainWindow(object):
 "\n"
 "border-radius: 4px;\n"
 "background-color: rgb(255, 255, 255);")
-        icon7 = QIcon()
-        icon7.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.choseSub.setIcon(icon7)
+        icon12 = QIcon()
+        icon12.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.choseSub.setIcon(icon12)
         self.choseSub.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_31.addWidget(self.choseSub)
@@ -1533,9 +1866,9 @@ class Ui_MainWindow(object):
 "color: rgb(0, 0, 0);\n"
 "border-radius: 4px;\n"
 "background-color: rgb(255, 255, 255);")
-        icon8 = QIcon()
-        icon8.addFile(u":/icons/assets/icons/equal-CC.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.playSub.setIcon(icon8)
+        icon13 = QIcon()
+        icon13.addFile(u":/icons/assets/icons/equal-CC.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.playSub.setIcon(icon13)
         self.playSub.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_31.addWidget(self.playSub)
@@ -1550,7 +1883,7 @@ class Ui_MainWindow(object):
         self.gridLayout_13.addWidget(self.frame_60, 0, 0, 1, 1)
 
 
-        self.gridLayout_6.addWidget(self.frame_32, 1, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.frame_32, 2, 1, 1, 1)
 
         self.stackedWidget.addWidget(self.video_player)
 
@@ -1560,7 +1893,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(1)
         self.stackedWidget_2.setCurrentIndex(0)
 
 
@@ -1569,10 +1902,20 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"sub", None))
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u"LOGO", None))
+        self.preferences.setText(QCoreApplication.translate("MainWindow", u"Preferences", None))
+        self.movie_name.setText("")
         self.min_btn.setText(QCoreApplication.translate("MainWindow", u"-", None))
         self.max_btn.setText(QCoreApplication.translate("MainWindow", u"O", None))
         self.close_btn.setText(QCoreApplication.translate("MainWindow", u"X", None))
+        self.p_user.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.p_subscription.setText(QCoreApplication.translate("MainWindow", u"Subscription", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Free", None))
+        self.p_settings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.p_mode.setText(QCoreApplication.translate("MainWindow", u"Dark Mode", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Default Player Language:", None))
+        self.p_lang.setText(QCoreApplication.translate("MainWindow", u"English (US)", None))
+        self.p_lang_2.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"               LOGO    ", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Welcome to TechSpecs Ray", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"em ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim v", None))
@@ -1613,6 +1956,7 @@ class Ui_MainWindow(object):
         self.youtube_url.setText("")
         self.youtube_url.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Insert your Youtube video link here", None))
         self.play_youtube.setText(QCoreApplication.translate("MainWindow", u"Play Video", None))
+        self.search_sub.setPlaceholderText(QCoreApplication.translate("MainWindow", u"search..", None))
         self.time.setText(QCoreApplication.translate("MainWindow", u"1:29 / 10:45", None))
         self.mute.setText("")
         self.previus.setText("")
