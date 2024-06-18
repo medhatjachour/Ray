@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainoNHOSn.ui'
+## Form generated from reading UI file 'mainCYzDLY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -32,9 +32,19 @@ class Ui_MainWindow(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.top_bar = QFrame(self.centralwidget)
+        self.frame = QFrame(self.centralwidget)
+        self.frame.setObjectName(u"frame")
+        self.frame.setMinimumSize(QSize(0, 500))
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_18 = QVBoxLayout(self.frame)
+        self.verticalLayout_18.setSpacing(0)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.top_bar = QFrame(self.frame)
         self.top_bar.setObjectName(u"top_bar")
-        self.top_bar.setMinimumSize(QSize(0, 50))
+        self.top_bar.setMinimumSize(QSize(0, 0))
+        self.top_bar.setMaximumSize(QSize(16777215, 0))
         self.top_bar.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         self.top_bar.setFrameShape(QFrame.StyledPanel)
         self.top_bar.setFrameShadow(QFrame.Raised)
@@ -153,9 +163,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.addWidget(self.frame_34)
 
 
-        self.verticalLayout.addWidget(self.top_bar)
+        self.verticalLayout_18.addWidget(self.top_bar)
 
-        self.preferences_frame = QFrame(self.centralwidget)
+        self.preferences_frame = QFrame(self.frame)
         self.preferences_frame.setObjectName(u"preferences_frame")
         self.preferences_frame.setMinimumSize(QSize(0, 0))
         self.preferences_frame.setMaximumSize(QSize(0, 0))
@@ -337,9 +347,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.addWidget(self.frame_48)
 
 
-        self.verticalLayout.addWidget(self.preferences_frame)
+        self.verticalLayout_18.addWidget(self.preferences_frame)
 
-        self.stackedWidget = QStackedWidget(self.centralwidget)
+        self.stackedWidget = QStackedWidget(self.frame)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setStyleSheet(u"")
         self.welcome = QWidget()
@@ -1887,6 +1897,7 @@ class Ui_MainWindow(object):
 
         self.localsub = QFrame(self.video_player)
         self.localsub.setObjectName(u"localsub")
+        self.localsub.setMinimumSize(QSize(0, 0))
         self.localsub.setMaximumSize(QSize(0, 0))
         self.localsub.setStyleSheet(u"background: #FFFFFF;\n"
 "color: rgb(0, 0, 0);\n"
@@ -1979,14 +1990,51 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_19.addWidget(self.scrollArea_3)
 
-        self.button_patiensts = QRadioButton(self.localsub)
-        self.button_patiensts.setObjectName(u"button_patiensts")
-        self.button_patiensts.setMinimumSize(QSize(100, 20))
-        self.button_patiensts.setMaximumSize(QSize(14566, 38))
+        self.choose_subtitle_file = QRadioButton(self.localsub)
+        self.choose_subtitle_file.setObjectName(u"choose_subtitle_file")
+        self.choose_subtitle_file.setMinimumSize(QSize(100, 20))
+        self.choose_subtitle_file.setMaximumSize(QSize(14566, 38))
         font5 = QFont()
         font5.setFamilies([u"Proxima Nova"])
         font5.setBold(False)
         font5.setItalic(False)
+        self.choose_subtitle_file.setFont(font5)
+        self.choose_subtitle_file.setCursor(QCursor(Qt.PointingHandCursor))
+        self.choose_subtitle_file.setLayoutDirection(Qt.LeftToRight)
+        self.choose_subtitle_file.setStyleSheet(u"\n"
+"QRadioButton{ \n"
+"background-color :  transparent;\n"
+"border : none ;\n"
+"\n"
+"border-radius:3px;\n"
+"\n"
+"padding:5px;\n"
+" }\n"
+"\n"
+"QRadioButton:hover{\n"
+"background: rgba(0, 0, 0, 0.1);\n"
+"\n"
+"}\n"
+"QRadioButton:checked{\n"
+"background: rgba(0, 0, 0, 0.1);\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"width: 0px;\n"
+"height: 0px;\n"
+"border-radius: 0px;\n"
+" }")
+        self.choose_subtitle_file.setIconSize(QSize(0, 0))
+        self.choose_subtitle_file.setChecked(True)
+
+        self.verticalLayout_19.addWidget(self.choose_subtitle_file)
+
+        self.button_patiensts = QRadioButton(self.localsub)
+        self.button_patiensts.setObjectName(u"button_patiensts")
+        self.button_patiensts.setMinimumSize(QSize(100, 20))
+        self.button_patiensts.setMaximumSize(QSize(14566, 38))
         self.button_patiensts.setFont(font5)
         self.button_patiensts.setCursor(QCursor(Qt.PointingHandCursor))
         self.button_patiensts.setLayoutDirection(Qt.LeftToRight)
@@ -2016,7 +2064,7 @@ class Ui_MainWindow(object):
 "border-radius: 0px;\n"
 " }")
         self.button_patiensts.setIconSize(QSize(0, 0))
-        self.button_patiensts.setChecked(True)
+        self.button_patiensts.setChecked(False)
 
         self.verticalLayout_19.addWidget(self.button_patiensts)
 
@@ -2025,7 +2073,10 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.addWidget(self.video_player)
 
-        self.verticalLayout.addWidget(self.stackedWidget)
+        self.verticalLayout_18.addWidget(self.stackedWidget)
+
+
+        self.verticalLayout.addWidget(self.frame)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -2105,6 +2156,7 @@ class Ui_MainWindow(object):
         self.choseSub.setText(QCoreApplication.translate("MainWindow", u"  English (US)", None))
         self.playSub.setText(QCoreApplication.translate("MainWindow", u" OFF", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Subtitles", None))
+        self.choose_subtitle_file.setText(QCoreApplication.translate("MainWindow", u"Choose subtitle file", None))
         self.button_patiensts.setText(QCoreApplication.translate("MainWindow", u"OFF", None))
     # retranslateUi
 

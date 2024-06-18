@@ -34,8 +34,7 @@ class MainWindow(QMainWindow):
         self.ui.max_btn.clicked.connect(self.toggle_full_screen)
         self.ui.min_btn.clicked.connect(self.showMinimized)
         self.ui.top_bar.mouseMoveEvent = self.move_window1
-        self.ui.verticalLayout.removeWidget(self.ui.top_bar)
-        self.ui.verticalLayout_8.setContentsMargins(-1, 50, -1, 30)
+        self.ui.verticalLayout_18.removeWidget(self.ui.top_bar)
         self.Hovered = False
         
 
@@ -58,11 +57,12 @@ class MainWindow(QMainWindow):
         self._playlist_index = -1
         self.subtitles_text = []
         # Set up timer to display subtitles
+        self.subName = None
         self.sub_timer = QTimer()
         self.sub_timer.timeout.connect(self.display_subtitle)
 
         self.subHolder = QGraphicsTextItem('')
-        font = QFont("Proxima Nova", 24) 
+        font = QFont("Proxima Nova", 20) 
         self.subHolder.setFont(font)
         self.subHolder.setDefaultTextColor(QColor(Qt.white))
         self.ui.choseSub.clicked.connect(self.choose_subtitle)   
@@ -83,7 +83,10 @@ class MainWindow(QMainWindow):
             ]
         self.show_available_subs()
         self.ui.playSub.clicked.connect(self.view_local_sub_window)
-        self.localSubWindowShown = False 
+        self.ui.button_patiensts.clicked.connect(self.toggle_sub) 
+        self.ui.choose_subtitle_file.clicked.connect(self.get_local_subtitle)
+        self.localSubWindowShown = False
+        self.getLocalSubs = False  
         self.ui.search_sub.returnPressed.connect(self.filter_sub)
         self.isSub = False 
         # return self.subtitles_text
@@ -145,14 +148,26 @@ class MainWindow(QMainWindow):
             self.ui.frame_32.show()
             self.ui.frame_32.raise_()
             self.ui.top_bar.raise_()
+            self.ui.top_bar.setMinimumWidth(self.width())
+            self.ui.top_bar.setMaximumWidth(self.width())
+            self.ui.top_bar.setMinimumHeight(50)
+            self.ui.top_bar.setMaximumHeight(50)
+            if self.ui.stackedWidget.currentIndex() == 3 :
+                self.ui.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+            else :
+                self.ui.verticalLayout_18.setContentsMargins(0, 50, 0, 0)
         else:
             self.ui.top_bar.hide()
             self.ui.frame_32.hide()
+            self.ui.top_bar.setMinimumWidth(0)
+            self.ui.top_bar.setMaximumWidth(0)
+            self.ui.top_bar.setMinimumHeight(0)
+            self.ui.top_bar.setMaximumHeight(0)
+            self.ui.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
 
 
     def event(self, event):
         if event.type() == QEvent.HoverMove:
-            print("Hover")
             self.hoverTimer.start()  # Restart the timer on every hover move
             self.Hovered = True
             self.toggle_controls_bar_visibility()
@@ -242,7 +257,6 @@ class MainWindow(QMainWindow):
     def showDialog(self):
         self.fileName = QFileDialog.getOpenFileName(self, "Chose the movie", "/","Image Files (*.mp4 *.avi *.mov *.mkv)")
         if len(self.fileName[0])> 10:
-            
             worker = Worker(
                 partial(
                     self.media_init,
@@ -253,6 +267,7 @@ class MainWindow(QMainWindow):
             self.ui.movie_name.setText(os.path.basename(self.fileName[0]))
     @Slot()
     def view_local_sub_window(self):
+    
         if not self.localSubWindowShown:
             self.ui.gridLayout_6.removeWidget(self.ui.localsub)
             width = self.ui.frame_32.width()
@@ -270,6 +285,7 @@ class MainWindow(QMainWindow):
             self.ui.localsub.setMinimumWidth(0)
             self.ui.localsub.setMinimumHeight(0)
             self.ui.localsub.hide()
+    
     def toggle_sub(self):
         if self.isSub:
             
@@ -278,15 +294,34 @@ class MainWindow(QMainWindow):
             self.ui.playSub.setIcon(icon_sub)
             self.ui.playSub.setIconSize(QSize(21, 21))
             self.isSub = not self.isSub
-            self.ui.playSub.setText("ON")
+            self.ui.playSub.setText(" ON")
+            self.ui.button_patiensts.setText(" ON")
         else:
             icon_sub = QIcon()
             icon_sub.addFile(u":/icons/assets/icons/equal-CC-off.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.playSub.setIcon(icon_sub)
             self.ui.playSub.setIconSize(QSize(21, 21))
-            self.ui.playSub.setText("OFF")
+            self.ui.playSub.setText(" OFF")
+            self.ui.button_patiensts.setText(" OFF")
             self.isSub = not self.isSub
-             
+
+    def auto_local_sub(self):
+        #TODO:NEED SOME WORKS
+        folder_path = os.path.dirname(self.fileName[0])
+        files_in_directory = os.listdir(folder_path)
+        # Filter out all files with .srt extension
+        srt_files = [os.path.join(folder_path, file) for file in files_in_directory if file.endswith('.srt')]
+        sbv_files = [file for file in files_in_directory if file.endswith('.sbv')]
+        vtt_files = [file for file in files_in_directory if file.endswith('.vtt')]
+        if len (srt_files) > 0:
+            self.parse_srt(srt_files[0]) 
+        elif len (sbv_files) > 0:
+            self.parse_srt(sbv_files[0]) 
+      
+        elif len (vtt_files) > 0:
+            self.parse_srt(vtt_files[0]) 
+      
+      
     def get_local_subtitle(self):
         # Create a QTimer to track video playback time
         self.subName = QFileDialog.getOpenFileName(self, "Chose the subtitle", f"{self.fileName[0]}","Subtitle Files (*.srt *.sbv *.vtt )")
@@ -298,10 +333,11 @@ class MainWindow(QMainWindow):
         # )
         # worker.signals.result.connect(partial(self.resultSub_tile))
         # self.threadpool.start(worker)
-        self.parse_srt() 
+        self.parse_srt(self.subName[0]) 
   
-    def parse_srt(self):
-        with open(self.subName[0], 'r', encoding='utf-8') as file:
+    def parse_srt(self, fileName):
+        
+        with open(fileName, 'r', encoding='utf-8') as file:
             content = file.read()
             entries = content.split('\n\n')
             for entry in entries:
@@ -315,7 +351,7 @@ class MainWindow(QMainWindow):
         self.isSub = True
         self._scene.addItem(self.subHolder)
   
-        self.subHolder.setPos((self.width()-self.subHolder.boundingRect().width() )/2, self.height() - 300)
+        self.subHolder.setPos((self.width()-self.subHolder.boundingRect().width() )/2, self.height() - 200)
         self.sub_timer.start(100)  # Check every 100 ms
 
     @Slot()
@@ -383,11 +419,19 @@ class MainWindow(QMainWindow):
         self.ui.frame_32.raise_()
         self.ui.gridLayout_6.removeWidget(self.ui.frame_32)
         self.ui.frame_32.setMinimumWidth(self.width())
+        self.ui.frame_32.setMaximumWidth(self.width())
         self.ui.frame_32.setMinimumHeight(100)
         self.ui.frame_32.raise_()
         R = QPoint(0, self.height())- QPoint(0, self.ui.frame_32.height() + 85)
+        print(f'r ={R}')
         self.ui.frame_32.move(R)
         self._videoitem.setSize(self.ui.frame_23.size())
+        # top bar top_bar
+        # self.ui.top_bar.setMinimumWidth(self.width())
+        # self.ui.top_bar.setMaximumWidth(self.width())
+        # self.ui.top_bar.setMinimumHeight(50)
+        # self.ui.top_bar.setMaximumHeight(50)
+
     def media_init(self,progress_callback):
         self.player.setSource(QUrl(self.fileName[0]))
         self.player.play()
@@ -397,14 +441,14 @@ class MainWindow(QMainWindow):
         # self.view.fitInView(self._videoitem)
         self._videoitem.setSize(self.ui.frame_23.size())
         # print(f'_scene  {self._scene.size()}')
-        print(f'view  == {self.view.size()}')
-        print(f'video_player == {self._videoitem.size()}')
     def resultFunctionMedia_int(self,result):
         print(result)
         self.ui.stackedWidget.setCurrentIndex(3)
         self.player.setVideoOutput(self._videoitem)
         subtitle_tracks = self.player.subtitleTracks()
         print(f'the subtitles tracked are { subtitle_tracks}')
+        
+        self.auto_local_sub()
         if subtitle_tracks:
             self.player.setSubtitleTrack(subtitle_tracks[0])
 
@@ -462,7 +506,6 @@ class MainWindow(QMainWindow):
     @Slot()
     def mute_fun(self):
         if self.isMuted:
-            print(self.audio_value)
             self.isMuted = not self.isMuted
             self.audio_output.setVolume(self.audio_value)
             icon_sound = QIcon()
@@ -479,10 +522,8 @@ class MainWindow(QMainWindow):
     @Slot()
     def handle_preference(self): 
         if not self.pref_shown:
-            self.ui.verticalLayout.removeWidget(self.ui.preferences_frame)
-            print(self.ui.preferences_frame.pos())
+            self.ui.verticalLayout_18.removeWidget(self.ui.preferences_frame)
             R = QPoint(0, 0)+  QPoint(15, 50)
-            # print(f"{R} is r")
             self.ui.preferences_frame.setMinimumWidth(265)
             self.ui.preferences_frame.setMinimumHeight(260)
             self.ui.preferences_frame.move(R)
