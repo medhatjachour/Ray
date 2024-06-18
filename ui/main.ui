@@ -691,7 +691,7 @@ line-height: 15px;
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="welcome">
        <property name="styleSheet">
@@ -3357,7 +3357,7 @@ QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
           </layout>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="1">
          <widget class="QFrame" name="frame_32">
           <property name="minimumSize">
            <size>
@@ -3966,11 +3966,11 @@ border-radius: 4px;
 background-color: rgb(255, 255, 255);</string>
                       </property>
                       <property name="text">
-                       <string>  ON</string>
+                       <string> OFF</string>
                       </property>
                       <property name="icon">
                        <iconset resource="../resources.qrc">
-                        <normaloff>:/icons/assets/icons/equal-CC.png</normaloff>:/icons/assets/icons/equal-CC.png</iconset>
+                        <normaloff>:/icons/assets/icons/equal-CC-off.png</normaloff>:/icons/assets/icons/equal-CC-off.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -3987,6 +3987,207 @@ background-color: rgb(255, 255, 255);</string>
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QFrame" name="localsub">
+          <property name="maximumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: #FFFFFF;
+color: rgb(0, 0, 0);
+font-family: Proxima Nova;
+font-size: 12px;
+font-weight: 400;
+line-height: 12px;
+text-align: left;
+border-radius:5px;
+</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_19">
+           <item>
+            <widget class="QLabel" name="label_23">
+             <property name="styleSheet">
+              <string notr="true">padding-left:5px;</string>
+             </property>
+             <property name="text">
+              <string>Subtitles</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_3">
+             <property name="styleSheet">
+              <string notr="true">QScrollBar:vertical{
+	border: none;
+	background-color: rgb(181, 196, 232);
+	width: 14px;	
+	margin: 15px 0px 15px 0px;
+	border-radius:0px;
+}
+QScrollBar::handle:vertical{
+	background-color: rgb(145, 145, 145);
+	min-height:30px;
+	border-radius:7px;
+}
+QScrollBar::handle:vertical:hover{
+	background-color: rgb(99, 99, 99);
+}
+QScrollBar::handle:vertical:pressed{
+	background-color: rgb(0, 0, 0);
+}
+QScrollBar::sub-line:vertical{
+	border:none;
+	background-color: rgb(194, 194, 194);
+	height:14px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	subcontrol-position:top;
+	subcontrol-origin:margin;
+}
+QScrollBar::sub-line:vertical:hover{
+background-color: rgb(134, 134, 134);
+}
+QScrollBar::sub-line:vertical:pressed{
+	background-color: rgb(1, 13, 89);
+}
+QScrollBar::add-line:vertical{
+
+	border:none;
+	background-color: rgb(194, 194, 194);
+	height:14px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	subcontrol-position:bottom;
+	subcontrol-origin:margin;
+}
+
+QScrollBar::add-line:vertical:hover{
+background-color: rgb(134, 134, 134);
+}
+QScrollBar::add-line:vertical:pressed{
+	background-color: rgb(1, 13, 89);
+}
+QScrollBar::up-arrow::vertical, QScrollBar::down-arrow:vertical{
+	border:none
+}
+QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{
+	border:none
+}
+</string>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>16</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="locals_subs_layout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="button_patiensts">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>14566</width>
+               <height>38</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Proxima Nova</family>
+               <pointsize>-1</pointsize>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QRadioButton{ 
+background-color :  transparent;
+border : none ;
+
+border-radius:3px;
+
+padding:5px;
+ }
+
+QRadioButton:hover{
+background: rgba(0, 0, 0, 0.1);
+
+}
+QRadioButton:checked{
+background: rgba(0, 0, 0, 0.1);
+
+
+}
+
+QRadioButton::indicator {
+width: 0px;
+height: 0px;
+border-radius: 0px;
+ }</string>
+             </property>
+             <property name="text">
+              <string>OFF</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
           </layout>

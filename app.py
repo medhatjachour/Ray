@@ -7,7 +7,7 @@ from functools import partial
 os.environ["QT_GSTREAMER_PLAYBIN_FLAGS"] = str(0x00000017)
 
 from PySide6.QtWidgets import QApplication, QMainWindow,QFileDialog , QGraphicsScene, QGraphicsView, QGraphicsSceneHoverEvent, QSlider, QCompleter, QGraphicsTextItem
-from PySide6.QtCore import Qt, QThreadPool, QSize, Slot,QUrl,QPoint,QTimer
+from PySide6.QtCore import Qt, QThreadPool, QSize, Slot,QUrl,QPoint,QTimer,QEvent
 from PySide6.QtGui import QMouseEvent, QCursor,QIcon,QFont, QColor
 from PySide6.QtMultimedia import (QAudioOutput,
                             QMediaPlayer)
@@ -24,8 +24,7 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
 
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        self.setAttribute(Qt.WidgetAttribute.WA_Hover)  
+        self.ui.setupUi(self) 
         self.threadpool = QThreadPool()
 
  
@@ -34,12 +33,12 @@ class MainWindow(QMainWindow):
         self.ui.close_btn.clicked.connect(self.close_fun)
         self.ui.max_btn.clicked.connect(self.toggle_full_screen)
         self.ui.min_btn.clicked.connect(self.showMinimized)
-        self.ui.frame_30.mouseMoveEvent = self.move_window1
-        self.bar_visible = False
+        self.ui.top_bar.mouseMoveEvent = self.move_window1
+        self.ui.verticalLayout.removeWidget(self.ui.top_bar)
+        self.ui.verticalLayout_8.setContentsMargins(-1, 50, -1, 30)
+        self.Hovered = False
         
-        # self.setMouseTracking(True)  # Enable mouse tracking
-        # self.idle_timer = QTimer(self)
-        # self.idle_timer.timeout.connect(self.hide_floating_widgets)
+
         #/////////// media player 
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
@@ -54,7 +53,6 @@ class MainWindow(QMainWindow):
 
         # Set up window resizing
         self.view.resizeEvent = self.handleResize
-
         # 
         self._playlist = []  # FIXME 6.3: Replace by QMediaPlaylist?
         self._playlist_index = -1
@@ -71,7 +69,6 @@ class MainWindow(QMainWindow):
         self.subWindowShown = False 
         self.subtitles = "/" # it's for local subtitle 
         self.subtitle_content = None # the content of the subtitle
-        # self.ui.pushButton.clicked.connect(self.get_local_subtitle)
         self.available_subs =[
                 "English", "Mandarin Chinese", "Hindi", "Spanish", "French",
                 "Modern Standard Arabic", "Bengali", "Russian", "Portuguese",
@@ -85,7 +82,8 @@ class MainWindow(QMainWindow):
                 "Khmer (Cambodian)", "Somali"
             ]
         self.show_available_subs()
-        self.ui.playSub.clicked.connect(self.toggle_sub)
+        self.ui.playSub.clicked.connect(self.view_local_sub_window)
+        self.localSubWindowShown = False 
         self.ui.search_sub.returnPressed.connect(self.filter_sub)
         self.isSub = False 
         # return self.subtitles_text
@@ -126,6 +124,13 @@ class MainWindow(QMainWindow):
         self.ui.sound_control.valueChanged.connect(self.adjust_audio_volume)
         self.ui.mute.clicked.connect(self.mute_fun)
 
+        self.setAttribute(Qt.WidgetAttribute.WA_Hover) 
+        self.setMouseTracking(True)  # Enable mouse tracking
+        
+        self.hoverTimer = QTimer(self)
+        self.hoverTimer.setInterval(5000)  # Set timer for 5 seconds
+        self.hoverTimer.setSingleShot(True)  # Timer is not reoccurring
+        self.hoverTimer.timeout.connect(self.hoverStopped)
         # preference settings
         self.ui.preferences.clicked.connect(self.handle_preference)
         self.pref_shown = False
@@ -133,39 +138,30 @@ class MainWindow(QMainWindow):
         self.dark_mode = PyToggle()
         self.ui.horizontalLayout_22.addWidget(self.dark_mode)
     # /////////////////////////////////////////   top bar functions     
-    def hoverMoveEvent(self, event):
-        self.idle_timer = QTimer(self)
-        print(f"Mouse moved to position: {event.pos()}")
-        y =  event.y()
-        print(y)
-        print(self.idle_timer)
-        
-        # Adjust the logic based on your desired behavior
-        if y > self.height() - 20:
-            self.show_floating_widgets()
-            self.idle_timer.start(self.idle_timeout)
-            print("show")
-        else:
-            print("hide")
-            self.hide_floating_widgets()
-            self.idle_timer.stop()
 
-    def show_floating_widgets(self):
-        if not self.bar_visible:
-            print("Bar appears")
+    def toggle_controls_bar_visibility(self):
+        if self.Hovered:
             self.ui.top_bar.show()
             self.ui.frame_32.show()
             self.ui.frame_32.raise_()
             self.ui.top_bar.raise_()
-            # Show your video player bar here
-            self.bar_visible = True
-    def hide_floating_widgets(self):
-        if self.bar_visible:
-            print("Bar disappears")
+        else:
             self.ui.top_bar.hide()
             self.ui.frame_32.hide()
-            # Hide your video player bar here
-            self.bar_visible = False
+
+
+    def event(self, event):
+        if event.type() == QEvent.HoverMove:
+            print("Hover")
+            self.hoverTimer.start()  # Restart the timer on every hover move
+            self.Hovered = True
+            self.toggle_controls_bar_visibility()
+        return super().event(event)
+
+    def hoverStopped(self):
+        self.Hovered = False
+        self.toggle_controls_bar_visibility()
+        print("Hover stopped for 5 seconds")
 
     def showMinimized(self) -> None:
         return super().showMinimized()
@@ -242,9 +238,11 @@ class MainWindow(QMainWindow):
             event.accept()
         else:
             event.ignore()
+    
     def showDialog(self):
         self.fileName = QFileDialog.getOpenFileName(self, "Chose the movie", "/","Image Files (*.mp4 *.avi *.mov *.mkv)")
         if len(self.fileName[0])> 10:
+            
             worker = Worker(
                 partial(
                     self.media_init,
@@ -253,7 +251,25 @@ class MainWindow(QMainWindow):
             worker.signals.result.connect(partial(self.resultFunctionMedia_int))
             self.threadpool.start(worker)
             self.ui.movie_name.setText(os.path.basename(self.fileName[0]))
-    
+    @Slot()
+    def view_local_sub_window(self):
+        if not self.localSubWindowShown:
+            self.ui.gridLayout_6.removeWidget(self.ui.localsub)
+            width = self.ui.frame_32.width()
+
+            R = QPoint(width, 0) - QPoint(680,-700)
+            # print(f"{R} is r")
+            self.ui.localsub.setMinimumWidth(216)
+            self.ui.localsub.setMinimumHeight(200)
+            self.ui.localsub.move(R)
+            self.ui.localsub.raise_()
+            self.ui.localsub.show()
+            self.localSubWindowShown = True
+        else:
+            self.localSubWindowShown = False
+            self.ui.localsub.setMinimumWidth(0)
+            self.ui.localsub.setMinimumHeight(0)
+            self.ui.localsub.hide()
     def toggle_sub(self):
         if self.isSub:
             
@@ -302,7 +318,37 @@ class MainWindow(QMainWindow):
         self.subHolder.setPos((self.width()-self.subHolder.boundingRect().width() )/2, self.height() - 300)
         self.sub_timer.start(100)  # Check every 100 ms
 
-  
+    @Slot()
+    def choose_subtitle(self):
+        if not self.subWindowShown:
+            self.ui.gridLayout_6.removeWidget(self.ui.sub_floating)
+            width = self.ui.frame_32.width()
+            # height = self.ui.frame_32.height()
+            print(self.ui.choseSub.pos())
+            print(self.ui.frame_32.pos())
+            print(self.height()-self.ui.sub_floating.height())
+            R = QPoint(width, 0) - QPoint(800,-525)
+            # print(f"{R} is r")
+            self.ui.sub_floating.setMinimumWidth(216)
+            self.ui.sub_floating.setMinimumHeight(400)
+            self.ui.sub_floating.move(R)
+            self.ui.sub_floating.raise_()
+            self.ui.sub_floating.show()
+            self.subWindowShown = True
+        else:
+            self.subWindowShown = False
+            self.ui.sub_floating.setMinimumWidth(0)
+            self.ui.sub_floating.setMinimumHeight(0)
+            self.ui.sub_floating.hide()
+
+    def show_available_subs(self):
+        for i in self.available_subs:
+            self.PySubBtn_ = PySubBtn(i)
+            self.ui.verticalLayout_13.addWidget(self.PySubBtn_)
+
+    def filter_sub(self):
+        print("Filter Sub")
+    
 
     # Function to convert SRT time format to milliseconds
     def convert_to_ms(self, srt_time):
@@ -428,38 +474,7 @@ class MainWindow(QMainWindow):
             icon_mute = QIcon()
             icon_mute.addFile(u":/icons/assets/icons/Mute.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.mute.setIcon(icon_mute)
-        
 
-    @Slot()
-    def choose_subtitle(self):
-        if not self.subWindowShown:
-            self.ui.gridLayout_6.removeWidget(self.ui.sub_floating)
-            width = self.ui.frame_32.width()
-            # height = self.ui.frame_32.height()
-            print(self.ui.choseSub.pos())
-            print(self.ui.frame_32.pos())
-            print(self.height()-self.ui.sub_floating.height())
-            R = QPoint(width, 0) - QPoint(800,-525)
-            # print(f"{R} is r")
-            self.ui.sub_floating.setMinimumWidth(216)
-            self.ui.sub_floating.setMinimumHeight(400)
-            self.ui.sub_floating.move(R)
-            self.ui.sub_floating.raise_()
-            self.ui.sub_floating.show()
-            self.subWindowShown = True
-        else:
-            self.subWindowShown = False
-            self.ui.sub_floating.setMinimumWidth(0)
-            self.ui.sub_floating.setMinimumHeight(0)
-            self.ui.sub_floating.hide()
-
-    def show_available_subs(self):
-        for i in self.available_subs:
-            self.PySubBtn_ = PySubBtn(i)
-            self.ui.verticalLayout_13.addWidget(self.PySubBtn_)
-
-    def filter_sub(self):
-        print("Filter Sub")
     # preferences
     @Slot()
     def handle_preference(self): 

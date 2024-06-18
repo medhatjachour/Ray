@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainbpordQ.ui'
+## Form generated from reading UI file 'mainoNHOSn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -1867,7 +1867,7 @@ class Ui_MainWindow(object):
 "border-radius: 4px;\n"
 "background-color: rgb(255, 255, 255);")
         icon13 = QIcon()
-        icon13.addFile(u":/icons/assets/icons/equal-CC.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon13.addFile(u":/icons/assets/icons/equal-CC-off.png", QSize(), QIcon.Normal, QIcon.Off)
         self.playSub.setIcon(icon13)
         self.playSub.setIconSize(QSize(21, 21))
 
@@ -1883,7 +1883,145 @@ class Ui_MainWindow(object):
         self.gridLayout_13.addWidget(self.frame_60, 0, 0, 1, 1)
 
 
-        self.gridLayout_6.addWidget(self.frame_32, 2, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.frame_32, 3, 1, 1, 1)
+
+        self.localsub = QFrame(self.video_player)
+        self.localsub.setObjectName(u"localsub")
+        self.localsub.setMaximumSize(QSize(0, 0))
+        self.localsub.setStyleSheet(u"background: #FFFFFF;\n"
+"color: rgb(0, 0, 0);\n"
+"font-family: Proxima Nova;\n"
+"font-size: 12px;\n"
+"font-weight: 400;\n"
+"line-height: 12px;\n"
+"text-align: left;\n"
+"border-radius:5px;\n"
+"")
+        self.localsub.setFrameShape(QFrame.StyledPanel)
+        self.localsub.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_19 = QVBoxLayout(self.localsub)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.label_23 = QLabel(self.localsub)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setStyleSheet(u"padding-left:5px;")
+
+        self.verticalLayout_19.addWidget(self.label_23)
+
+        self.scrollArea_3 = QScrollArea(self.localsub)
+        self.scrollArea_3.setObjectName(u"scrollArea_3")
+        self.scrollArea_3.setStyleSheet(u"QScrollBar:vertical{\n"
+"	border: none;\n"
+"	background-color: rgb(181, 196, 232);\n"
+"	width: 14px;	\n"
+"	margin: 15px 0px 15px 0px;\n"
+"	border-radius:0px;\n"
+"}\n"
+"QScrollBar::handle:vertical{\n"
+"	background-color: rgb(145, 145, 145);\n"
+"	min-height:30px;\n"
+"	border-radius:7px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover{\n"
+"	background-color: rgb(99, 99, 99);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed{\n"
+"	background-color: rgb(0, 0, 0);\n"
+"}\n"
+"QScrollBar::sub-line:vertical{\n"
+"	border:none;\n"
+"	background-color: rgb(194, 194, 194);\n"
+"	height:14px;\n"
+"	border-top-left-radius: 6px;\n"
+"	border-top-right-radius: 6px;\n"
+"	subcontrol-position:top;\n"
+"	subcontrol-origin:margin;\n"
+"}\n"
+"QScrollBar::sub-line:vertical:hover{\n"
+"background-color: rgb(134, 134, 134);\n"
+"}\n"
+"QScrollBar::sub-line:vertical:pressed{\n"
+"	background-color: rgb(1, 13, 89);\n"
+"}\n"
+"QScrollBar::add-line:vertical{\n"
+"\n"
+"	border:none;\n"
+"	background-color: rgb(194, 194, 194);\n"
+"	height:14px;\n"
+"	border-bottom"
+                        "-left-radius: 6px;\n"
+"	border-bottom-right-radius: 6px;\n"
+"	subcontrol-position:bottom;\n"
+"	subcontrol-origin:margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical:hover{\n"
+"background-color: rgb(134, 134, 134);\n"
+"}\n"
+"QScrollBar::add-line:vertical:pressed{\n"
+"	background-color: rgb(1, 13, 89);\n"
+"}\n"
+"QScrollBar::up-arrow::vertical, QScrollBar::down-arrow:vertical{\n"
+"	border:none\n"
+"}\n"
+"QScrollBar::add-page::vertical, QScrollBar::sub-page:vertical{\n"
+"	border:none\n"
+"}\n"
+"")
+        self.scrollArea_3.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_3 = QWidget()
+        self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 16, 16))
+        self.locals_subs_layout = QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.locals_subs_layout.setSpacing(0)
+        self.locals_subs_layout.setObjectName(u"locals_subs_layout")
+        self.locals_subs_layout.setContentsMargins(0, 0, 0, 0)
+        self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_3)
+
+        self.verticalLayout_19.addWidget(self.scrollArea_3)
+
+        self.button_patiensts = QRadioButton(self.localsub)
+        self.button_patiensts.setObjectName(u"button_patiensts")
+        self.button_patiensts.setMinimumSize(QSize(100, 20))
+        self.button_patiensts.setMaximumSize(QSize(14566, 38))
+        font5 = QFont()
+        font5.setFamilies([u"Proxima Nova"])
+        font5.setBold(False)
+        font5.setItalic(False)
+        self.button_patiensts.setFont(font5)
+        self.button_patiensts.setCursor(QCursor(Qt.PointingHandCursor))
+        self.button_patiensts.setLayoutDirection(Qt.LeftToRight)
+        self.button_patiensts.setStyleSheet(u"\n"
+"QRadioButton{ \n"
+"background-color :  transparent;\n"
+"border : none ;\n"
+"\n"
+"border-radius:3px;\n"
+"\n"
+"padding:5px;\n"
+" }\n"
+"\n"
+"QRadioButton:hover{\n"
+"background: rgba(0, 0, 0, 0.1);\n"
+"\n"
+"}\n"
+"QRadioButton:checked{\n"
+"background: rgba(0, 0, 0, 0.1);\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"width: 0px;\n"
+"height: 0px;\n"
+"border-radius: 0px;\n"
+" }")
+        self.button_patiensts.setIconSize(QSize(0, 0))
+        self.button_patiensts.setChecked(True)
+
+        self.verticalLayout_19.addWidget(self.button_patiensts)
+
+
+        self.gridLayout_6.addWidget(self.localsub, 2, 1, 1, 1)
 
         self.stackedWidget.addWidget(self.video_player)
 
@@ -1893,7 +2031,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(3)
         self.stackedWidget_2.setCurrentIndex(0)
 
 
@@ -1965,6 +2103,8 @@ class Ui_MainWindow(object):
         self.forward.setText("")
         self.next.setText("")
         self.choseSub.setText(QCoreApplication.translate("MainWindow", u"  English (US)", None))
-        self.playSub.setText(QCoreApplication.translate("MainWindow", u"  ON", None))
+        self.playSub.setText(QCoreApplication.translate("MainWindow", u" OFF", None))
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"Subtitles", None))
+        self.button_patiensts.setText(QCoreApplication.translate("MainWindow", u"OFF", None))
     # retranslateUi
 
