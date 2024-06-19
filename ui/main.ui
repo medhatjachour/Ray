@@ -727,7 +727,7 @@ line-height: 15px;
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="welcome">
           <property name="styleSheet">

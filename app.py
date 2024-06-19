@@ -36,6 +36,7 @@ class MainWindow(QMainWindow):
         self.ui.top_bar.mouseMoveEvent = self.move_window1
         self.ui.verticalLayout_18.removeWidget(self.ui.top_bar)
         self.Hovered = False
+        self.ui.verticalLayout_8.setContentsMargins(0, 50, 0, 0) # space for the top bar
         
 
         #/////////// media player 
@@ -62,6 +63,8 @@ class MainWindow(QMainWindow):
         self.sub_timer.timeout.connect(self.display_subtitle)
 
         self.subHolder = QGraphicsTextItem('')
+        self.subHolder.setTextWidth(self.width() - 150)  # Set maximum width to 100
+        self.subHolder.setDefaultTextColor(Qt.AlignCenter)  # Align text to center
         font = QFont("Proxima Nova", 20) 
         self.subHolder.setFont(font)
         self.subHolder.setDefaultTextColor(QColor(Qt.white))
@@ -152,10 +155,7 @@ class MainWindow(QMainWindow):
             self.ui.top_bar.setMaximumWidth(self.width())
             self.ui.top_bar.setMinimumHeight(50)
             self.ui.top_bar.setMaximumHeight(50)
-            if self.ui.stackedWidget.currentIndex() == 3 :
-                self.ui.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
-            else :
-                self.ui.verticalLayout_18.setContentsMargins(0, 50, 0, 0)
+        
         else:
             self.ui.top_bar.hide()
             self.ui.frame_32.hide()
@@ -163,7 +163,6 @@ class MainWindow(QMainWindow):
             self.ui.top_bar.setMaximumWidth(0)
             self.ui.top_bar.setMinimumHeight(0)
             self.ui.top_bar.setMaximumHeight(0)
-            self.ui.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
 
 
     def event(self, event):
@@ -218,6 +217,7 @@ class MainWindow(QMainWindow):
     def handleResize(self, event):
         # Update video item size
         self._videoitem.setSize(self.view.size())
+        self.subHolder.setTextWidth(self.width() - 150)  # Set maximum width to 100
         self.floating_video_control()
     def close_fun(self):
 
@@ -402,7 +402,7 @@ class MainWindow(QMainWindow):
                         # Display subtitle text
                         self._scene.removeItem(self.subHolder)
                         self.subHolder.setPlainText(text)
-                        self.subHolder.setHtml(f"<div style='background: rgba(0, 0, 0, 0.4);color:white'>{text}</div>")
+                        self.subHolder.setHtml(f"<div style='background: rgba(0, 0, 0, 0.4);color:white;text-align:center;'>{text}</div>")
 
                         self._scene.addItem(self.subHolder)
                         self.subHolder.setPos((self.width()-self.subHolder.boundingRect().width() )/2, self.height() - 300)
