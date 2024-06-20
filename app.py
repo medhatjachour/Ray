@@ -175,7 +175,6 @@ class MainWindow(QMainWindow):
     def hoverStopped(self):
         self.Hovered = False
         self.toggle_controls_bar_visibility()
-        print("Hover stopped for 5 seconds")
 
     def showMinimized(self) -> None:
         return super().showMinimized()
@@ -255,7 +254,7 @@ class MainWindow(QMainWindow):
             event.ignore()
     
     def showDialog(self):
-        self.fileName = QFileDialog.getOpenFileName(self, "Chose the movie", "/","Image Files (*.mp4 *.avi *.mov *.mkv)")
+        self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *ogv *webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
         if len(self.fileName[0])> 10:
             worker = Worker(
                 partial(
@@ -317,7 +316,6 @@ class MainWindow(QMainWindow):
             self.parse_srt(srt_files[0]) 
         elif len (sbv_files) > 0:
             self.parse_srt(sbv_files[0]) 
-      
         elif len (vtt_files) > 0:
             self.parse_srt(vtt_files[0]) 
       
@@ -398,7 +396,7 @@ class MainWindow(QMainWindow):
             if self.player.playbackState() == QMediaPlayer.PlayingState and len(self.subtitles_text) > 1:#TODO: this needs more accurate condtions 
                 current_time = self.player.position()
                 for start_time, end_time, text in self.subtitles_text:
-                    if start_time <= current_time <= end_time:
+                    if start_time <= current_time <= end_time :
                         # Display subtitle text
                         self._scene.removeItem(self.subHolder)
                         self.subHolder.setPlainText(text)
@@ -407,6 +405,8 @@ class MainWindow(QMainWindow):
                         self._scene.addItem(self.subHolder)
                         self.subHolder.setPos((self.width()-self.subHolder.boundingRect().width() )/2, self.height() - 300)
                         break
+                    else:
+                        self.subHolder.setPlainText(" ")
         else:
             self.subHolder.setPlainText(" ")
     @Slot()
@@ -423,7 +423,6 @@ class MainWindow(QMainWindow):
         self.ui.frame_32.setMinimumHeight(100)
         self.ui.frame_32.raise_()
         R = QPoint(0, self.height())- QPoint(0, self.ui.frame_32.height() + 85)
-        print(f'r ={R}')
         self.ui.frame_32.move(R)
         self._videoitem.setSize(self.ui.frame_23.size())
         # top bar top_bar
@@ -434,20 +433,20 @@ class MainWindow(QMainWindow):
 
     def media_init(self,progress_callback):
         self.player.setSource(QUrl(self.fileName[0]))
-        self.player.play()
-        self._scene.addItem(self._videoitem)
-        self.view.fitInView(self._scene.sceneRect())
-        # self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
-        # self.view.fitInView(self._videoitem)
-        self._videoitem.setSize(self.ui.frame_23.size())
-        # print(f'_scene  {self._scene.size()}')
+        if self.player.isAvailable():
+            self.player.play()
+            self._scene.addItem(self._videoitem)
+            self.view.fitInView(self._scene.sceneRect())
+            # self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
+            # self.view.fitInView(self._videoitem)
+            self._videoitem.setSize(self.ui.frame_23.size())
+        else :
+            print('media type is not supported')
     def resultFunctionMedia_int(self,result):
-        print(result)
         self.ui.stackedWidget.setCurrentIndex(3)
         self.player.setVideoOutput(self._videoitem)
         subtitle_tracks = self.player.subtitleTracks()
         print(f'the subtitles tracked are { subtitle_tracks}')
-        
         self.auto_local_sub()
         if subtitle_tracks:
             self.player.setSubtitleTrack(subtitle_tracks[0])
@@ -499,7 +498,6 @@ class MainWindow(QMainWindow):
         self.audio_output.setVolume(volume/100)
         self.audio_value = volume/100
         if self.isMuted:
-            print(self.audio_value)
             icon_sound = QIcon()
             icon_sound.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.mute.setIcon(icon_sound)

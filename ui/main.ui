@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1420</width>
+    <width>1422</width>
     <height>828</height>
    </rect>
   </property>
@@ -727,7 +727,7 @@ line-height: 15px;
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="welcome">
           <property name="styleSheet">
@@ -3496,7 +3496,7 @@ border-radius:4px;</string>
                      <number>0</number>
                     </property>
                     <property name="leftMargin">
-                     <number>1</number>
+                     <number>5</number>
                     </property>
                     <property name="topMargin">
                      <number>0</number>
@@ -3531,40 +3531,63 @@ border-radius:4px;</string>
                        <property name="rightMargin">
                         <number>0</number>
                        </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
                        <item>
                         <widget class="QSlider" name="position_control">
                          <property name="maximumSize">
                           <size>
                            <width>16777215</width>
-                           <height>8</height>
+                           <height>16777215</height>
                           </size>
                          </property>
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
                          <property name="styleSheet">
-                          <string notr="true">QSlider{
-	background-color:transparent;
-	margin: 0px;
+                          <string notr="true">/* HORIZONTAL */
+QSlider { margin-left: 8px; 
 
-    border-radius: 4px;
-}
+	background: transparent;}
 QSlider::groove:horizontal {
-    border-radius: 10px;
-    height: 7px;
-	background-color:  rgba(149, 168, 189, 1);
-}/*
-QSlider::groove:horizontal:hover { background-color: #1e2229; }
-*/QSlider::handle:horizontal {
-    border: none;
-    height: 18;
-    width: 18;
-    margin: 1px;
-	border-radius: 9px;
-    background-color: white;
-}/*
-QSlider::handle:horizontal:hover { background-color: #1e2229; }*/
-QSlider::handle:horizontal:pressed { 
-	background-color: rgba(3, 169, 244, 1); }
+    border-radius: 4px;
+    height: 8px;
+	margin: 0px;
+	background-color: #95A8BD;
 
-</string>
+}
+QSlider::groove:horizontal:hover { background-color: rgb(120, 135, 152)}
+QSlider::handle:horizontal {
+    border: none;
+    height: 14px;
+    width:14px;
+	margin: -3px;
+	border-radius: 7px;
+    background-color: white;
+}
+QSlider::handle:horizontal:hover { background-color: {_handle_color_hover}; }
+QSlider::handle:horizontal:pressed { background-color: {_handle_color_pressed}; }
+
+/* VERTICAL */
+QSlider::groove:vertical {
+    border-radius: 5px;
+    width: 10px;
+    margin: 0px;
+	background-color: #95A8BD;
+
+}
+QSlider::groove:vertical:hover { background-color:  rgb(120, 135, 152); }
+QSlider::handle:vertical {
+	border: none;
+    height:16px;
+    width: 16px;
+    margin: -3px;
+	border-radius: 8px;
+    background-color: white;
+}
+QSlider::handle:vertical:hover { background-color:white; }
+QSlider::handle:vertical:pressed { background-color:white; }</string>
                          </property>
                          <property name="orientation">
                           <enum>Qt::Horizontal</enum>
@@ -3583,7 +3606,8 @@ QSlider::handle:horizontal:pressed {
                        </size>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
+                       <string notr="true">color: rgb(0, 0, 0);
+ margin-left: 5px;</string>
                       </property>
                       <property name="text">
                        <string>1:29 / 10:45</string>
@@ -3632,6 +3656,12 @@ QSlider::handle:horizontal:pressed {
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QHBoxLayout" name="horizontalLayout_32">
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>9</number>
+                          </property>
                           <item>
                            <widget class="QPushButton" name="mute">
                             <property name="minimumSize">
@@ -3666,31 +3696,52 @@ QSlider::handle:horizontal:pressed {
                               <height>16777215</height>
                              </size>
                             </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
                             <property name="styleSheet">
-                             <string notr="true">QSlider{
-	background-color:transparent;
-	margin: 0px;
-
-    border-radius: 4px;
-}
+                             <string notr="true">/* HORIZONTAL */
+QSlider { margin: 8px; }
 QSlider::groove:horizontal {
-    border-radius: 10px;
-    height: 7px;
-	background-color:  rgba(149, 168, 189, 1);
-}/*
-QSlider::groove:horizontal:hover { background-color: #1e2229; }*/
+    border-radius: 4px;
+    height: 8px;
+	margin: 0px;
+	background-color: #95A8BD;
+
+}
+
+
+QSlider::groove:horizontal:hover { background-color: rgb(120, 135, 152)}
 QSlider::handle:horizontal {
     border: none;
-    height: 18;
-    width: 18;
-    margin: 1px;
-	border-radius: 9px;
+    height: 14px;
+    width:14px;
+	margin: -3px;
+	border-radius: 7px;
     background-color: white;
-}/*
-QSlider::handle:horizontal:hover { background-color: #1e2229; }*/
-QSlider::handle:horizontal:pressed { 
-	background-color: rgba(3, 169, 244, 1); }
-</string>
+}
+QSlider::handle:horizontal:hover { background-color: {_handle_color_hover}; }
+QSlider::handle:horizontal:pressed { background-color: {_handle_color_pressed}; }
+
+/* VERTICAL */
+QSlider::groove:vertical {
+    border-radius: 5px;
+    width: 10px;
+    margin: 0px;
+	background-color: #95A8BD;
+
+}
+QSlider::groove:vertical:hover { background-color:  rgb(120, 135, 152); }
+QSlider::handle:vertical {
+	border: none;
+    height:16px;
+    width: 16px;
+    margin: -3px;
+	border-radius: 8px;
+    background-color: white;
+}
+QSlider::handle:vertical:hover { background-color:white; }
+QSlider::handle:vertical:pressed { background-color:white; }</string>
                             </property>
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
