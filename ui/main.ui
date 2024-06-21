@@ -3438,7 +3438,7 @@ background-color: transparent;
                <widget class="QFrame" name="frame_60">
                 <property name="minimumSize">
                  <size>
-                  <width>777</width>
+                  <width>770</width>
                   <height>92</height>
                  </size>
                 </property>
@@ -3479,7 +3479,7 @@ border-radius:4px;</string>
                    <property name="minimumSize">
                     <size>
                      <width>770</width>
-                     <height>85</height>
+                     <height>94</height>
                     </size>
                    </property>
                    <property name="styleSheet">
@@ -3515,6 +3515,15 @@ border-radius:4px;</string>
                         <height>0</height>
                        </size>
                       </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>14</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: transparent;</string>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -3547,7 +3556,7 @@ border-radius:4px;</string>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">/* HORIZONTAL */
-QSlider { margin-left: 8px; 
+QSlider { margin-left: 5px; 
 
 	background: transparent;}
 QSlider::groove:horizontal {
@@ -3630,13 +3639,13 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                         <number>10</number>
                        </property>
                        <property name="leftMargin">
-                        <number>50</number>
+                        <number>25</number>
                        </property>
                        <property name="topMargin">
                         <number>0</number>
                        </property>
                        <property name="rightMargin">
-                        <number>29</number>
+                        <number>25</number>
                        </property>
                        <property name="bottomMargin">
                         <number>0</number>
@@ -3656,11 +3665,20 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QHBoxLayout" name="horizontalLayout_32">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
                           <property name="leftMargin">
                            <number>0</number>
                           </property>
                           <property name="topMargin">
-                           <number>9</number>
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
                           </property>
                           <item>
                            <widget class="QPushButton" name="mute">
@@ -3752,6 +3770,19 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                         </widget>
                        </item>
                        <item>
+                        <spacer name="horizontalSpacer_20">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
                         <widget class="QFrame" name="frame_64">
                          <property name="minimumSize">
                           <size>
@@ -3774,6 +3805,9 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                          <layout class="QHBoxLayout" name="horizontalLayout_35">
                           <property name="spacing">
                            <number>8</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>4</number>
                           </property>
                           <item>
                            <widget class="QPushButton" name="previus">
@@ -3983,24 +4017,54 @@ text-align:center;</string>
                         </spacer>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="choseSub">
+                        <widget class="QFrame" name="frame_52">
                          <property name="minimumSize">
                           <size>
-                           <width>133</width>
-                           <height>33</height>
+                           <width>250</width>
+                           <height>0</height>
                           </size>
                          </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>133</width>
-                           <height>33</height>
-                          </size>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
                          </property>
-                         <property name="cursor">
-                          <cursorShape>PointingHandCursor</cursorShape>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
                          </property>
-                         <property name="styleSheet">
-                          <string notr="true">font-family: Proxima Nova;
+                         <layout class="QHBoxLayout" name="horizontalLayout_23">
+                          <property name="spacing">
+                           <number>8</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QPushButton" name="choseSub">
+                            <property name="minimumSize">
+                             <size>
+                              <width>130</width>
+                              <height>33</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>133</width>
+                              <height>33</height>
+                             </size>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">font-family: Proxima Nova;
 color: rgb(0, 0, 0);
 font-size: 12px;
 font-weight: 400;
@@ -4009,41 +4073,41 @@ line-height: 12px;
 
 border-radius: 4px;
 background-color: rgb(255, 255, 255);</string>
-                         </property>
-                         <property name="text">
-                          <string>  English (US)</string>
-                         </property>
-                         <property name="icon">
-                          <iconset resource="../resources.qrc">
-                           <normaloff>:/icons/assets/icons/message-text-square-02.png</normaloff>:/icons/assets/icons/message-text-square-02.png</iconset>
-                         </property>
-                         <property name="iconSize">
-                          <size>
-                           <width>21</width>
-                           <height>21</height>
-                          </size>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="playSub">
-                         <property name="minimumSize">
-                          <size>
-                           <width>77</width>
-                           <height>33</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>77</width>
-                           <height>33</height>
-                          </size>
-                         </property>
-                         <property name="cursor">
-                          <cursorShape>PointingHandCursor</cursorShape>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">font-family: Proxima Nova;
+                            </property>
+                            <property name="text">
+                             <string>  English (US)</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="../resources.qrc">
+                              <normaloff>:/icons/assets/icons/message-text-square-02.png</normaloff>:/icons/assets/icons/message-text-square-02.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>21</width>
+                              <height>21</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="playSub">
+                            <property name="minimumSize">
+                             <size>
+                              <width>77</width>
+                              <height>33</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>85</width>
+                              <height>33</height>
+                             </size>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">font-family: Proxima Nova;
 font-size: 12px;
 font-weight: 400;
 line-height: 12px;
@@ -4051,20 +4115,23 @@ line-height: 12px;
 color: rgb(0, 0, 0);
 border-radius: 4px;
 background-color: rgb(255, 255, 255);</string>
-                         </property>
-                         <property name="text">
-                          <string> OFF</string>
-                         </property>
-                         <property name="icon">
-                          <iconset resource="../resources.qrc">
-                           <normaloff>:/icons/assets/icons/equal-CC-off.png</normaloff>:/icons/assets/icons/equal-CC-off.png</iconset>
-                         </property>
-                         <property name="iconSize">
-                          <size>
-                           <width>21</width>
-                           <height>21</height>
-                          </size>
-                         </property>
+                            </property>
+                            <property name="text">
+                             <string> OFF</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="../resources.qrc">
+                              <normaloff>:/icons/assets/icons/equal-CC-off.png</normaloff>:/icons/assets/icons/equal-CC-off.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>21</width>
+                              <height>21</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>

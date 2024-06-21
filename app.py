@@ -36,6 +36,7 @@ class MainWindow(QMainWindow):
         self.ui.top_bar.mouseMoveEvent = self.move_window1
         self.ui.verticalLayout_18.removeWidget(self.ui.top_bar)
         self.Hovered = False
+        
         self.ui.verticalLayout_8.setContentsMargins(0, 50, 0, 0) # space for the top bar
         
 
@@ -155,6 +156,8 @@ class MainWindow(QMainWindow):
             self.ui.top_bar.setMaximumWidth(self.width())
             self.ui.top_bar.setMinimumHeight(50)
             self.ui.top_bar.setMaximumHeight(50)
+            self.ui.frame_60.setMinimumSize(QSize( 770, 92)) 
+            self.ui.frame_60.setMaximumSize(QSize((self.ui.frame_32.width() - 500 ) , 92))
         
         else:
             self.ui.top_bar.hide()
@@ -269,10 +272,9 @@ class MainWindow(QMainWindow):
     
         if not self.localSubWindowShown:
             self.ui.gridLayout_6.removeWidget(self.ui.localsub)
-            width = self.ui.frame_32.width()
-
-            R = QPoint(width, 0) - QPoint(680,-700)
-            # print(f"{R} is r")
+            #  get the position related to  the 0, ,0
+            w =self.ui.playSub.mapToGlobal(QPoint(0, 0))
+            R = w - QPoint(0,250)
             self.ui.localsub.setMinimumWidth(216)
             self.ui.localsub.setMinimumHeight(200)
             self.ui.localsub.move(R)
@@ -356,12 +358,10 @@ class MainWindow(QMainWindow):
     def choose_subtitle(self):
         if not self.subWindowShown:
             self.ui.gridLayout_6.removeWidget(self.ui.sub_floating)
-            width = self.ui.frame_32.width()
-            # height = self.ui.frame_32.height()
-            print(self.ui.choseSub.pos())
-            print(self.ui.frame_32.pos())
-            print(self.height()-self.ui.sub_floating.height())
-            R = QPoint(width, 0) - QPoint(800,-525)
+            pos = self.ui.frame_32.pos()
+            w = self.ui.choose_subtitle_file.mapToGlobal(QPoint(0, 0))
+            print(f' w == {pos} ')
+            R = w - QPoint(100,335)
             # print(f"{R} is r")
             self.ui.sub_floating.setMinimumWidth(216)
             self.ui.sub_floating.setMinimumHeight(400)

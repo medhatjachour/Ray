@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainniVRrc.ui'
+## Form generated from reading UI file 'mainvLGQYE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -1624,7 +1624,7 @@ class Ui_MainWindow(object):
         self.gridLayout_13.setContentsMargins(0, 0, 0, 0)
         self.frame_60 = QFrame(self.frame_32)
         self.frame_60.setObjectName(u"frame_60")
-        self.frame_60.setMinimumSize(QSize(777, 92))
+        self.frame_60.setMinimumSize(QSize(770, 92))
         self.frame_60.setMaximumSize(QSize(770, 92))
         self.frame_60.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);\n"
 "border-radius:4px;")
@@ -1636,7 +1636,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.frame_61 = QFrame(self.frame_60)
         self.frame_61.setObjectName(u"frame_61")
-        self.frame_61.setMinimumSize(QSize(770, 85))
+        self.frame_61.setMinimumSize(QSize(770, 94))
         self.frame_61.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);")
         self.frame_61.setFrameShape(QFrame.StyledPanel)
         self.frame_61.setFrameShadow(QFrame.Raised)
@@ -1647,6 +1647,8 @@ class Ui_MainWindow(object):
         self.frame_65 = QFrame(self.frame_61)
         self.frame_65.setObjectName(u"frame_65")
         self.frame_65.setMinimumSize(QSize(0, 0))
+        self.frame_65.setMaximumSize(QSize(16777215, 14))
+        self.frame_65.setStyleSheet(u"background-color: transparent;")
         self.frame_65.setFrameShape(QFrame.StyledPanel)
         self.frame_65.setFrameShadow(QFrame.Raised)
         self.verticalLayout_23 = QVBoxLayout(self.frame_65)
@@ -1657,7 +1659,7 @@ class Ui_MainWindow(object):
         self.position_control.setMaximumSize(QSize(16777215, 16777215))
         self.position_control.setCursor(QCursor(Qt.PointingHandCursor))
         self.position_control.setStyleSheet(u"/* HORIZONTAL */\n"
-"QSlider { margin-left: 8px; \n"
+"QSlider { margin-left: 5px; \n"
 "\n"
 "	background: transparent;}\n"
 "QSlider::groove:horizontal {\n"
@@ -1722,15 +1724,16 @@ class Ui_MainWindow(object):
         self.horizontalLayout_31 = QHBoxLayout(self.frame_62)
         self.horizontalLayout_31.setSpacing(10)
         self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
-        self.horizontalLayout_31.setContentsMargins(50, 0, 29, 0)
+        self.horizontalLayout_31.setContentsMargins(25, 0, 25, 0)
         self.frame_63 = QFrame(self.frame_62)
         self.frame_63.setObjectName(u"frame_63")
         self.frame_63.setMinimumSize(QSize(200, 0))
         self.frame_63.setFrameShape(QFrame.StyledPanel)
         self.frame_63.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_32 = QHBoxLayout(self.frame_63)
+        self.horizontalLayout_32.setSpacing(0)
         self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
-        self.horizontalLayout_32.setContentsMargins(0, 9, -1, -1)
+        self.horizontalLayout_32.setContentsMargins(0, 0, 0, 0)
         self.mute = QPushButton(self.frame_63)
         self.mute.setObjectName(u"mute")
         self.mute.setMinimumSize(QSize(30, 30))
@@ -1745,6 +1748,7 @@ class Ui_MainWindow(object):
         self.sound_control = QSlider(self.frame_63)
         self.sound_control.setObjectName(u"sound_control")
         self.sound_control.setMaximumSize(QSize(150, 16777215))
+        self.sound_control.setCursor(QCursor(Qt.PointingHandCursor))
         self.sound_control.setStyleSheet(u"/* HORIZONTAL */\n"
 "QSlider { margin: 8px; }\n"
 "QSlider::groove:horizontal {\n"
@@ -1754,6 +1758,8 @@ class Ui_MainWindow(object):
 "	background-color: #95A8BD;\n"
 "\n"
 "}\n"
+"\n"
+"\n"
 "QSlider::groove:horizontal:hover { background-color: rgb(120, 135, 152)}\n"
 "QSlider::handle:horizontal {\n"
 "    border: none;\n"
@@ -1781,8 +1787,8 @@ class Ui_MainWindow(object):
 "    width: 16px;\n"
 "    margin: -3px;\n"
 "	border-radius: 8px;\n"
-"    background-color: "
-                        "white;\n"
+"    backgrou"
+                        "nd-color: white;\n"
 "}\n"
 "QSlider::handle:vertical:hover { background-color:white; }\n"
 "QSlider::handle:vertical:pressed { background-color:white; }")
@@ -1793,6 +1799,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_31.addWidget(self.frame_63)
 
+        self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_31.addItem(self.horizontalSpacer_20)
+
         self.frame_64 = QFrame(self.frame_62)
         self.frame_64.setObjectName(u"frame_64")
         self.frame_64.setMinimumSize(QSize(224, 0))
@@ -1802,6 +1812,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_35 = QHBoxLayout(self.frame_64)
         self.horizontalLayout_35.setSpacing(8)
         self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
+        self.horizontalLayout_35.setContentsMargins(-1, 4, -1, -1)
         self.previus = QPushButton(self.frame_64)
         self.previus.setObjectName(u"previus")
         self.previus.setMinimumSize(QSize(0, 30))
@@ -1880,9 +1891,18 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_31.addItem(self.horizontalSpacer_35)
 
-        self.choseSub = QPushButton(self.frame_62)
+        self.frame_52 = QFrame(self.frame_62)
+        self.frame_52.setObjectName(u"frame_52")
+        self.frame_52.setMinimumSize(QSize(250, 0))
+        self.frame_52.setFrameShape(QFrame.StyledPanel)
+        self.frame_52.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_23 = QHBoxLayout(self.frame_52)
+        self.horizontalLayout_23.setSpacing(8)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.horizontalLayout_23.setContentsMargins(0, 0, 20, 0)
+        self.choseSub = QPushButton(self.frame_52)
         self.choseSub.setObjectName(u"choseSub")
-        self.choseSub.setMinimumSize(QSize(133, 33))
+        self.choseSub.setMinimumSize(QSize(130, 33))
         self.choseSub.setMaximumSize(QSize(133, 33))
         self.choseSub.setCursor(QCursor(Qt.PointingHandCursor))
         self.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n"
@@ -1899,12 +1919,12 @@ class Ui_MainWindow(object):
         self.choseSub.setIcon(icon12)
         self.choseSub.setIconSize(QSize(21, 21))
 
-        self.horizontalLayout_31.addWidget(self.choseSub)
+        self.horizontalLayout_23.addWidget(self.choseSub)
 
-        self.playSub = QPushButton(self.frame_62)
+        self.playSub = QPushButton(self.frame_52)
         self.playSub.setObjectName(u"playSub")
         self.playSub.setMinimumSize(QSize(77, 33))
-        self.playSub.setMaximumSize(QSize(77, 33))
+        self.playSub.setMaximumSize(QSize(85, 33))
         self.playSub.setCursor(QCursor(Qt.PointingHandCursor))
         self.playSub.setStyleSheet(u"font-family: Proxima Nova;\n"
 "font-size: 12px;\n"
@@ -1919,7 +1939,10 @@ class Ui_MainWindow(object):
         self.playSub.setIcon(icon13)
         self.playSub.setIconSize(QSize(21, 21))
 
-        self.horizontalLayout_31.addWidget(self.playSub)
+        self.horizontalLayout_23.addWidget(self.playSub)
+
+
+        self.horizontalLayout_31.addWidget(self.frame_52)
 
 
         self.verticalLayout_22.addWidget(self.frame_62)
