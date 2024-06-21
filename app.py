@@ -272,11 +272,11 @@ class MainWindow(QMainWindow):
     
         if not self.localSubWindowShown:
             self.ui.gridLayout_6.removeWidget(self.ui.localsub)
-            #  get the position related to  the 0, ,0
-            w =self.ui.playSub.mapToGlobal(QPoint(0, 0))
-            R = w - QPoint(0,250)
             self.ui.localsub.setMinimumWidth(216)
             self.ui.localsub.setMinimumHeight(200)
+            #  get the position related to  the 0, ,0
+            # w =self.ui.playSub.mapToGlobal(QPoint(0, 0))
+            R = QPoint(self.ui.frame_60.x() + self.ui.frame_52.x()+ 100 , self.ui.frame_32.y() -  self.ui.localsub.height() ) 
             self.ui.localsub.move(R)
             self.ui.localsub.raise_()
             self.ui.localsub.show()
@@ -358,13 +358,11 @@ class MainWindow(QMainWindow):
     def choose_subtitle(self):
         if not self.subWindowShown:
             self.ui.gridLayout_6.removeWidget(self.ui.sub_floating)
-            pos = self.ui.frame_32.pos()
-            w = self.ui.choose_subtitle_file.mapToGlobal(QPoint(0, 0))
-            print(f' w == {pos} ')
-            R = w - QPoint(100,335)
-            # print(f"{R} is r")
             self.ui.sub_floating.setMinimumWidth(216)
             self.ui.sub_floating.setMinimumHeight(400)
+            R = QPoint(self.ui.frame_60.x() + self.ui.frame_52.x() , self.ui.frame_32.y() -  self.ui.sub_floating.height() ) 
+
+            # print(f"{R} is r")
             self.ui.sub_floating.move(R)
             self.ui.sub_floating.raise_()
             self.ui.sub_floating.show()
@@ -497,6 +495,7 @@ class MainWindow(QMainWindow):
     def adjust_audio_volume(self,volume):
         self.audio_output.setVolume(volume/100)
         self.audio_value = volume/100
+
         if self.isMuted:
             icon_sound = QIcon()
             icon_sound.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
