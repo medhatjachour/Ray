@@ -1,5 +1,7 @@
 from functools import partial
 from PySide6.QtCore import Qt, QThreadPool
+import os
+
 from widgets.DragDrop.Dragdrop import DragDrop
 class Drag:
     def __init__(self):
@@ -9,7 +11,7 @@ class Drag:
         self.ui.setupUi(self)
 
     def init(self):
-        self.drag_frame = DragDrop()
+        self.drag_frame = DragDrop(Drag)
         #####################################
         Drag.buttons_actions(self)
         
@@ -17,12 +19,19 @@ class Drag:
 
     def buttons_actions(self):
        # filter button
-        self.ui.signUp_tab.clicked.connect(
-            partial(Drag.open_singUp, self)
+        self.drag_frame.browse_file.clicked.connect(
+            partial(self.showDialog )
         )
 
   
 
-    def open_singUp(self):
-        self.ui.stackedWidget_2.setCurrentIndex(1)
+    def dragg(self,file_name):
+        worker = Worker(
+                partial(
+                    self.media_init,file_name
+                )
+            )
+        worker.signals.result.connect(partial(self.resultFunctionMedia_int))
+        self.threadpool.start(worker)
+        self.ui.movie_name.setText(os.path.basename(self.fileName[0]))
   

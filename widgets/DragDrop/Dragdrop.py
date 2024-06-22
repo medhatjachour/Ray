@@ -16,9 +16,11 @@ import resources_rc
 class DragDrop(QFrame):
     def __init__(
         self,
+        drag
     ):
         super().__init__()
 
+        self._drag =  drag
         self.file = '/'
         self.resize(800, 327)
         
@@ -168,9 +170,7 @@ class DragDrop(QFrame):
             file_path = event.mimeData().urls()[0].toLocalFile()
             print(file_path)
             self.file =  file_path
-
+            self._drag.dragg(self,file_path[0])
             event.accept()
         else:
             event.ignore()
-    def acceptTheDropped(self):
-        return self.file

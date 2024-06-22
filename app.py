@@ -20,18 +20,31 @@ from widgets.toggleBtn.py_toggle import PyToggle
 from ui.ui_main import Ui_MainWindow
 from pages.log import Log
 from pages.Drag import Drag
+from pages.Controller import Control
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self) 
+        # remove the old top bar and the frame 
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.toggle_full_screen() #start at full screen
+        # init always the main window to the welcome page
+        self.ui.stackedWidget.setCurrentIndex(0)
+        # threads
         self.threadpool = QThreadPool()
+
+        #/////////// media player 
+        self.player = QMediaPlayer()
+        self.audio_output = QAudioOutput()
+        self.player.setAudioOutput(self.audio_output)
+        
+        # pages 
         Log.init(self)
         Drag.init(self)
- 
-        self.setWindowFlag(Qt.FramelessWindowHint)
-        self.toggle_full_screen()
+        Control.init(self)
+
         self.ui.close_btn.clicked.connect(self.close_fun)
         self.ui.max_btn.clicked.connect(self.toggle_full_screen)
         self.ui.min_btn.clicked.connect(self.showMinimized)
@@ -42,10 +55,6 @@ class MainWindow(QMainWindow):
         self.ui.verticalLayout_8.setContentsMargins(0, 50, 0, 0) # space for the top bar
         
 
-        #/////////// media player 
-        self.player = QMediaPlayer()
-        self.audio_output = QAudioOutput()
-        self.player.setAudioOutput(self.audio_output)
         # test graphics
 
         self.view =   QGraphicsView(self)
@@ -96,40 +105,11 @@ class MainWindow(QMainWindow):
         self.ui.search_sub.returnPressed.connect(self.filter_sub)
         self.isSub = False 
         # return self.subtitles_text
-        # init always the main window to the welcome page
-        self.ui.stackedWidget.setCurrentIndex(0)
         # get started function 
         self.ui.get_started.clicked.connect(self.get_started_Fun)
         # drag and drop files 
         # get the drag and drop frame to accept drag and drop behavior
         self.fileName = "/" #it holds the video path 
-
-        # self.ui.drag_frame.setAcceptDrops(True)
-        # self.ui.browse_file.clicked.connect(self.showDialog)
-        # ,media player 
-        self.ui.stop_play.clicked.connect(self.play_pause)
-        # position
-        self.ui.position_control.sliderMoved.connect(self.set_position)
-        self.ui.position_control.setTickInterval(100)
-        self.ui.position_control.setTickPosition(QSlider.TicksBelow)
-        self.ui.position_control.setToolTip("Position")
-        self.player.positionChanged.connect(self.change_position)
-        self.player.durationChanged.connect(self.duration_position)
-        self.ui.forward.clicked.connect(self.forward_Ten)
-        self.ui.backward.clicked.connect(self.backward_Ten)
-        # timer = QTimer()
-        # # timer.timeout.connect(self.display_subtitle())
-        # timer.start(100)  # Check every 100 ms
-        # sound
-        self.isMuted = False
-        self.audio_value = self.audio_output.volume()*100
-        self.ui.sound_control.setValue(self.audio_output.volume()*100)
-        self.ui.sound_control.setTickInterval(10)
-        self.ui.sound_control.setTickPosition(QSlider.TicksBelow)
-        self.ui.sound_control.setToolTip("Volume")
-        self.ui.sound_control.valueChanged.connect(self.adjust_audio_volume)
-        self.ui.mute.clicked.connect(self.mute_fun)
-
         self.setAttribute(Qt.WidgetAttribute.WA_Hover) 
         self.setMouseTracking(True)  # Enable mouse tracking
         
@@ -249,11 +229,11 @@ class MainWindow(QMainWindow):
     #         event.ignore()
     
     def showDialog(self):
-        self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *ogv *webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
+        self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *.ogv *.webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
         if len(self.fileName[0])> 10:
             worker = Worker(
                 partial(
-                    self.media_init,
+                    self.media_init,self.fileName[0]
                 )
             )
             worker.signals.result.connect(partial(self.resultFunctionMedia_int))
@@ -421,8 +401,8 @@ class MainWindow(QMainWindow):
         # self.ui.top_bar.setMinimumHeight(50)
         # self.ui.top_bar.setMaximumHeight(50)
 
-    def media_init(self,progress_callback):
-        self.player.setSource(QUrl(self.fileName[0]))
+    def media_init(self,file_name,progress_callback):
+        self.player.setSource(QUrl(file_name))
         if self.player.isAvailable():
             self.player.play()
             self._scene.addItem(self._videoitem)
@@ -445,68 +425,7 @@ class MainWindow(QMainWindow):
     def _ensure_stopped(self):
         if self.player.playbackState() != QMediaPlayer.StoppedState:
             self.player.stop()
-    @Slot()
-    def play_pause(self):
-        if self.player.playbackState() == QMediaPlayer.PlayingState:
-            icon_play = QIcon()
-            icon_play.addFile(u":/icons/assets/icons/play_.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.stop_play.setIcon(icon_play)
-            # self.ui.stop_play.setIconSize(QSize(21, 21))
-            self.player.pause()
-        else:
-            icon4_pause = QIcon()
-            icon4_pause.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.stop_play.setIcon(icon4_pause)
-            # self.ui.stop_play.setIconSize(QSize(21, 21))
-            self.player.play()
-    @Slot()
-    def set_position(self,position):
-        self.player.setPosition(position)
-    @Slot()
-    def change_position(self,position):
-        played = time.strftime('%H:%M:%S', time.gmtime(position / 1000))
-        duration = time.strftime('%H:%M:%S', time.gmtime(self.player.duration() / 1000))
-        self.ui.time.setText(f'{played} / {duration}')
-        self.ui.position_control.setValue(position)
-    @Slot()
-    def duration_position(self,d):
-        self.ui.position_control.setRange(0,d)
-    @Slot()
-    def forward_Ten(self):
-        current_position  = self.player.position() 
-        # To skip forward by 10 seconds
-        self.player.setPosition(current_position + 10000)
-        self.ui.position_control.setValue((current_position+10000) // 1000)
-    @Slot()
-    def backward_Ten(self):
-        current_position  = self.player.position() 
-        # To skip forward by 10 seconds
-        self.player.setPosition(current_position - 10000)
-        self.ui.position_control.setValue((current_position-10000) // 1000)
-    @Slot()
-    def adjust_audio_volume(self,volume):
-        self.audio_output.setVolume(volume/100)
-        self.audio_value = volume/100
-
-        if self.isMuted:
-            icon_sound = QIcon()
-            icon_sound.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon_sound)
-    @Slot()
-    def mute_fun(self):
-        if self.isMuted:
-            self.isMuted = not self.isMuted
-            self.audio_output.setVolume(self.audio_value)
-            icon_sound = QIcon()
-            icon_sound.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon_sound)
-        else:
-            self.isMuted = not self.isMuted
-            self.audio_output.setVolume(0)
-            icon_mute = QIcon()
-            icon_mute.addFile(u":/icons/assets/icons/Mute.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon_mute)
-
+    
     # preferences
     @Slot()
     def handle_preference(self): 
