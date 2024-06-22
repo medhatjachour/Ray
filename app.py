@@ -18,7 +18,8 @@ from widgets.PySubBtn.PySubBtn import PySubBtn
 from widgets.toggleBtn.py_toggle import PyToggle
 
 from ui.ui_main import Ui_MainWindow
-
+from pages.log import Log
+from pages.Drag import Drag
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -26,7 +27,8 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self) 
         self.threadpool = QThreadPool()
-
+        Log.init(self)
+        Drag.init(self)
  
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.toggle_full_screen()
@@ -98,15 +100,12 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(0)
         # get started function 
         self.ui.get_started.clicked.connect(self.get_started_Fun)
-        # sign up and login function
-        self.ui.signUp_tab.clicked.connect(self.open_singUp)
-        self.ui.logIn_tab.clicked.connect(self.open_logIn)
-        self.ui.logIn_btn.clicked.connect(self.log_in_fun)
         # drag and drop files 
         # get the drag and drop frame to accept drag and drop behavior
         self.fileName = "/" #it holds the video path 
-        self.ui.drag_frame.setAcceptDrops(True)
-        self.ui.browse_file.clicked.connect(self.showDialog)
+
+        # self.ui.drag_frame.setAcceptDrops(True)
+        # self.ui.browse_file.clicked.connect(self.showDialog)
         # ,media player 
         self.ui.stop_play.clicked.connect(self.play_pause)
         # position
@@ -157,7 +156,7 @@ class MainWindow(QMainWindow):
             self.ui.top_bar.setMinimumHeight(50)
             self.ui.top_bar.setMaximumHeight(50)
             self.ui.frame_60.setMinimumSize(QSize( 770, 92)) 
-            self.ui.frame_60.setMaximumSize(QSize((self.ui.frame_32.width() - 500 ) , 92))
+            self.ui.frame_60.setMaximumSize(QSize( abs(self.ui.frame_32.width() - 500 ) , 92))
         
         else:
             self.ui.top_bar.hide()
@@ -228,33 +227,26 @@ class MainWindow(QMainWindow):
 
     def get_started_Fun(self):
         self.ui.stackedWidget.setCurrentIndex(1)
-    def open_singUp(self):
-        self.ui.stackedWidget_2.setCurrentIndex(1)
-    def open_logIn(self):
-        self.ui.stackedWidget_2.setCurrentIndex(0)
-    def log_in_fun(self):
-        self.ui.stackedWidget.setCurrentIndex(2)
-    # drag and drop events
-    
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasImage:
-            event.accept()
-        else:
-            event.ignore()
-    def dragMoveEvent(self, event):
-        if event.mimeData().hasImage:
-            event.accept()
-        else:
-            event.ignore()
-    def dropEvent(self, event):
-        if event.mimeData().hasImage:
-            event.setDropAction(Qt.CopyAction)
-            file_path = event.mimeData().urls()[0].toLocalFile()
-            print(file_path)
 
-            event.accept()
-        else:
-            event.ignore()
+    # def dragEnterEvent(self, event):
+    #     if event.mimeData().hasImage:
+    #         event.accept()
+    #     else:
+    #         event.ignore()
+    # def dragMoveEvent(self, event):
+    #     if event.mimeData().hasImage:
+    #         event.accept()
+    #     else:
+    #         event.ignore()
+    # def dropEvent(self, event):
+    #     if event.mimeData().hasImage:
+    #         event.setDropAction(Qt.CopyAction)
+    #         file_path = event.mimeData().urls()[0].toLocalFile()
+    #         print(file_path)
+
+    #         event.accept()
+    #     else:
+    #         event.ignore()
     
     def showDialog(self):
         self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *ogv *webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
