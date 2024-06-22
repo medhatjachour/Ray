@@ -16,11 +16,11 @@ import resources_rc
 class DragDrop(QFrame):
     def __init__(
         self,
-        drag
+        main
     ):
         super().__init__()
 
-        self._drag =  drag
+        self._main =  main
         self.file = '/'
         self.resize(800, 327)
         
@@ -168,9 +168,9 @@ class DragDrop(QFrame):
         if event.mimeData().hasImage:
             event.setDropAction(Qt.CopyAction)
             file_path = event.mimeData().urls()[0].toLocalFile()
-            print(file_path)
+            print(f'file_path {file_path}')
             self.file =  file_path
-            self._drag.dragg(self,file_path[0])
+            self._main.start_media(file_path)
             event.accept()
         else:
             event.ignore()

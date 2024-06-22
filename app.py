@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
         
         # pages 
         Log.init(self)
-        Drag.init(self)
+        Drag.init(self,self)
         Control.init(self)
 
         self.ui.close_btn.clicked.connect(self.close_fun)
@@ -231,14 +231,17 @@ class MainWindow(QMainWindow):
     def showDialog(self):
         self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *.ogv *.webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
         if len(self.fileName[0])> 10:
-            worker = Worker(
-                partial(
-                    self.media_init,self.fileName[0]
-                )
+            self.start_media(self.fileName[0])
+    def start_media(self,file_name):
+        
+        worker = Worker(
+            partial(
+                self.media_init,file_name
             )
-            worker.signals.result.connect(partial(self.resultFunctionMedia_int))
-            self.threadpool.start(worker)
-            self.ui.movie_name.setText(os.path.basename(self.fileName[0]))
+        )
+        worker.signals.result.connect(partial(self.resultFunctionMedia_int))
+        self.threadpool.start(worker)
+        self.ui.movie_name.setText(os.path.basename(file_name))
     @Slot()
     def view_local_sub_window(self):
     
@@ -402,6 +405,7 @@ class MainWindow(QMainWindow):
         # self.ui.top_bar.setMaximumHeight(50)
 
     def media_init(self,file_name,progress_callback):
+        print(f'file_name =  {file_name}')
         self.player.setSource(QUrl(file_name))
         if self.player.isAvailable():
             self.player.play()

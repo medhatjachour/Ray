@@ -10,8 +10,9 @@ class Drag:
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-    def init(self):
-        self.drag_frame = DragDrop(Drag)
+    def init(self, main):
+        self.main = main
+        self.drag_frame = DragDrop(main)
         #####################################
         Drag.buttons_actions(self)
         
@@ -23,15 +24,4 @@ class Drag:
             partial(self.showDialog )
         )
 
-  
-
-    def dragg(self,file_name):
-        worker = Worker(
-                partial(
-                    self.media_init,file_name
-                )
-            )
-        worker.signals.result.connect(partial(self.resultFunctionMedia_int))
-        self.threadpool.start(worker)
-        self.ui.movie_name.setText(os.path.basename(self.fileName[0]))
   
