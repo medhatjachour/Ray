@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>assets/icons/chevron-left.png</file>
     <file>assets/icons/user-03.png</file>
     <file>assets/icons/diamond-01.png</file>
     <file>assets/icons/settings-01.png</file>

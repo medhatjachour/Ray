@@ -6,7 +6,7 @@ from functools import partial
 
 os.environ["QT_GSTREAMER_PLAYBIN_FLAGS"] = str(0x00000017)
 
-from PySide6.QtWidgets import QApplication, QMainWindow,QFileDialog , QGraphicsScene, QGraphicsView, QGraphicsSceneHoverEvent, QSlider, QCompleter, QGraphicsTextItem
+from PySide6.QtWidgets import QApplication, QMainWindow,QFileDialog , QGraphicsScene, QGraphicsView, QGraphicsDropShadowEffect, QSlider, QCompleter, QGraphicsTextItem
 from PySide6.QtCore import Qt, QThreadPool, QSize, Slot,QUrl,QPoint,QTimer,QEvent
 from PySide6.QtGui import QMouseEvent, QCursor,QIcon,QFont, QColor
 from PySide6.QtMultimedia import (QAudioOutput,
@@ -107,6 +107,7 @@ class MainWindow(QMainWindow):
         # return self.subtitles_text
         # get started function 
         self.ui.get_started.clicked.connect(self.get_started_Fun)
+        self.ui.p_user.clicked.connect(self.user_fun)
         # drag and drop files 
         # get the drag and drop frame to accept drag and drop behavior
         self.fileName = "/" #it holds the video path 
@@ -123,6 +124,7 @@ class MainWindow(QMainWindow):
         #add toggle dark mode 
         self.dark_mode = PyToggle()
         self.ui.horizontalLayout_22.addWidget(self.dark_mode)
+        
     # /////////////////////////////////////////   top bar functions     
 
     def toggle_controls_bar_visibility(self):
@@ -197,6 +199,7 @@ class MainWindow(QMainWindow):
                     # break
     def handleResize(self, event):
         # Update video item size
+        print(f'event.size(  = = ={event.size()}')
         self._videoitem.setSize(self.view.size())
         self.subHolder.setTextWidth(self.width() - 150)  # Set maximum width to 100
         self.floating_video_control()
@@ -208,26 +211,9 @@ class MainWindow(QMainWindow):
     def get_started_Fun(self):
         self.ui.stackedWidget.setCurrentIndex(1)
 
-    # def dragEnterEvent(self, event):
-    #     if event.mimeData().hasImage:
-    #         event.accept()
-    #     else:
-    #         event.ignore()
-    # def dragMoveEvent(self, event):
-    #     if event.mimeData().hasImage:
-    #         event.accept()
-    #     else:
-    #         event.ignore()
-    # def dropEvent(self, event):
-    #     if event.mimeData().hasImage:
-    #         event.setDropAction(Qt.CopyAction)
-    #         file_path = event.mimeData().urls()[0].toLocalFile()
-    #         print(file_path)
+    def user_fun(self):
+        self.ui.stackedWidget.setCurrentIndex(4)
 
-    #         event.accept()
-    #     else:
-    #         event.ignore()
-    
     def showDialog(self):
         self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *.ogv *.webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
         if len(self.fileName[0])> 10:
@@ -310,9 +296,9 @@ class MainWindow(QMainWindow):
         # self.threadpool.start(worker)
         self.parse_srt(self.subName[0]) 
   
-    def parse_srt(self, fileName):
+    def parse_srt(self, file_name):
         
-        with open(fileName, 'r', encoding='utf-8') as file:
+        with open(file_name, 'r', encoding='utf-8') as file:
             content = file.read()
             entries = content.split('\n\n')
             for entry in entries:
@@ -433,6 +419,7 @@ class MainWindow(QMainWindow):
     # preferences
     @Slot()
     def handle_preference(self): 
+        self.add_box_shadow()
         if not self.pref_shown:
             self.ui.verticalLayout_18.removeWidget(self.ui.preferences_frame)
             R = QPoint(0, 0)+  QPoint(15, 50)
@@ -447,10 +434,16 @@ class MainWindow(QMainWindow):
             self.ui.preferences_frame.setMinimumWidth(0)
             self.ui.preferences_frame.setMinimumHeight(0)
             self.ui.preferences_frame.hide()
+    def add_box_shadow(self):
+        # Create a shadow effect
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setColor(QColor(0,0, 0, .9))  # Shadow color (RGBA)
+        shadow.setBlurRadius(8)  # Shadow blur radius
+        shadow.setOffset(6, 6)  # Shadow offset (x, y)
+        # Apply the shadow effect to the widget
+        self.ui.preferences_frame.setGraphicsEffect(shadow)
 
-
-
-
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
