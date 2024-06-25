@@ -18,6 +18,7 @@ from widgets.PySubBtn.PySubBtn import PySubBtn
 from widgets.toggleBtn.py_toggle import PyToggle
 
 from ui.ui_main import Ui_MainWindow
+
 from pages.log import Log
 from pages.Drag import Drag
 from pages.Controller import Control
@@ -39,7 +40,8 @@ class MainWindow(QMainWindow):
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
         self.player.setAudioOutput(self.audio_output)
-        
+        self.player.mediaStatusChanged.connect(self.statusChanged)
+
         # pages 
         Log.init(self)
         Drag.init(self,self)
@@ -62,14 +64,16 @@ class MainWindow(QMainWindow):
         self.view.setScene(self._scene) 
         self._videoitem = QGraphicsVideoItem()
         self.ui.gridLayout_8.addWidget(self.view)
+        self._scene.addItem(self._videoitem)
+        self.view.fitInView(self._scene.sceneRect())
 
         # Set up window resizing
         self.view.resizeEvent = self.handleResize
         # 
         self._playlist = []  # FIXME 6.3: Replace by QMediaPlaylist?
-        self._playlist_index = -1
-        self.subtitles_text = []
+        self._playlist_index = 0
         # Set up timer to display subtitles
+        self.subtitles_text = []
         self.subName = None
         self.sub_timer = QTimer()
         self.sub_timer.timeout.connect(self.display_subtitle)
@@ -123,6 +127,7 @@ class MainWindow(QMainWindow):
         self.pref_shown = False
         #add toggle dark mode 
         self.dark_mode = PyToggle()
+        self.dark_mode.stateChanged.connect(self.toggle_mode)
         self.ui.horizontalLayout_22.addWidget(self.dark_mode)
         
     # /////////////////////////////////////////   top bar functions     
@@ -213,11 +218,7 @@ class MainWindow(QMainWindow):
 
     def user_fun(self):
         self.ui.stackedWidget.setCurrentIndex(4)
-
-    def showDialog(self):
-        self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *.ogv *.webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
-        if len(self.fileName[0])> 10:
-            self.start_media(self.fileName[0])
+    
     def start_media(self,file_name):
         
         worker = Worker(
@@ -227,7 +228,51 @@ class MainWindow(QMainWindow):
         )
         worker.signals.result.connect(partial(self.resultFunctionMedia_int))
         self.threadpool.start(worker)
-        self.ui.movie_name.setText(os.path.basename(file_name))
+   
+    
+    def media_init(self,file_name,progress_callback):
+        print(f'file_name =  {type( file_name)}')
+        if isinstance(file_name, str): 
+            self.player.setSource(QUrl(file_name))
+            self.ui.movie_name.setText(os.path.basename(file_name))
+            if self.player.isAvailable():
+                self.player.play()
+                self._scene.addItem(self._videoitem)
+                self.view.fitInView(self._scene.sceneRect())
+                # self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
+                # self.view.fitInView(self._videoitem)
+                self._videoitem.setSize(self.ui.frame_23.size())
+            else :
+                print('media type is not supported')
+        elif isinstance(file_name, list):
+            self._playlist = file_name
+            self.player.setSource(QUrl(file_name[self._playlist_index].toLocalFile()))
+            if self.player.isAvailable() :
+                self.player.play()
+                print("ready to play")
+                self.ui.movie_name.setText(os.path.basename(file_name[self._playlist_index].toLocalFile()))
+                # self.view.fitInView(self._scene.sceneRect())
+                # self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
+                # self._videoitem.setSize(self.ui.frame_23.size())
+            self._playlist_index += 1 
+            print(f'ss = {len (self._playlist) == self._playlist_index}')
+            if len (self._playlist) == self._playlist_index:
+                self._playlist_index = 0 
+                    
+    def resultFunctionMedia_int(self,result):
+        self.ui.stackedWidget.setCurrentIndex(3)
+        self.player.setVideoOutput(self._videoitem)
+        subtitle_tracks = self.player.subtitleTracks()
+        print(f'the subtitles tracked are { subtitle_tracks}')
+        self.auto_local_sub()
+        if subtitle_tracks:
+            self.player.setSubtitleTrack(subtitle_tracks[0])
+        
+    
+    def statusChanged(self, status):
+        if status == QMediaPlayer.EndOfMedia:
+            self.start_media(self._playlist)
+            
     @Slot()
     def view_local_sub_window(self):
     
@@ -247,7 +292,7 @@ class MainWindow(QMainWindow):
             self.ui.localsub.setMinimumWidth(0)
             self.ui.localsub.setMinimumHeight(0)
             self.ui.localsub.hide()
-    
+    @Slot()
     def toggle_sub(self):
         if self.isSub:
             
@@ -266,27 +311,29 @@ class MainWindow(QMainWindow):
             self.ui.playSub.setText(" OFF")
             self.ui.button_patiensts.setText(" OFF")
             self.isSub = not self.isSub
-
+    @Slot()
     def auto_local_sub(self):
         #TODO:NEED SOME WORKS
-        folder_path = os.path.dirname(self.fileName[0])
-        files_in_directory = os.listdir(folder_path)
-        # Filter out all files with .srt extension
-        srt_files = [os.path.join(folder_path, file) for file in files_in_directory if file.endswith('.srt')]
-        sbv_files = [file for file in files_in_directory if file.endswith('.sbv')]
-        vtt_files = [file for file in files_in_directory if file.endswith('.vtt')]
-        if len (srt_files) > 0:
-            self.parse_srt(srt_files[0]) 
-        elif len (sbv_files) > 0:
-            self.parse_srt(sbv_files[0]) 
-        elif len (vtt_files) > 0:
-            self.parse_srt(vtt_files[0]) 
+        try:
+            folder_path = os.path.dirname(self.fileName[0])
+            files_in_directory = os.listdir(folder_path)
+            # Filter out all files with .srt extension
+            srt_files = [os.path.join(folder_path, file) for file in files_in_directory if file.endswith('.srt')]
+            sbv_files = [file for file in files_in_directory if file.endswith('.sbv')]
+            vtt_files = [file for file in files_in_directory if file.endswith('.vtt')]
+            if len (srt_files) > 0:
+                self.parse_srt(srt_files[0]) 
+            elif len (sbv_files) > 0:
+                self.parse_srt(sbv_files[0]) 
+            elif len (vtt_files) > 0:
+                self.parse_srt(vtt_files[0]) 
+        except Exception as e:
+            print(e)
       
-      
+    @Slot()
     def get_local_subtitle(self):
         # Create a QTimer to track video playback time
         self.subName = QFileDialog.getOpenFileName(self, "Chose the subtitle", f"{self.fileName[0]}","Subtitle Files (*.srt *.sbv *.vtt )")
-        print(self.subName[0])
         # worker = Worker(
         #     partial(
         #         self.parse_srt,
@@ -322,8 +369,6 @@ class MainWindow(QMainWindow):
             self.ui.sub_floating.setMinimumWidth(216)
             self.ui.sub_floating.setMinimumHeight(400)
             R = QPoint(self.ui.frame_60.x() + self.ui.frame_52.x() , self.ui.frame_32.y() -  self.ui.sub_floating.height() ) 
-
-            # print(f"{R} is r")
             self.ui.sub_floating.move(R)
             self.ui.sub_floating.raise_()
             self.ui.sub_floating.show()
@@ -334,10 +379,12 @@ class MainWindow(QMainWindow):
             self.ui.sub_floating.setMinimumHeight(0)
             self.ui.sub_floating.hide()
 
+
     def show_available_subs(self):
         for i in self.available_subs:
             self.PySubBtn_ = PySubBtn(i)
             self.ui.verticalLayout_13.addWidget(self.PySubBtn_)
+    @Slot()
 
     def filter_sub(self):
         print("Filter Sub")
@@ -390,32 +437,11 @@ class MainWindow(QMainWindow):
         # self.ui.top_bar.setMinimumHeight(50)
         # self.ui.top_bar.setMaximumHeight(50)
 
-    def media_init(self,file_name,progress_callback):
-        print(f'file_name =  {file_name}')
-        self.player.setSource(QUrl(file_name))
-        if self.player.isAvailable():
-            self.player.play()
-            self._scene.addItem(self._videoitem)
-            self.view.fitInView(self._scene.sceneRect())
-            # self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
-            # self.view.fitInView(self._videoitem)
-            self._videoitem.setSize(self.ui.frame_23.size())
-        else :
-            print('media type is not supported')
-    def resultFunctionMedia_int(self,result):
-        self.ui.stackedWidget.setCurrentIndex(3)
-        self.player.setVideoOutput(self._videoitem)
-        subtitle_tracks = self.player.subtitleTracks()
-        print(f'the subtitles tracked are { subtitle_tracks}')
-        self.auto_local_sub()
-        if subtitle_tracks:
-            self.player.setSubtitleTrack(subtitle_tracks[0])
-
     @Slot()
     def _ensure_stopped(self):
         if self.player.playbackState() != QMediaPlayer.StoppedState:
             self.player.stop()
-    
+
     # preferences
     @Slot()
     def handle_preference(self): 
@@ -442,8 +468,127 @@ class MainWindow(QMainWindow):
         shadow.setOffset(6, 6)  # Shadow offset (x, y)
         # Apply the shadow effect to the widget
         self.ui.preferences_frame.setGraphicsEffect(shadow)
+    
+    # dark mode 
+    @Slot()
+    def toggle_mode(self):
+        if self.dark_mode.isChecked():   
+            # top Bar   
+            self.ui.top_bar.setStyleSheet(u"background-color: #1E1E1E;\n"
+                                          "color: #ffffff;\n"
+                "border-bottom: 1px solid #EBEDEF;\n"
+            "")
+            self.ui.preferences.setStyleSheet(u"QPushButton{\n" 
+                "width:125px;\n" "height: 29px;\n" "top: 11px;\n" "left: 74px;\n" "background-color: #3E3E3E;\n""color: #ffffff;\n"
+                "border-radius: 4px;\n""border: 1px 0px 0px 0px;\n""}\n"
+                "QPushButton:hover{\n""background-color: rgb(223, 223, 223);\n""}") 
+            icon = QIcon()
+            icon.addFile(u":/icons/assets/icons/settings-W.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.preferences.setIcon(icon)
+            # controllers
+            self.ui.frame_61.setStyleSheet(u"background: #2C2C2C;\n""color: #ffffff;\n""border-radius:4px;")
+            # mute
+            icon7 = QIcon()
+            icon7.addFile(u":/icons/assets/icons/volume-max-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.mute.setIcon(icon7)
+            # previous
+            icon8 = QIcon()
+            icon8.addFile(u":/icons/assets/icons/skip-back-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.previus.setIcon(icon8)
+            icon9 = QIcon()
+            icon9.addFile(u":/icons/assets/icons/refresh-ccw-01-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.backward.setIcon(icon9)
+            
+            icon11 = QIcon()
+            icon11.addFile(u":/icons/assets/icons/refresh-ccw-02-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.forward.setIcon(icon11)
+            
+            icon12 = QIcon()
+            icon12.addFile(u":/icons/assets/icons/skip-forward-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.next.setIcon(icon12)
+            
+            icon13 = QIcon()
+            icon13.addFile(u":/icons/assets/icons/message-text-square-02-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.choseSub.setIcon(icon13)
+            self.ui.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n"
+    "color: #ffffff;\n"
+    "font-size: 12px;\n"
+    "font-weight: 400;\n"
+    "line-height: 12px;\n"
+    "\n"
+    "\n"
+    "border-radius: 4px;\n"
+    "background-color: #3E3E3E;")
+            
+            self.ui.playSub.setStyleSheet(u"font-family: Proxima Nova;\n"
+                "font-size: 12px;\n"
+                "font-weight: 400;\n"
+                "line-height: 12px;\n"
+                "color: #ffffff;\n"
+                "border-radius: 4px;\n"
+                "background-color: #3E3E3E;")
+            icon14 = QIcon()
+            icon14.addFile(u":/icons/assets/icons/equal-CC-w.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.playSub.setIcon(icon14)
 
-        
+        else:        
+            self.ui.top_bar.setStyleSheet(u"background-color: rgb(255, 255, 255);\n""color: #060606;\n"
+                "border-bottom: 1px solid #EBEDEF;\n""")
+            self.ui.preferences.setStyleSheet(u"QPushButton{\n""width: 125px;\n" "height: 29px;\n" "top: 11px;\n" "left: 74px;\n"
+                "border-radius: 4px;\n""border: 1px 0px 0px 0px;\n""}\n" "QPushButton:hover{\n"
+                "background-color: rgb(223, 223, 223);\n""}")
+            icon = QIcon()
+            icon.addFile(u":/icons/assets/icons/settings-02.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.preferences.setIcon(icon)
+            # controllers
+            self.ui.frame_61.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);\n" "border-radius:4px;")
+            # mute
+            icon7 = QIcon()
+            icon7.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.mute.setIcon(icon7)
+            # previous
+            icon8 = QIcon()
+            icon8.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.previus.setIcon(icon8)
+            
+            icon9 = QIcon()
+            icon9.addFile(u":/icons/assets/icons/refresh-ccw-01.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.backward.setIcon(icon9)
+
+            icon11 = QIcon()
+            icon11.addFile(u":/icons/assets/icons/refresh-ccw-02.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.forward.setIcon(icon11)
+            
+            icon12 = QIcon()
+            icon12.addFile(u":/icons/assets/icons/skip-forward.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.next.setIcon(icon12)
+            
+            icon13 = QIcon()
+            icon13.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.choseSub.setIcon(icon13)
+           
+            self.ui.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n"
+    "color: rgb(0, 0, 0);\n"
+    "font-size: 12px;\n"
+    "font-weight: 400;\n"
+    "line-height: 12px;\n"
+    "\n"
+    "\n"
+    "border-radius: 4px;\n"
+    "background-color: rgb(255, 255, 255);")
+                
+            self.ui.playSub.setStyleSheet(u"font-family: Proxima Nova;\n"
+                "font-size: 12px;\n"
+                "font-weight: 400;\n"
+                "line-height: 12px;\n"
+                "\n"
+                "color: rgb(0, 0, 0);\n"
+                "border-radius: 4px;\n"
+                "background-color: rgb(255, 255, 255);")
+            icon14 = QIcon()
+            icon14.addFile(u":/icons/assets/icons/equal-CC-off.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.ui.playSub.setIcon(icon14)
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()

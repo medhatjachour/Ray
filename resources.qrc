@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="icons">
+    <file>assets/icons/equal-CC-w.png</file>
+    <file>assets/icons/message-text-square-02-w.png</file>
+    <file>assets/icons/equal-pause-w.png</file>
+    <file>assets/icons/skip-forward-w.png</file>
+    <file>assets/icons/refresh-ccw-02-w.png</file>
+    <file>assets/icons/refresh-ccw-01-w.png</file>
+    <file>assets/icons/skip-back-w.png</file>
+    <file>assets/icons/volume-max-w.png</file>
     <file>assets/icons/chevron-left.png</file>
     <file>assets/icons/user-03.png</file>
     <file>assets/icons/diamond-01.png</file>
@@ -7,6 +15,7 @@
     <file>assets/icons/moon-01.png</file>
     <file>assets/icons/pencil-02.png</file>
     <file>assets/icons/settings-02.png</file>
+    <file>assets/icons/settings-W.png</file>
     <file>assets/icons/check.png</file>
     <file>assets/icons/Mute.png</file>
     <file>assets/icons/equal-CC-off.png</file>

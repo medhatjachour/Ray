@@ -75,7 +75,10 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-bottom: 1px solid #EBEDEF;
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -167,7 +170,7 @@ QPushButton:hover{
                </property>
                <property name="icon">
                 <iconset resource="../resources.qrc">
-                 <normaloff>:/icons/assets/icons/settings-02.png</normaloff>:/icons/assets/icons/settings-02.png</iconset>
+                 <normaloff>:/icons/assets/icons/settings-01.png</normaloff>:/icons/assets/icons/settings-01.png</iconset>
                </property>
               </widget>
              </item>
@@ -190,7 +193,7 @@ QPushButton:hover{
           <item>
            <widget class="QLabel" name="movie_name">
             <property name="styleSheet">
-             <string notr="true">color: rgb(0, 0, 0);</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string/>
@@ -235,6 +238,9 @@ text-align: left;
               <width>150</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:none;</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -727,7 +733,7 @@ line-height: 15px;
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="welcome">
           <property name="styleSheet">

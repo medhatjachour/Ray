@@ -1,6 +1,6 @@
 from functools import partial
 import time 
-from PySide6.QtCore import Qt, QThreadPool,Slot,QSize
+from PySide6.QtCore import Qt, QThreadPool,Slot,QSize,QUrl
 from PySide6.QtWidgets import  QSlider
 from PySide6.QtGui import QIcon
 from PySide6.QtMultimedia import (QMediaPlayer)
@@ -54,6 +54,14 @@ class Control:
         self.ui.position_control.sliderMoved.connect(
             partial(Control.set_position, self)
         )
+        # next - previous 
+
+        self.ui.next.clicked.connect(
+            partial(Control.next, self)
+        )
+        self.ui.previus.clicked.connect(
+            partial(Control.previous, self)
+        )
         # sound
         self.ui.sound_control.valueChanged.connect(
             partial(Control.adjust_audio_volume, self)
@@ -103,7 +111,15 @@ class Control:
         self.player.setPosition(current_position - 10000)
         self.ui.position_control.setValue((current_position-10000) // 1000)
   
-    
+    # next - previous   
+    @Slot()
+    def next(self):
+        # using the end of video that ends all the states and so 
+        self.player.setPosition(self.player.duration() )
+    def previous(self):
+        self._playlist_index -= 2 
+        self.player.setPosition(self.player.duration() )
+
     # sound
     @Slot()
     def adjust_audio_volume(self,volume):

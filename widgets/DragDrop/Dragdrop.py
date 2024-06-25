@@ -152,25 +152,25 @@ class DragDrop(QFrame):
         self.label_12.setText(QCoreApplication.translate("Form", u"Drag & drop video and audio files here", None))
         self.label_13.setText(QCoreApplication.translate("Form", u"OR", None))
         self.browse_file.setText(QCoreApplication.translate("Form", u"Browse Files", None))
-    # retranslateUi
-
+    # drag drop events
     def dragEnterEvent(self, event):
-        if event.mimeData().hasImage:
+        if event.mimeData().hasUrls() and event.mimeData().urls()[0].toString().endswith(".mp4"):
             event.accept()
         else:
             event.ignore()
     def dragMoveEvent(self, event):
-        if event.mimeData().hasImage:
+        if event.mimeData().hasUrls() and event.mimeData().urls()[0].toString().endswith(".mp4"):
             event.accept()
         else:
             event.ignore()
     def dropEvent(self, event):
-        if event.mimeData().hasImage:
+        if event.mimeData().hasUrls() and event.mimeData().urls()[0].toString().endswith(".mp4"):
             event.setDropAction(Qt.CopyAction)
+            print(event.mimeData().urls())
             file_path = event.mimeData().urls()[0].toLocalFile()
             print(f'file_path {file_path}')
             self.file =  file_path
-            self._main.start_media(file_path)
+            self._main.start_media(event.mimeData().urls())
             event.accept()
         else:
             event.ignore()

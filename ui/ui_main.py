@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainebXDjT.ui'
+## Form generated from reading UI file 'mainrvPWJp.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -45,7 +45,10 @@ class Ui_MainWindow(object):
         self.top_bar.setObjectName(u"top_bar")
         self.top_bar.setMinimumSize(QSize(0, 0))
         self.top_bar.setMaximumSize(QSize(16777215, 0))
-        self.top_bar.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.top_bar.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);\n"
+"border-bottom: 1px solid #EBEDEF;\n"
+"")
         self.top_bar.setFrameShape(QFrame.StyledPanel)
         self.top_bar.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.top_bar)
@@ -84,7 +87,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(223, 223, 223);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u":/icons/assets/icons/settings-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/icons/assets/icons/settings-01.png", QSize(), QIcon.Normal, QIcon.Off)
         self.preferences.setIcon(icon)
 
         self.horizontalLayout_19.addWidget(self.preferences)
@@ -98,7 +101,7 @@ class Ui_MainWindow(object):
 
         self.movie_name = QLabel(self.top_bar)
         self.movie_name.setObjectName(u"movie_name")
-        self.movie_name.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.movie_name.setStyleSheet(u"border:none;")
 
         self.horizontalLayout_6.addWidget(self.movie_name)
 
@@ -122,6 +125,7 @@ class Ui_MainWindow(object):
         self.frame_34 = QFrame(self.top_bar)
         self.frame_34.setObjectName(u"frame_34")
         self.frame_34.setMinimumSize(QSize(150, 0))
+        self.frame_34.setStyleSheet(u"border:none;")
         self.frame_34.setFrameShape(QFrame.StyledPanel)
         self.frame_34.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.frame_34)
@@ -251,7 +255,9 @@ class Ui_MainWindow(object):
         self.p_settings.setMaximumSize(QSize(16777215, 32))
         self.p_settings.setCursor(QCursor(Qt.PointingHandCursor))
         self.p_settings.setStyleSheet(u"border:none;")
-        self.p_settings.setIcon(icon)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/assets/icons/settings-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_settings.setIcon(icon3)
 
         self.verticalLayout_17.addWidget(self.p_settings)
 
@@ -268,9 +274,9 @@ class Ui_MainWindow(object):
         self.p_mode.setCursor(QCursor(Qt.PointingHandCursor))
         self.p_mode.setStyleSheet(u"border:none;\n"
 "border-bottom: 1px solid  rgba(165, 165, 165 ,.4);")
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/assets/icons/moon-01.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.p_mode.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/assets/icons/moon-01.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_mode.setIcon(icon4)
 
         self.horizontalLayout_22.addWidget(self.p_mode)
 
@@ -333,9 +339,9 @@ class Ui_MainWindow(object):
 "font-weight: 400;\n"
 "line-height: 15px;\n"
 "")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/assets/icons/pencil-02.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.p_lang_2.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/assets/icons/pencil-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.p_lang_2.setIcon(icon5)
         self.p_lang_2.setIconSize(QSize(28, 29))
 
         self.horizontalLayout_20.addWidget(self.p_lang_2)
@@ -724,9 +730,9 @@ class Ui_MainWindow(object):
 "border:1px solid #F1F1F1;\n"
 "padding-left :15px\n"
 "")
-        icon5 = QIcon()
-        icon5.addFile(u":/icons/assets/icons/google.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.log_google.setIcon(icon5)
+        icon6 = QIcon()
+        icon6.addFile(u":/icons/assets/icons/google.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.log_google.setIcon(icon6)
         self.log_google.setIconSize(QSize(26, 26))
 
         self.horizontalLayout_9.addWidget(self.log_google)
@@ -1622,7 +1628,7 @@ class Ui_MainWindow(object):
 
         self.frame_62 = QFrame(self.frame_61)
         self.frame_62.setObjectName(u"frame_62")
-        self.frame_62.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);")
+        self.frame_62.setStyleSheet(u"")
         self.frame_62.setFrameShape(QFrame.StyledPanel)
         self.frame_62.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_31 = QHBoxLayout(self.frame_62)
@@ -1643,9 +1649,9 @@ class Ui_MainWindow(object):
         self.mute.setMinimumSize(QSize(30, 30))
         self.mute.setMaximumSize(QSize(30, 30))
         self.mute.setCursor(QCursor(Qt.PointingHandCursor))
-        icon6 = QIcon()
-        icon6.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.mute.setIcon(icon6)
+        icon7 = QIcon()
+        icon7.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.mute.setIcon(icon7)
 
         self.horizontalLayout_32.addWidget(self.mute)
 
@@ -1722,9 +1728,9 @@ class Ui_MainWindow(object):
         self.previus.setMinimumSize(QSize(0, 30))
         self.previus.setMaximumSize(QSize(50, 16777215))
         self.previus.setCursor(QCursor(Qt.PointingHandCursor))
-        icon7 = QIcon()
-        icon7.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.previus.setIcon(icon7)
+        icon8 = QIcon()
+        icon8.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.previus.setIcon(icon8)
         self.previus.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.previus)
@@ -1734,9 +1740,9 @@ class Ui_MainWindow(object):
         self.backward.setMinimumSize(QSize(0, 30))
         self.backward.setMaximumSize(QSize(50, 16777215))
         self.backward.setCursor(QCursor(Qt.PointingHandCursor))
-        icon8 = QIcon()
-        icon8.addFile(u":/icons/assets/icons/refresh-ccw-01.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.backward.setIcon(icon8)
+        icon9 = QIcon()
+        icon9.addFile(u":/icons/assets/icons/refresh-ccw-01.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.backward.setIcon(icon9)
         self.backward.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.backward)
@@ -1753,9 +1759,9 @@ class Ui_MainWindow(object):
         self.stop_play.setStyleSheet(u"background: rgba(255, 255, 255, 1);\n"
 "border-radius:19px;\n"
 "text-align:center;")
-        icon9 = QIcon()
-        icon9.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.stop_play.setIcon(icon9)
+        icon10 = QIcon()
+        icon10.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.stop_play.setIcon(icon10)
         self.stop_play.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.stop_play)
@@ -1769,9 +1775,9 @@ class Ui_MainWindow(object):
         self.forward.setMinimumSize(QSize(0, 30))
         self.forward.setMaximumSize(QSize(50, 16777215))
         self.forward.setCursor(QCursor(Qt.PointingHandCursor))
-        icon10 = QIcon()
-        icon10.addFile(u":/icons/assets/icons/refresh-ccw-02.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.forward.setIcon(icon10)
+        icon11 = QIcon()
+        icon11.addFile(u":/icons/assets/icons/refresh-ccw-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.forward.setIcon(icon11)
         self.forward.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.forward)
@@ -1781,9 +1787,9 @@ class Ui_MainWindow(object):
         self.next.setMinimumSize(QSize(0, 30))
         self.next.setMaximumSize(QSize(50, 16777215))
         self.next.setCursor(QCursor(Qt.PointingHandCursor))
-        icon11 = QIcon()
-        icon11.addFile(u":/icons/assets/icons/skip-forward.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.next.setIcon(icon11)
+        icon12 = QIcon()
+        icon12.addFile(u":/icons/assets/icons/skip-forward.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.next.setIcon(icon12)
         self.next.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_35.addWidget(self.next)
@@ -1818,9 +1824,9 @@ class Ui_MainWindow(object):
 "\n"
 "border-radius: 4px;\n"
 "background-color: rgb(255, 255, 255);")
-        icon12 = QIcon()
-        icon12.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.choseSub.setIcon(icon12)
+        icon13 = QIcon()
+        icon13.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.choseSub.setIcon(icon13)
         self.choseSub.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_23.addWidget(self.choseSub)
@@ -1838,9 +1844,9 @@ class Ui_MainWindow(object):
 "color: rgb(0, 0, 0);\n"
 "border-radius: 4px;\n"
 "background-color: rgb(255, 255, 255);")
-        icon13 = QIcon()
-        icon13.addFile(u":/icons/assets/icons/equal-CC-off.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.playSub.setIcon(icon13)
+        icon14 = QIcon()
+        icon14.addFile(u":/icons/assets/icons/equal-CC-off.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.playSub.setIcon(icon14)
         self.playSub.setIconSize(QSize(21, 21))
 
         self.horizontalLayout_23.addWidget(self.playSub)
@@ -2080,9 +2086,9 @@ class Ui_MainWindow(object):
 "background: #eeeeee;\n"
 "\n"
 "}")
-        icon14 = QIcon()
-        icon14.addFile(u":/icons/assets/icons/chevron-left.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton.setIcon(icon14)
+        icon15 = QIcon()
+        icon15.addFile(u":/icons/assets/icons/chevron-left.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton.setIcon(icon15)
         self.pushButton.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_14.addWidget(self.pushButton)
@@ -2546,7 +2552,7 @@ class Ui_MainWindow(object):
 "background: #eeeeee;\n"
 "\n"
 "}")
-        self.pushButton_3.setIcon(icon14)
+        self.pushButton_3.setIcon(icon15)
         self.pushButton_3.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_15.addWidget(self.pushButton_3)
@@ -2631,7 +2637,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(3)
         self.stackedWidget_2.setCurrentIndex(0)
 
 
