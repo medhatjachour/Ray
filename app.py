@@ -66,6 +66,8 @@ class MainWindow(QMainWindow):
         self.ui.gridLayout_8.addWidget(self.view)
         self._scene.addItem(self._videoitem)
         self.view.fitInView(self._scene.sceneRect())
+        self.is_muted = False
+        self.dark_mode_on = False 
 
         # Set up window resizing
         self.view.resizeEvent = self.handleResize
@@ -472,7 +474,8 @@ class MainWindow(QMainWindow):
     # dark mode 
     @Slot()
     def toggle_mode(self):
-        if self.dark_mode.isChecked():   
+        if self.dark_mode.isChecked():  
+            self.dark_mode_on = True 
             # top Bar   
             self.ui.top_bar.setStyleSheet(u"background-color: #1E1E1E;\n"
                                           "color: #ffffff;\n"
@@ -488,9 +491,14 @@ class MainWindow(QMainWindow):
             # controllers
             self.ui.frame_61.setStyleSheet(u"background: #2C2C2C;\n""color: #ffffff;\n""border-radius:4px;")
             # mute
-            icon7 = QIcon()
-            icon7.addFile(u":/icons/assets/icons/volume-max-w.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon7)
+            if self.is_muted:
+                icon7 = QIcon()
+                icon7.addFile(u":/icons/assets/icons/NoAudio.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon7)
+            else:
+                icon7 = QIcon()
+                icon7.addFile(u":/icons/assets/icons/volume-max-w.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon7)
             # previous
             icon8 = QIcon()
             icon8.addFile(u":/icons/assets/icons/skip-back-w.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -510,28 +518,39 @@ class MainWindow(QMainWindow):
             icon13 = QIcon()
             icon13.addFile(u":/icons/assets/icons/message-text-square-02-w.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.choseSub.setIcon(icon13)
-            self.ui.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n"
-    "color: #ffffff;\n"
-    "font-size: 12px;\n"
-    "font-weight: 400;\n"
-    "line-height: 12px;\n"
-    "\n"
-    "\n"
-    "border-radius: 4px;\n"
-    "background-color: #3E3E3E;")
+            self.ui.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n" "color: #ffffff;\n" "font-size: 12px;\n""font-weight: 400;\n"
+                "line-height: 12px;\n" "border-radius: 4px;\n" "background-color: #3E3E3E;")
             
-            self.ui.playSub.setStyleSheet(u"font-family: Proxima Nova;\n"
-                "font-size: 12px;\n"
-                "font-weight: 400;\n"
-                "line-height: 12px;\n"
-                "color: #ffffff;\n"
-                "border-radius: 4px;\n"
-                "background-color: #3E3E3E;")
+            self.ui.playSub.setStyleSheet(u"font-family: Proxima Nova;\n" "font-size: 12px;\n" "font-weight: 400;\n" "line-height: 12px;\n"
+                "color: #ffffff;\n" "border-radius: 4px;\n" "background-color: #3E3E3E;")
             icon14 = QIcon()
             icon14.addFile(u":/icons/assets/icons/equal-CC-w.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.playSub.setIcon(icon14)
+            
+            self.ui.stop_play.setStyleSheet(u"background: #3E3E3E;\n" "border-radius:19px;\n" "text-align:center;")
+            
+            if self.player.playbackState() == QMediaPlayer.PlayingState:
+                icon10 = QIcon()
+                icon10.addFile(u":/icons/assets/icons/equal-pause-w.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon10)
+            else:
+                icon10 = QIcon()
+                icon10.addFile(u":/icons/assets/icons/play-w.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon10)
+
+            self.ui.time.setStyleSheet(u"color: #ffffff;\n"" margin-left: 5px;")
+
+            # preferences_frame
+            self.ui.preferences_frame.setStyleSheet(u"width: 262px;\n"
+                "height: 258px;\n"
+                "border-radius:5px;\n"
+                "\n"
+                "background:#3E3E3E;\n"
+                "color:#ffffff;\n"
+                "")
 
         else:        
+            self.dark_mode_on = False 
             self.ui.top_bar.setStyleSheet(u"background-color: rgb(255, 255, 255);\n""color: #060606;\n"
                 "border-bottom: 1px solid #EBEDEF;\n""")
             self.ui.preferences.setStyleSheet(u"QPushButton{\n""width: 125px;\n" "height: 29px;\n" "top: 11px;\n" "left: 74px;\n"
@@ -543,9 +562,15 @@ class MainWindow(QMainWindow):
             # controllers
             self.ui.frame_61.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);\n" "border-radius:4px;")
             # mute
-            icon7 = QIcon()
-            icon7.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon7)
+            
+            if self.is_muted:
+                icon_mute = QIcon()
+                icon_mute.addFile(u":/icons/assets/icons/Mute.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon_mute)
+            else:
+                icon7 = QIcon()
+                icon7.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon7)
             # previous
             icon8 = QIcon()
             icon8.addFile(u":/icons/assets/icons/skip-back.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -567,28 +592,37 @@ class MainWindow(QMainWindow):
             icon13.addFile(u":/icons/assets/icons/message-text-square-02.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.choseSub.setIcon(icon13)
            
-            self.ui.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n"
-    "color: rgb(0, 0, 0);\n"
-    "font-size: 12px;\n"
-    "font-weight: 400;\n"
-    "line-height: 12px;\n"
-    "\n"
-    "\n"
-    "border-radius: 4px;\n"
-    "background-color: rgb(255, 255, 255);")
+            self.ui.choseSub.setStyleSheet(u"font-family: Proxima Nova;\n" "color: rgb(0, 0, 0);\n" "font-size: 12px;\n" "font-weight: 400;\n"
+                "line-height: 12px;\n" "border-radius: 4px;\n" "background-color: rgb(255, 255, 255);")
                 
-            self.ui.playSub.setStyleSheet(u"font-family: Proxima Nova;\n"
-                "font-size: 12px;\n"
-                "font-weight: 400;\n"
-                "line-height: 12px;\n"
-                "\n"
-                "color: rgb(0, 0, 0);\n"
-                "border-radius: 4px;\n"
-                "background-color: rgb(255, 255, 255);")
+            self.ui.playSub.setStyleSheet(u"font-family: Proxima Nova;\n" "font-size: 12px;\n" "font-weight: 400;\n""line-height: 12px;\n"
+                "color: rgb(0, 0, 0);\n" "border-radius: 4px;\n" "background-color: rgb(255, 255, 255);")
             icon14 = QIcon()
             icon14.addFile(u":/icons/assets/icons/equal-CC-off.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.playSub.setIcon(icon14)
 
+            self.ui.stop_play.setStyleSheet(u"background: rgba(255, 255, 255, 1);\n" "border-radius:19px;\n" "text-align:center;")
+            
+            if self.player.playbackState() == QMediaPlayer.PlayingState:
+                icon10 = QIcon()
+                icon10.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon10)
+            else:
+                icon10 = QIcon()
+                icon10.addFile(u":/icons/assets/icons/play_.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon10)
+
+            self.ui.time.setStyleSheet(u"color: rgb(0, 0, 0);\n"" margin-left: 5px;")
+            # preferences
+            
+            self.ui.preferences_frame.setStyleSheet(u"width: 262px;\n"
+                "height: 258px;\n"
+                "border-radius:5px;\n"
+                "\n"
+                "background: rgba(255, 255, 255, 1);\n"
+                "color: rgb(0, 0, 0);\n"
+                "")
+            
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()

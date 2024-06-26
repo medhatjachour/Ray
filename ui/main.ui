@@ -193,7 +193,7 @@ QPushButton:hover{
           <item>
            <widget class="QLabel" name="movie_name">
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">border:none;</string>
             </property>
             <property name="text">
              <string/>
@@ -3404,14 +3404,14 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
  margin-left: 5px;</string>
                       </property>
                       <property name="text">
-                       <string>1:29 / 10:45</string>
+                       <string>210/231</string>
                       </property>
                      </widget>
                     </item>
                     <item>
                      <widget class="QFrame" name="frame_62">
                       <property name="styleSheet">
-                       <string notr="true">background: rgba(239, 242, 245, 0.95);</string>
+                       <string notr="true"/>
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>

@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>assets/icons/play-w.png</file>
+    <file>assets/icons/NoAudio.png</file>
     <file>assets/icons/equal-CC-w.png</file>
     <file>assets/icons/message-text-square-02-w.png</file>
     <file>assets/icons/equal-pause-w.png</file>

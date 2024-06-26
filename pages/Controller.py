@@ -21,7 +21,6 @@ class Control:
         self.ui.position_control.setTickPosition(QSlider.TicksBelow)
         self.ui.position_control.setToolTip("Position")
         # sound 
-        self.is_muted = False
         self.audio_value = self.audio_output.volume()*100
         self.ui.sound_control.setValue(self.audio_output.volume()*100)
         self.ui.sound_control.setTickInterval(10)
@@ -74,17 +73,28 @@ class Control:
     @Slot()
     def play_pause(self):
         if self.player.playbackState() == QMediaPlayer.PlayingState:
-            icon_play = QIcon()
-            icon_play.addFile(u":/icons/assets/icons/play_.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.stop_play.setIcon(icon_play)
-            # self.ui.stop_play.setIconSize(QSize(21, 21))
             self.player.pause()
-        else:
-            icon4_pause = QIcon()
-            icon4_pause.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.stop_play.setIcon(icon4_pause)
+            
+            if self.dark_mode_on:
+                icon_play = QIcon()
+                icon_play.addFile(u":/icons/assets/icons/play-w.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon_play)
+            else:
+                icon_play_d = QIcon()
+                icon_play_d.addFile(u":/icons/assets/icons/play_.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon_play_d)
             # self.ui.stop_play.setIconSize(QSize(21, 21))
+        else:
             self.player.play()
+            if self.dark_mode_on:
+                icon4_pause = QIcon()
+                icon4_pause.addFile(u":/icons/assets/icons/equal-pause-w.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon4_pause)
+            else:
+                icon4_pause = QIcon()
+                icon4_pause.addFile(u":/icons/assets/icons/equal-pause.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.stop_play.setIcon(icon4_pause)
+            # self.ui.stop_play.setIconSize(QSize(21, 21))
     # position
     @Slot()
     def set_position(self,position):
@@ -135,12 +145,22 @@ class Control:
         if self.is_muted:
             self.is_muted = not self.is_muted
             self.audio_output.setVolume(self.audio_value)
-            icon_sound = QIcon()
-            icon_sound.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon_sound)
+            if self.dark_mode_on:
+                icon_sound_d = QIcon()
+                icon_sound_d.addFile(u":/icons/assets/icons/volume-max-w.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon_sound_d)
+            else:
+                icon_sound = QIcon()
+                icon_sound.addFile(u":/icons/assets/icons/volume-max.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon_sound)
         else:
             self.is_muted = not self.is_muted
             self.audio_output.setVolume(0)
-            icon_mute = QIcon()
-            icon_mute.addFile(u":/icons/assets/icons/Mute.png", QSize(), QIcon.Normal, QIcon.Off)
-            self.ui.mute.setIcon(icon_mute)
+            if self.dark_mode_on:
+                icon_mute = QIcon()
+                icon_mute.addFile(u":/icons/assets/icons/NoAudio.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon_mute)
+            else:
+                icon_mute = QIcon()
+                icon_mute.addFile(u":/icons/assets/icons/Mute.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.ui.mute.setIcon(icon_mute)
