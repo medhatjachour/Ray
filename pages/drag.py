@@ -28,6 +28,6 @@ class Drag:
 
   
     def showDialog(self):
-        self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp4 *.avi *.mov *.mkv *.ogv *.webm *.MPEG *.WMV *.FLV .*3GP .*MP3 .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
+        self.fileName = QFileDialog.getOpenFileName(self, "Chose media", "/","Media Files (*.mp3 *.mp4 *.avi *.mov *.mkv *.ogv *.webm *.MPEG *.WMV *.FLV .*3GP .*FLAC .*DSD .*AIFF .*ALAC .*AAC )")
         if len(self.fileName[0])> 10:
             self.start_media(self.fileName[0])

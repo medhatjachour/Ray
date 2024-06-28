@@ -3,6 +3,8 @@ import os
 import time 
 from datetime import datetime, timedelta
 from functools import partial
+import requests
+import hashlib
 
 os.environ["QT_GSTREAMER_PLAYBIN_FLAGS"] = str(0x00000017)
 
@@ -22,6 +24,23 @@ from ui.ui_main import Ui_MainWindow
 from pages.log import Log
 from pages.Drag import Drag
 from pages.Controller import Control
+
+
+def generate_audio_id(file_path):
+    # Read the audio file in chunks (64 KB at a time)
+    BUF_SIZE = 65536
+    sha256 = hashlib.sha256()
+
+    with open(file_path, 'rb') as f:
+        while True:
+            data = f.read(BUF_SIZE)
+            if not data:
+                break
+            sha256.update(data)
+
+    # Get the hexadecimal representation of the hash
+    audio_id = sha256.hexdigest()
+    return audio_id
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -35,6 +54,9 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(0)
         # threads
         self.threadpool = QThreadPool()
+        self.user = 'user123'
+        self.content = 'content_5'
+        self.segment = 'segment_5'
 
         #/////////// media player 
         self.player = QMediaPlayer()
@@ -124,6 +146,8 @@ class MainWindow(QMainWindow):
         self.hoverTimer.setInterval(5000)  # Set timer for 5 seconds
         self.hoverTimer.setSingleShot(True)  # Timer is not reoccurring
         self.hoverTimer.timeout.connect(self.hoverStopped)
+
+
         # preference settings
         self.ui.preferences.clicked.connect(self.handle_preference)
         self.pref_shown = False
@@ -131,6 +155,9 @@ class MainWindow(QMainWindow):
         self.dark_mode = PyToggle()
         self.dark_mode.stateChanged.connect(self.toggle_mode)
         self.ui.horizontalLayout_22.addWidget(self.dark_mode)
+
+        # ////////////////////////////////// test get  subtitles from 
+        
         
     # /////////////////////////////////////////   top bar functions     
 
@@ -222,7 +249,15 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(4)
     
     def start_media(self,file_name):
-        
+         
+        # worker_upload = Worker(
+        #     partial(
+        #         self.upload,file_name
+        #     )
+        # )
+        # worker_upload.signals.result.connect(partial(self.resultFunctionMedia_int))
+        # self.threadpool.start(worker_upload)
+
         worker = Worker(
             partial(
                 self.media_init,file_name
@@ -233,8 +268,10 @@ class MainWindow(QMainWindow):
    
     
     def media_init(self,file_name,progress_callback):
+
         print(f'file_name =  {type( file_name)}')
         if isinstance(file_name, str): 
+
             self.player.setSource(QUrl(file_name))
             self.ui.movie_name.setText(os.path.basename(file_name))
             if self.player.isAvailable():
@@ -265,12 +302,54 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(3)
         self.player.setVideoOutput(self._videoitem)
         subtitle_tracks = self.player.subtitleTracks()
-        print(f'the subtitles tracked are { subtitle_tracks}')
+                        
+        print("start  timer")
+        self.getSubtitle = QTimer(self)
+        self.getSubtitle.timeout.connect(self.fetchSubtitle)
+        self.getSubtitle.start(5000)  # Set timer for 5 seconds
+
+        print("end  timer")
+
         self.auto_local_sub()
         if subtitle_tracks:
             self.player.setSubtitleTrack(subtitle_tracks[0])
+
+    def upload(self,file_name):
+        name = os.path.basename(file_name)
+        extension = os.path.splitext(file_name)
+        # Create a SHA-256 hash object
+        sha256_hash = generate_audio_id(file_name)
+
+        url = f'https://api.techspecsray.com/v1/mp3/{self.user}/{self.content}/{self.segment}'
+
+        payload = {
+        'original_file_name': name,
+        'original_file_format': extension,
+        'original_file_hash': sha256_hash
+        }
         
-    
+        files = [('file', (name, open(file_name, 'rb'), 'audio/mpeg')) ]
+        headers = {
+        'Authorization': 'Bearer test_api_key_12345'
+        }
+        print(payload)
+        response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        print(response.text)
+
+    def fetchSubtitle(self):
+        print("Fetching subtitle")
+        url = f"https://goldenretriever.techspecsray.com/v1/captions/{self.user}/{self.content}/{self.segment}"
+
+        headers = {
+            "accept": "application/json",
+            'Authorization': 'Bearer test_api_key_12345'
+        }
+
+        response = requests.get(url, headers=headers)
+        print(response)
+        print(response.text)
+
+
     def statusChanged(self, status):
         if status == QMediaPlayer.EndOfMedia:
             self.start_media(self._playlist)
