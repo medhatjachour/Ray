@@ -24,6 +24,7 @@ from ui.ui_main import Ui_MainWindow
 from pages.log import Log
 from pages.Drag import Drag
 from pages.Controller import Control
+from pages.Subtitle import Subtitle
 
 
 def generate_audio_id(file_path):
@@ -68,6 +69,7 @@ class MainWindow(QMainWindow):
         Log.init(self)
         Drag.init(self,self)
         Control.init(self)
+        Subtitle.init(self)
 
         self.ui.close_btn.clicked.connect(self.close_fun)
         self.ui.max_btn.clicked.connect(self.toggle_full_screen)
@@ -258,6 +260,7 @@ class MainWindow(QMainWindow):
         # worker_upload.signals.result.connect(partial(self.resultFunctionMedia_int))
         # self.threadpool.start(worker_upload)
 
+        Subtitle.handle_converting(self,file_name)
         worker = Worker(
             partial(
                 self.media_init,file_name
@@ -303,10 +306,10 @@ class MainWindow(QMainWindow):
         self.player.setVideoOutput(self._videoitem)
         subtitle_tracks = self.player.subtitleTracks()
                         
-        print("start  timer")
-        self.getSubtitle = QTimer(self)
-        self.getSubtitle.timeout.connect(self.fetchSubtitle)
-        self.getSubtitle.start(5000)  # Set timer for 5 seconds
+        # print("start  timer")
+        # self.getSubtitle = QTimer(self)
+        # self.getSubtitle.timeout.connect(self.fetchSubtitle)
+        # self.getSubtitle.start(5000)  # Set timer for 5 seconds
 
         print("end  timer")
 
@@ -567,7 +570,7 @@ class MainWindow(QMainWindow):
             icon = QIcon()
             icon.addFile(u":/icons/assets/icons/settings-W.png", QSize(), QIcon.Normal, QIcon.Off)
             self.ui.preferences.setIcon(icon)
-            # controllers
+            # Subtitles
             self.ui.frame_61.setStyleSheet(u"background: #2C2C2C;\n""color: #ffffff;\n""border-radius:4px;")
             # mute
             if self.is_muted:
