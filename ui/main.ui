@@ -3268,7 +3268,7 @@ border-radius:4px;</string>
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background: rgba(239, 242, 245, 0.95);</string>
+                    <string notr="true"/>
                    </property>
                    <property name="frameShape">
                     <enum>QFrame::StyledPanel</enum>
@@ -3401,7 +3401,8 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">color: rgb(0, 0, 0);
- margin-left: 5px;</string>
+ margin-left: 5px;
+background: rgba(239, 242, 245, 0.95);</string>
                       </property>
                       <property name="text">
                        <string>210/231</string>
@@ -3411,7 +3412,7 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                     <item>
                      <widget class="QFrame" name="frame_62">
                       <property name="styleSheet">
-                       <string notr="true"/>
+                       <string notr="true">background: rgba(239, 242, 245, 0.95);</string>
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
@@ -3492,18 +3493,42 @@ QSlider::handle:vertical:pressed { background-color:white; }</string>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QSlider" name="sound_control">
-                            <property name="maximumSize">
-                             <size>
-                              <width>150</width>
-                              <height>16777215</height>
-                             </size>
+                           <widget class="QFrame" name="frame_80">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
                             </property>
-                            <property name="cursor">
-                             <cursorShape>PointingHandCursor</cursorShape>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">/* HORIZONTAL */
+                            <layout class="QVBoxLayout" name="verticalLayout_31">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <widget class="QSlider" name="sound_control">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="cursor">
+                                <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">/* HORIZONTAL */
 QSlider { margin: 8px; }
 QSlider::groove:horizontal {
     border-radius: 4px;
@@ -3545,10 +3570,13 @@ QSlider::handle:vertical {
 }
 QSlider::handle:vertical:hover { background-color:white; }
 QSlider::handle:vertical:pressed { background-color:white; }</string>
-                            </property>
-                            <property name="orientation">
-                             <enum>Qt::Horizontal</enum>
-                            </property>
+                               </property>
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
                            </widget>
                           </item>
                          </layout>
@@ -4258,7 +4286,7 @@ color: rgb(0, 0, 0);</string>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_14">
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="back_to_player_a">
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
@@ -5160,7 +5188,7 @@ color: rgb(0, 0, 0);</string>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_15">
                  <item>
-                  <widget class="QPushButton" name="pushButton_3">
+                  <widget class="QPushButton" name="back_to_player_s">
                    <property name="minimumSize">
                     <size>
                      <width>140</width>

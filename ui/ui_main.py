@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainPOdYPt.ui'
+## Form generated from reading UI file 'mainUFVGfk.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -1547,7 +1547,7 @@ class Ui_MainWindow(object):
         self.frame_61 = QFrame(self.frame_60)
         self.frame_61.setObjectName(u"frame_61")
         self.frame_61.setMinimumSize(QSize(770, 94))
-        self.frame_61.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);")
+        self.frame_61.setStyleSheet(u"")
         self.frame_61.setFrameShape(QFrame.StyledPanel)
         self.frame_61.setFrameShadow(QFrame.Raised)
         self.verticalLayout_22 = QVBoxLayout(self.frame_61)
@@ -1576,10 +1576,11 @@ class Ui_MainWindow(object):
 "    border-radius: 4px;\n"
 "    height: 8px;\n"
 "	margin: 0px;\n"
-"	background-color: #95A8BD;\n"
+"	background-color: #03A9F4;\n"
 "\n"
 "}\n"
-"QSlider::groove:horizontal:hover { background-color: rgb(120, 135, 152)}\n"
+"QSlider::groove:horizontal:hover { \n"
+"	background-color: #03A9F4;}\n"
 "QSlider::handle:horizontal {\n"
 "    border: none;\n"
 "    height: 14px;\n"
@@ -1605,12 +1606,16 @@ class Ui_MainWindow(object):
 "    height:16px;\n"
 "    width: 16px;\n"
 "    margin: -3px;\n"
-"	border"
-                        "-radius: 8px;\n"
+"	border-rad"
+                        "ius: 8px;\n"
 "    background-color: white;\n"
 "}\n"
 "QSlider::handle:vertical:hover { background-color:white; }\n"
-"QSlider::handle:vertical:pressed { background-color:white; }")
+"QSlider::handle:vertical:pressed { background-color:white; }\n"
+"QSlider::add-page:horizontal {\n"
+"                background-color: #95A8BD;\n"
+"\n"
+"            }")
         self.position_control.setOrientation(Qt.Horizontal)
 
         self.verticalLayout_23.addWidget(self.position_control)
@@ -1622,13 +1627,14 @@ class Ui_MainWindow(object):
         self.time.setObjectName(u"time")
         self.time.setMaximumSize(QSize(16777215, 19))
         self.time.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-" margin-left: 5px;")
+" margin-left: 5px;\n"
+"background: rgba(239, 242, 245, 0.95);")
 
         self.verticalLayout_22.addWidget(self.time)
 
         self.frame_62 = QFrame(self.frame_61)
         self.frame_62.setObjectName(u"frame_62")
-        self.frame_62.setStyleSheet(u"")
+        self.frame_62.setStyleSheet(u"background: rgba(239, 242, 245, 0.95);")
         self.frame_62.setFrameShape(QFrame.StyledPanel)
         self.frame_62.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_31 = QHBoxLayout(self.frame_62)
@@ -1655,22 +1661,31 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_32.addWidget(self.mute)
 
-        self.sound_control = QSlider(self.frame_63)
+        self.frame_80 = QFrame(self.frame_63)
+        self.frame_80.setObjectName(u"frame_80")
+        self.frame_80.setFrameShape(QFrame.StyledPanel)
+        self.frame_80.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_31 = QVBoxLayout(self.frame_80)
+        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
+        self.sound_control = QSlider(self.frame_80)
         self.sound_control.setObjectName(u"sound_control")
         self.sound_control.setMaximumSize(QSize(150, 16777215))
         self.sound_control.setCursor(QCursor(Qt.PointingHandCursor))
         self.sound_control.setStyleSheet(u"/* HORIZONTAL */\n"
-"QSlider { margin: 8px; }\n"
+"QSlider { margin-left: 5px; \n"
+"\n"
+"	background: transparent;}\n"
 "QSlider::groove:horizontal {\n"
 "    border-radius: 4px;\n"
 "    height: 8px;\n"
 "	margin: 0px;\n"
-"	background-color: #95A8BD;\n"
+"	background-color: #03A9F4;\n"
 "\n"
 "}\n"
-"\n"
-"\n"
-"QSlider::groove:horizontal:hover { background-color: rgb(120, 135, 152)}\n"
+"QSlider::groove:horizontal:hover { \n"
+"	background-color: #03A9F4;}\n"
 "QSlider::handle:horizontal {\n"
 "    border: none;\n"
 "    height: 14px;\n"
@@ -1696,15 +1711,22 @@ class Ui_MainWindow(object):
 "    height:16px;\n"
 "    width: 16px;\n"
 "    margin: -3px;\n"
-"	border-radius: 8px;\n"
-"    backgrou"
-                        "nd-color: white;\n"
+"	border-rad"
+                        "ius: 8px;\n"
+"    background-color: white;\n"
 "}\n"
 "QSlider::handle:vertical:hover { background-color:white; }\n"
-"QSlider::handle:vertical:pressed { background-color:white; }")
+"QSlider::handle:vertical:pressed { background-color:white; }\n"
+"QSlider::add-page:horizontal {\n"
+"                background-color: #95A8BD;\n"
+"\n"
+"            }")
         self.sound_control.setOrientation(Qt.Horizontal)
 
-        self.horizontalLayout_32.addWidget(self.sound_control)
+        self.verticalLayout_31.addWidget(self.sound_control)
+
+
+        self.horizontalLayout_32.addWidget(self.frame_80)
 
 
         self.horizontalLayout_31.addWidget(self.frame_63)
@@ -2637,7 +2659,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(5)
+        self.stackedWidget.setCurrentIndex(3)
         self.stackedWidget_2.setCurrentIndex(0)
 
 

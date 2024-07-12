@@ -1,5 +1,9 @@
-
+# IMPORT QT CORE
+# ///////////////////////////////////////////////////////////////
 from PySide6.QtWidgets import QSlider
+
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QPainter, QLinearGradient,QColor
 style = """
 /* HORIZONTAL */
 QSlider {{ margin: {_margin}px; }}
@@ -39,6 +43,10 @@ QSlider::handle:vertical {{
 }}
 QSlider::handle:vertical:hover {{ background-color: {_handle_color_hover}; }}
 QSlider::handle:vertical:pressed {{ background-color: {_handle_color_pressed}; }}
+
+            QSlider::add-page:horizontal {{
+                background-color:#95A8BD;
+            }}
 """
 
 class PySlider(QSlider):
@@ -76,4 +84,6 @@ class PySlider(QSlider):
 
         # APPLY CUSTOM STYLE
         # ///////////////////////////////////////////////////////////////
+        
         self.setStyleSheet(adjust_style)
+
