@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainrvPWJp.ui'
+## Form generated from reading UI file 'mainPOdYPt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.3
 ##
@@ -2065,12 +2065,12 @@ class Ui_MainWindow(object):
         self.frame_56.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_14 = QHBoxLayout(self.frame_56)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.pushButton = QPushButton(self.frame_56)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMinimumSize(QSize(0, 4))
-        self.pushButton.setMaximumSize(QSize(140, 40))
-        self.pushButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.pushButton.setStyleSheet(u"QPushButton{\n"
+        self.back_to_player_a = QPushButton(self.frame_56)
+        self.back_to_player_a.setObjectName(u"back_to_player_a")
+        self.back_to_player_a.setMinimumSize(QSize(0, 4))
+        self.back_to_player_a.setMaximumSize(QSize(140, 40))
+        self.back_to_player_a.setCursor(QCursor(Qt.PointingHandCursor))
+        self.back_to_player_a.setStyleSheet(u"QPushButton{\n"
 "background: #EFF2F5;\n"
 "font-family: Inter;\n"
 "font-size: 12px;\n"
@@ -2088,10 +2088,10 @@ class Ui_MainWindow(object):
 "}")
         icon15 = QIcon()
         icon15.addFile(u":/icons/assets/icons/chevron-left.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton.setIcon(icon15)
-        self.pushButton.setIconSize(QSize(24, 24))
+        self.back_to_player_a.setIcon(icon15)
+        self.back_to_player_a.setIconSize(QSize(24, 24))
 
-        self.horizontalLayout_14.addWidget(self.pushButton)
+        self.horizontalLayout_14.addWidget(self.back_to_player_a)
 
         self.frame_57 = QFrame(self.frame_56)
         self.frame_57.setObjectName(u"frame_57")
@@ -2531,12 +2531,12 @@ class Ui_MainWindow(object):
         self.frame_73.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_15 = QHBoxLayout(self.frame_73)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.pushButton_3 = QPushButton(self.frame_73)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setMinimumSize(QSize(140, 4))
-        self.pushButton_3.setMaximumSize(QSize(140, 40))
-        self.pushButton_3.setCursor(QCursor(Qt.PointingHandCursor))
-        self.pushButton_3.setStyleSheet(u"QPushButton{\n"
+        self.back_to_player_s = QPushButton(self.frame_73)
+        self.back_to_player_s.setObjectName(u"back_to_player_s")
+        self.back_to_player_s.setMinimumSize(QSize(140, 4))
+        self.back_to_player_s.setMaximumSize(QSize(140, 40))
+        self.back_to_player_s.setCursor(QCursor(Qt.PointingHandCursor))
+        self.back_to_player_s.setStyleSheet(u"QPushButton{\n"
 "background: #EFF2F5;\n"
 "font-family: Inter;\n"
 "font-size: 12px;\n"
@@ -2552,10 +2552,10 @@ class Ui_MainWindow(object):
 "background: #eeeeee;\n"
 "\n"
 "}")
-        self.pushButton_3.setIcon(icon15)
-        self.pushButton_3.setIconSize(QSize(24, 24))
+        self.back_to_player_s.setIcon(icon15)
+        self.back_to_player_s.setIconSize(QSize(24, 24))
 
-        self.horizontalLayout_15.addWidget(self.pushButton_3)
+        self.horizontalLayout_15.addWidget(self.back_to_player_s)
 
         self.frame_74 = QFrame(self.frame_73)
         self.frame_74.setObjectName(u"frame_74")
@@ -2637,7 +2637,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(5)
         self.stackedWidget_2.setCurrentIndex(0)
 
 
@@ -2697,7 +2697,7 @@ class Ui_MainWindow(object):
         self.youtube_url.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Insert your Youtube video link here", None))
         self.play_youtube.setText(QCoreApplication.translate("MainWindow", u"Play Video", None))
         self.search_sub.setPlaceholderText(QCoreApplication.translate("MainWindow", u"search..", None))
-        self.time.setText(QCoreApplication.translate("MainWindow", u"1:29 / 10:45", None))
+        self.time.setText(QCoreApplication.translate("MainWindow", u"210/231", None))
         self.mute.setText("")
         self.previus.setText("")
         self.backward.setText("")
@@ -2709,7 +2709,7 @@ class Ui_MainWindow(object):
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Subtitles", None))
         self.choose_subtitle_file.setText(QCoreApplication.translate("MainWindow", u"Choose subtitle file", None))
         self.button_patiensts.setText(QCoreApplication.translate("MainWindow", u"OFF", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Back to Player", None))
+        self.back_to_player_a.setText(QCoreApplication.translate("MainWindow", u"Back to Player", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"New Password", None))
         self.new_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Password", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Last Name", None))
@@ -2725,7 +2725,7 @@ class Ui_MainWindow(object):
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"Email", None))
         self.add_product_3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Thomas.peterson985@gmail.com", None))
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"Update Password", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Back to Player", None))
+        self.back_to_player_s.setText(QCoreApplication.translate("MainWindow", u"Back to Player", None))
         self.label_29.setText(QCoreApplication.translate("MainWindow", u"Subscription", None))
     # retranslateUi
 

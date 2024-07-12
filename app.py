@@ -90,6 +90,9 @@ class MainWindow(QMainWindow):
         self.ui.gridLayout_8.addWidget(self.view)
         self._scene.addItem(self._videoitem)
         self.view.fitInView(self._scene.sceneRect())
+
+            # Set the scene rect to match the view's usable area
+
         self.is_muted = False
         self.dark_mode_on = False 
 
@@ -138,6 +141,9 @@ class MainWindow(QMainWindow):
         # get started function 
         self.ui.get_started.clicked.connect(self.get_started_Fun)
         self.ui.p_user.clicked.connect(self.user_fun)
+        self.ui.p_subscription.clicked.connect(self.subscription_fun)
+        self.ui.back_to_player_a.clicked.connect(self.back_to_player_fun)
+        self.ui.back_to_player_s.clicked.connect(self.back_to_player_fun)
         # drag and drop files 
         # get the drag and drop frame to accept drag and drop behavior
         self.fileName = "/" #it holds the video path 
@@ -249,6 +255,10 @@ class MainWindow(QMainWindow):
 
     def user_fun(self):
         self.ui.stackedWidget.setCurrentIndex(4)
+    def subscription_fun(self):
+        self.ui.stackedWidget.setCurrentIndex(5)
+    def back_to_player_fun(self):
+        self.ui.stackedWidget.setCurrentIndex(3)
     
     def start_media(self,file_name):
          
@@ -260,7 +270,7 @@ class MainWindow(QMainWindow):
         # worker_upload.signals.result.connect(partial(self.resultFunctionMedia_int))
         # self.threadpool.start(worker_upload)
 
-        Subtitle.handle_converting(self,file_name)
+        # Subtitle.handle_converting(self,file_name)
         worker = Worker(
             partial(
                 self.media_init,file_name
@@ -279,6 +289,7 @@ class MainWindow(QMainWindow):
             self.ui.movie_name.setText(os.path.basename(file_name))
             if self.player.isAvailable():
                 self.player.play()
+                self._scene.setSceneRect(0, 0, self._videoitem.boundingRect().width(), self._videoitem.boundingRect().height())
                 self._scene.addItem(self._videoitem)
                 self.view.fitInView(self._scene.sceneRect())
                 # self.view.fitInView(self._scene.sceneRect(), Qt.KeepAspectRatio)
@@ -306,12 +317,11 @@ class MainWindow(QMainWindow):
         self.player.setVideoOutput(self._videoitem)
         subtitle_tracks = self.player.subtitleTracks()
                         
-        # print("start  timer")
+        # print("start timer")
         # self.getSubtitle = QTimer(self)
         # self.getSubtitle.timeout.connect(self.fetchSubtitle)
         # self.getSubtitle.start(5000)  # Set timer for 5 seconds
-
-        print("end  timer")
+        # print("end timer")
 
         self.auto_local_sub()
         if subtitle_tracks:
@@ -452,7 +462,7 @@ class MainWindow(QMainWindow):
             self.ui.gridLayout_6.removeWidget(self.ui.sub_floating)
             self.ui.sub_floating.setMinimumWidth(216)
             self.ui.sub_floating.setMinimumHeight(400)
-            R = QPoint(self.ui.frame_60.x() + self.ui.frame_52.x() , self.ui.frame_32.y() -  self.ui.sub_floating.height() ) 
+            R = QPoint(self.ui.frame_60.x() + self.ui.frame_52.x() , self.ui.frame_32.y() -  self.ui.sub_floating.height() +1) 
             self.ui.sub_floating.move(R)
             self.ui.sub_floating.raise_()
             self.ui.sub_floating.show()
@@ -463,13 +473,12 @@ class MainWindow(QMainWindow):
             self.ui.sub_floating.setMinimumHeight(0)
             self.ui.sub_floating.hide()
 
-
+    @Slot()
     def show_available_subs(self):
         for i in self.available_subs:
             self.PySubBtn_ = PySubBtn(i)
             self.ui.verticalLayout_13.addWidget(self.PySubBtn_)
     @Slot()
-
     def filter_sub(self):
         print("Filter Sub")
     

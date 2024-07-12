@@ -1,5 +1,6 @@
 from functools import partial
-
+from PySide6.QtCore import Qt, QThreadPool
+from widgets.worker.Worker import Worker
 import os
 from moviepy.editor import VideoFileClip
 
@@ -11,8 +12,10 @@ class Subtitle:
 
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.mp3File = ''
 
-
+        # threads
+        self.threadpool = QThreadPool()
     def init(self):
         #####################################
         # Subtitle.buttons_actions(self)
@@ -23,6 +26,18 @@ class Subtitle:
     def handle_media(self, file_name):
         print("ewe")
     def handle_converting(self, file_name):
+
+        
+        workers = Worker(
+            partial(
+                Subtitle.start_convert,self,file_name
+            )
+        )
+        workers.signals.result.connect(partial(Subtitle.result_convert,self))
+        self.threadpool.start(workers)
+
+    def start_convert(self, file_name, progress_callback ):
+        pass
         print(f" handle_converting = {file_name}")
         video = VideoFileClip(os.path.join(file_name))
         name = os.path.splitext(os.path.basename(file_name))[0]
@@ -33,9 +48,12 @@ class Subtitle:
         # audio_segment = video.subclip("00:00:13", "00:00:15")
         # Load your audio file (e.g., "your_audio.mp3").
         # Load your audio file (replace "your_audio.mp3" with the actual file path)
-        print(f"  start writting mp3 {folder}/{name}.mp3")
-        song = AudioSegment.from_mp3(f"{folder}/{name}.mp3")
-        print(f"  AudioSegment AudioSegment mp3 {folder}/{name}.mp3")
+        self.mp3File = f'{folder}/{name}.mp3'
+    def result_convert(self,result):
+        print(f"  start writting mp3 { self.mp3File }.")
+        song = AudioSegment.from_mp3("C:/Users/Medha/OneDrive/Documents/Ray/Ray/ww.mp3")
+        # song = AudioSegment.from_mp3("C:/Users/Medha/Videos/Captures/MainWindow 2024-06-18 21-28-51.mp3")
+        print(f"  AudioSegment AudioSegment mp3 {self.mp3File}.mp3")
 
         # Split the track where the silence is 2 seconds or more
         chunks = split_on_silence(
