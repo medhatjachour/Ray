@@ -166,7 +166,11 @@ class MainWindow(QMainWindow):
 
         # ////////////////////////////////// test get  subtitles from 
         
-        
+        self.shadow = QGraphicsDropShadowEffect()
+        self.shadow.setBlurRadius(5)
+        self.shadow.setColor(QColor(0, 0, 0, 50))
+        self.shadow.setOffset(10, 10)
+        self.ui.preferences_frame.setGraphicsEffect(self.shadow)
     # /////////////////////////////////////////   top bar functions     
 
     def toggle_controls_bar_visibility(self):
