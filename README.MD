@@ -3,7 +3,7 @@
 This is a desktop application built with PySide6 that functions as a media player. It supports playing video and MP3 files, detects and displays subtitles, and includes an option to convert voice to text.
 ![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im1.png?raw=true)
 ![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im2.png?raw=true)
-![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im2.png?raw=true)
+![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im3.png?raw=true)
 ## Features
 - **Play Video and MP3**: Supports various video and audio formats.
 - **Subtitle Detection and Display**: Automatically detects and displays subtitles for video files.
