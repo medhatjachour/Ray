@@ -1,12 +1,65 @@
-Product Features
+# PySide6 Media Player
+## Overview
+This is a desktop application built with PySide6 that functions as a media player. It supports playing video and MP3 files, detects and displays subtitles, and includes an option to convert voice to text.
+![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im1.png?raw=true)
+![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im2.png?raw=true)
+![alt text](https://github.com/medhatjachour/Ray/blob/main/sample/im2.png?raw=true)
+## Features
+- **Play Video and MP3**: Supports various video and audio formats.
+- **Subtitle Detection and Display**: Automatically detects and displays subtitles for video files.
+- **Voice to Text**: Converts audio from video or MP3 files into text.
 
-1. Watch videos from youtube and vimeo: TechSpecs Ray supports playing videos from various platforms like youtube and vimeo, so you can watch your favorite videos with subtitles in 47 languages. No need to worry about the subtitles anymore.
+## Installation
 
-2. Fully Customizable Subtitles:
-With TechSpecs Ray, you have complete control over the appearance and style of your subtitles, including font, size, color, and background. You can also adjust the position on the screen to your preference.
+### Prerequisites
+- Python 3.8+
+- PySide6
+- Other dependencies listed in `requirements.txt`
 
-3. Universal Media Compatibility:
-TechSpecs Ray's advanced technology allows it to support a wide range of media formats, including popular ones like MP4 and AVI. But even if a format isn't natively supported, our player automatically converts it for you, so you can enjoy your media seamlessly.
+### Steps
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/medhatjachour/ray.git
+    cd ray
+    ```
 
-4. Offline Subtitling:
-Whether you're on a plane or in a remote location, TechSpecs Ray allows you to generate and save subtitles for offline viewing, so you can enjoy your media anytime, anywhere.
+2. Create a virtual environment and activate it:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. Install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Run the application:
+    ```bash
+    python app.py
+    ```
+
+## Usage
+1. **Open Media**: Use the file menu to open a video or MP3 file.
+2. **Play/Pause**: Use the play/pause button to control playback.
+3. **Subtitles**: Subtitles will be automatically detected and displayed if available.
+4. **Voice to Text**: Use the voice-to-text option in the menu to convert audio to text.
+
+## Dependencies
+- PySide6
+- PyQt5 (for additional widgets)
+- ffmpeg (for media processing)
+- SpeechRecognition (for voice to text)
+- Other dependencies listed in `requirements.txt`
+
+## Contributing
+Contributions are welcome! If you’d like to contribute to this project, just contact me
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Acknowledgements
+- PySide6 Documentation
+- ffmpeg Documentation
+- SpeechRecognition Documentation
